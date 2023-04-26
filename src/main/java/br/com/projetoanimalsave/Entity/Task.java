@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_serviços", schema = "projeto-animal-save")
-public class Service extends AbstractEntity {
+public class Task extends AbstractEntity {
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
