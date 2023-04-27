@@ -1,4 +1,4 @@
 package br.com.projetoanimalsave.Controller;
 
-public class ServiceController {
+public class TaskController {
 }
