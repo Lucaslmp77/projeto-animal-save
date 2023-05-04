@@ -40,4 +40,17 @@ public class VaccinationController {
     ) {
         return ResponseEntity.ok().body(this.vaccinationService.findById(idVaccination));
     }
+
+    @PutMapping("/{idVaccination}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idVaccination,
+            @RequestBody Vaccination vaccination
+    ) {
+        try {
+            this.vaccinationService.update(vaccination, idVaccination);
+            return ResponseEntity.ok().body("Vacinação atualizada com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
