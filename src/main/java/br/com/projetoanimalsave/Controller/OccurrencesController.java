@@ -21,7 +21,7 @@ public class OccurrencesController {
     ) {
         try {
             this.occurrencesService.save(occurrences);
-            return ResponseEntity.ok().body("Ocorrências cadastrada");
+            return ResponseEntity.ok().body("Ocorrência cadastrada");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -39,5 +39,18 @@ public class OccurrencesController {
             @PathVariable Long idOccurrences
     ) {
         return ResponseEntity.ok().body(this.occurrencesService.findById(idOccurrences));
+    }
+
+    @PutMapping("/{idOccurrences}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idOccurrences,
+            @RequestBody Occurrences occurrences
+    ) {
+        try {
+            this.occurrencesService.update(occurrences, idOccurrences);
+            return ResponseEntity.ok().body("Ocorrência atualizada");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
