@@ -33,4 +33,11 @@ public class VaccinationController {
     ) {
         return ResponseEntity.ok().body(this.vaccinationService.listAll());
     }
+
+    @GetMapping("/{idVaccination}")
+    public ResponseEntity<Vaccination> findById(
+            @PathVariable("idProvider") Long idVaccination
+    ) {
+        return ResponseEntity.ok().body(this.vaccinationService.findById(idVaccination));
+    }
 }
