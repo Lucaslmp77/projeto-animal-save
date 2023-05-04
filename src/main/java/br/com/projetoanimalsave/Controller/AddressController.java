@@ -33,6 +33,13 @@ public class AddressController {
         return ResponseEntity.ok().body(this.addressService.listAll());
     }
 
+    @GetMapping("/{idAddress}")
+    public ResponseEntity<Address> findById (
+            @PathVariable Long idAddress
+    ) {
+        return ResponseEntity.ok().body(this.addressService.findById(idAddress));
+    }
+
 
 
 }
