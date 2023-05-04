@@ -34,4 +34,11 @@ public class AssociateController {
         return ResponseEntity.ok().body(this.associateService.listAll());
     }
 
+    @GetMapping("/{idAssociate}")
+    public ResponseEntity<Associate> findById(
+            @PathVariable("idAssociate") Long idAssociate
+    ) {
+        return ResponseEntity.ok().body(this.associateService.findById(idAssociate));
+    }
+
 }
