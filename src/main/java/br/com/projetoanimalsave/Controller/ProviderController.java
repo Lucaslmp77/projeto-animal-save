@@ -33,4 +33,13 @@ public class ProviderController {
     ) {
         return ResponseEntity.ok().body(this.providerService.listAll());
     }
+
+    @GetMapping("/{idProvider}")
+    public ResponseEntity<Provider> findById(
+            @PathVariable("idProvider") Long idprovider
+    ) {
+        return ResponseEntity.ok().body(this.providerService.findById(idprovider));
+    }
+
+
 }
