@@ -53,4 +53,17 @@ public class OccurrencesController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{idOccurrences}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long idOccurrences,
+            @RequestBody Occurrences occurrences
+    ) {
+        try {
+            this.occurrencesService.update(occurrences, idOccurrences);
+            return ResponseEntity.ok().body("Ocorrência atualizada");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
