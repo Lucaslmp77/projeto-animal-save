@@ -40,6 +40,19 @@ public class AddressController {
         return ResponseEntity.ok().body(this.addressService.findById(idAddress));
     }
 
+    @PutMapping("/{idAddress}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idAddress,
+            @RequestBody Address address
+    ) {
+        try {
+            this.addressService.update(address, idAddress);
+            return ResponseEntity.ok().body("Endereço atualizado!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 
 }
