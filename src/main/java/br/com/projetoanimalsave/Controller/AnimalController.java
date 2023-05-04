@@ -53,4 +53,17 @@ public class AnimalController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{idAnimal}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long idAnimal,
+            @RequestBody Animal animal
+    ) {
+        try {
+            this.animalService.delete(animal, idAnimal);
+            return ResponseEntity.ok().body("Animal Excluido!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
