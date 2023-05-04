@@ -41,5 +41,16 @@ public class ProviderController {
         return ResponseEntity.ok().body(this.providerService.findById(idprovider));
     }
 
-
+    @PutMapping("/{idProvider}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idProvider,
+            @RequestBody Provider provider
+    ) {
+        try {
+            this.providerService.update(provider, idProvider);
+            return ResponseEntity.ok().body("Fornecedor atualizado com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
