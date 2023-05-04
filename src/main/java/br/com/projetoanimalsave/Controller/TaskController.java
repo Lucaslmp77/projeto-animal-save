@@ -27,6 +27,7 @@ public class TaskController {
         }
     }
 
+    @GetMapping
     public ResponseEntity<List<Task>> listAll(
 
     ) {
