@@ -40,6 +40,7 @@ public class AssociateController {
     ) {
         return ResponseEntity.ok().body(this.associateService.findById(idAssociate));
     }
+
     @PutMapping("/{idCurso}")
     public ResponseEntity<?> update(
             @PathVariable Long idAssociate,
@@ -48,6 +49,19 @@ public class AssociateController {
         try {
             this.associateService.update(associate, idAssociate);
             return ResponseEntity.ok().body("Associado atualizado com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{idAssociate}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long idAssociate,
+            @RequestBody Associate associate
+    ) {
+        try {
+            this.associateService.delete(associate, idAssociate);
+            return ResponseEntity.ok().body("Associado deletado com sucesso!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
