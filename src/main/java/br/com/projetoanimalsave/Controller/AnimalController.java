@@ -26,4 +26,11 @@ public class AnimalController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping
+    public ResponseEntity<List<Animal>> listAll(
+
+    ) {
+        return ResponseEntity.ok().body(this.animalService.listAll());
+    }
 }
