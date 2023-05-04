@@ -31,4 +31,17 @@ public class TaskController {
     ) {
         return ResponseEntity.ok().body(this.taskService.findById(idTask));
     }
+
+    @PutMapping("/{idTask}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idTask,
+            @RequestBody Task task
+    ) {
+        try {
+            this.taskService.update(task, idTask);
+            return ResponseEntity.ok().body("Tarefa atualizada");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
