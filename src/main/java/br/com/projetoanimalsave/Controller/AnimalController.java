@@ -33,4 +33,11 @@ public class AnimalController {
     ) {
         return ResponseEntity.ok().body(this.animalService.listAll());
     }
+
+    @GetMapping("/{idAnimal}")
+    public ResponseEntity<Animal> findById (
+            @PathVariable Long idAnimal
+    ) {
+        return ResponseEntity.ok().body(this.animalService.findById(idAnimal));
+    }
 }
