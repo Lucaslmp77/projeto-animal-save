@@ -40,5 +40,16 @@ public class AssociateController {
     ) {
         return ResponseEntity.ok().body(this.associateService.findById(idAssociate));
     }
-
+    @PutMapping("/{idCurso}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idAssociate,
+            @RequestBody Associate associate
+    ) {
+        try {
+            this.associateService.update(associate, idAssociate);
+            return ResponseEntity.ok().body("Associado atualizado com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
