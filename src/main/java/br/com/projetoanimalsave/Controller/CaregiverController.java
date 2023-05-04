@@ -33,4 +33,11 @@ public class CaregiverController {
     ) {
         return ResponseEntity.ok().body(this.caregiverService.listAll());
     }
+
+    @GetMapping("/{idCaregiver}")
+    public ResponseEntity<Caregiver> findById (
+            @PathVariable Long idCaregiver
+    ) {
+        return ResponseEntity.ok().body(this.caregiverService.findById(idCaregiver));
+    }
 }
