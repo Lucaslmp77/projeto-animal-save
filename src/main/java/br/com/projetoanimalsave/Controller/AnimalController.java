@@ -40,4 +40,17 @@ public class AnimalController {
     ) {
         return ResponseEntity.ok().body(this.animalService.findById(idAnimal));
     }
+
+    @PutMapping("/{idAnimal}")
+    public ResponseEntity<?> update(
+            @PathVariable Long idAnimal,
+            @RequestBody Animal animal
+    ) {
+        try {
+            this.animalService.update(animal, idAnimal);
+            return ResponseEntity.ok().body("Animal atualizado!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
