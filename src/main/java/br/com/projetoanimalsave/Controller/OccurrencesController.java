@@ -33,4 +33,11 @@ public class OccurrencesController {
     ) {
         return ResponseEntity.ok().body(this.occurrencesService.listAll())
     }
+
+    @GetMapping("/{idOccurrences}")
+    public ResponseEntity<Occurrences> findById (
+            @PathVariable Long idOccurrences
+    ) {
+        return ResponseEntity.ok().body(this.occurrencesService.findById(idOccurrences));
+    }
 }
