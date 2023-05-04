@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
@@ -23,6 +25,12 @@ public class TaskController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    public ResponseEntity<List<Task>> listAll(
+
+    ) {
+        return ResponseEntity.ok().body(this.taskService.listAll());
     }
 
     @GetMapping("/{idTask}")
