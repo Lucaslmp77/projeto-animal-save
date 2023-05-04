@@ -44,4 +44,17 @@ public class TaskController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/{idTask}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long idTask,
+            @RequestBody Task task
+    ) {
+        try {
+            this.taskService.update(task, idTask);
+            return ResponseEntity.ok().body("Tarefa atualizada");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
