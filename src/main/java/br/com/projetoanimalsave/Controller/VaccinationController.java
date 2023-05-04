@@ -21,7 +21,7 @@ public class VaccinationController {
     ) {
         try {
             this.vaccinationService.save(vaccination);
-            return ResponseEntity.ok().body("Vacinação cadastrado com sucesso!");
+            return ResponseEntity.ok().body("Vacinação cadastrada com sucesso!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
