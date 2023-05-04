@@ -4,10 +4,9 @@ import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/provider")
@@ -26,5 +25,12 @@ public class ProviderController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Provider>> listAll(
+
+    ) {
+        return ResponseEntity.ok().body(this.providerService.listAll());
     }
 }
