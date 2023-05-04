@@ -31,7 +31,7 @@ public class OccurrencesController {
     public ResponseEntity<List<Occurrences>> listAll(
 
     ) {
-        return ResponseEntity.ok().body(this.occurrencesService.listAll())
+        return ResponseEntity.ok().body(this.occurrencesService.listAll());
     }
 
     @GetMapping("/{idOccurrences}")
