@@ -4,10 +4,7 @@ import br.com.projetoanimalsave.Entity.Task;
 import br.com.projetoanimalsave.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/task")
@@ -26,5 +23,12 @@ public class TaskController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/{idTask}")
+    public ResponseEntity<Task> findById (
+            @PathVariable Long idTask
+    ) {
+        return ResponseEntity.ok().body(this.taskService.findById(idTask));
     }
 }
