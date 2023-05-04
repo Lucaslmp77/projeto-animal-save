@@ -53,4 +53,17 @@ public class ProviderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/delete/{idProvider}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long idProvider,
+            @RequestBody Provider provider
+    ) {
+        try {
+            this.providerService.delete(provider, idProvider);
+            return ResponseEntity.ok().body("Fornecedor deletado com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
