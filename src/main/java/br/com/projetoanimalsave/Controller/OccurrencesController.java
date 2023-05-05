@@ -27,7 +27,7 @@ public class OccurrencesController {
         }
     }
 
-    @PutMapping
+    @GetMapping
     public ResponseEntity<List<Occurrences>> listAll(
 
     ) {
