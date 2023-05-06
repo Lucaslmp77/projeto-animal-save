@@ -54,7 +54,7 @@ public class VaccinationController {
         }
     }
 
-    @PutMapping("/disable/{idTask}")
+    @PutMapping("/disable/{idVaccination}")
     public ResponseEntity<?> disable(
             @PathVariable Long idVaccination
     ) {
