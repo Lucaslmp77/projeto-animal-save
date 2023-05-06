@@ -36,9 +36,10 @@ public class AddressService {
     }
 
     @Transactional
-    public void delete(Address address, Long id) {
-        if (id == address.getId()) {
-            this.addressRepository.delete(address);
+    public void disable(Long id) {
+        var address = this.addressRepository.findById(id);
+        if (id == address.get().getId()) {
+            this.addressRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
