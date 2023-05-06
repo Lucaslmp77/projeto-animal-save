@@ -36,9 +36,10 @@ public class OccurrencesService {
     }
 
     @Transactional
-    public void delete(Occurrences occurrences, Long id) {
-        if (id == occurrences.getId()) {
-            this.occurrencesRepository.delete(occurrences);
+    public void disable(Long id) {
+        var occurrences = this.occurrencesRepository.findById(id);
+        if (id == occurrences.get().getId()) {
+            this.occurrencesRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
