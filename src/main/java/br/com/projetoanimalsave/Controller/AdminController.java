@@ -55,13 +55,12 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping("{idAdmin}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idAdmin,
-            @RequestBody Admin admin
+    @PutMapping("/disable{idAdmin}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idAdmin
     ) {
         try {
-            this.adminService.delete(admin, idAdmin);
+            this.adminService.disable(idAdmin);
             return ResponseEntity.ok().body("Administrador excluido");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

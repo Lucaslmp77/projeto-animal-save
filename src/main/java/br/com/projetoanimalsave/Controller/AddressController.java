@@ -54,7 +54,7 @@ public class AddressController {
     }
 
     @PutMapping("/disable/{idAddress}")
-    public ResponseEntity<?> delete(
+    public ResponseEntity<?> disable(
             @PathVariable Long idAddress
     ) {
         try {
