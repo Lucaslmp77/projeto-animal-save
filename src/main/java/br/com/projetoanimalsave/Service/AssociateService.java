@@ -36,9 +36,10 @@ public class AssociateService {
     }
 
     @Transactional
-    public void delete(Associate associate, Long id) {
-        if (id == associate.getId()) {
-            this.associateRepository.delete(associate);
+    public void disable(Long id) {
+        var associate = this.associateRepository.findById(id);
+        if (id == associate.get().getId()) {
+            this.associateRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
