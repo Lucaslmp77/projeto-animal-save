@@ -36,9 +36,10 @@ public class AdminService {
     }
 
     @Transactional
-    public void delete(Admin admin, Long id) {
-        if (id == admin.getId()) {
-            this.adminRepository.delete(admin);
+    public void disable(Long id) {
+        var admin = this.adminRepository.findById(id);
+        if (id == admin.get().getId()) {
+            this.adminRepository.disable(id);
         } else {
             throw new RuntimeException();
         }

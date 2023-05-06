@@ -36,9 +36,10 @@ public class AnimalService {
     }
 
     @Transactional
-    public void delete(Animal animal, Long id) {
-        if (id == animal.getId()) {
-            this.animalRepository.delete(animal);
+    public void disable(Long id) {
+        var animal = this.animalRepository.findById(id);
+        if (id == animal.get().getId()) {
+            this.animalRepository.disable(id);
         } else {
             throw new RuntimeException();
         }

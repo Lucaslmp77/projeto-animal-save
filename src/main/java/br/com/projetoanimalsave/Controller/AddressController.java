@@ -53,13 +53,12 @@ public class AddressController {
         }
     }
 
-    @DeleteMapping("/{idAddress}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idAddress,
-            @RequestBody Address address
+    @PutMapping("/disable/{idAddress}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idAddress
     ) {
         try {
-            this.addressService.delete(address, idAddress);
+            this.addressService.disable(idAddress);
             return ResponseEntity.ok().body("Endereço excluido!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

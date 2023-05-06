@@ -53,4 +53,16 @@ public class VaccinationController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/disable/{idVaccination}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idVaccination
+    ) {
+        try {
+            this.vaccinationService.disable(idVaccination);
+            return ResponseEntity.ok().body("Vacinações excluidas!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

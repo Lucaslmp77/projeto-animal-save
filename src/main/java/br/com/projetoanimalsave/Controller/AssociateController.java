@@ -54,13 +54,12 @@ public class AssociateController {
         }
     }
 
-    @DeleteMapping("/delete/{idAssociate}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idAssociate,
-            @RequestBody Associate associate
+    @PutMapping("/disable/{idAssociate}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idAssociate
     ) {
         try {
-            this.associateService.delete(associate, idAssociate);
+            this.associateService.disable(idAssociate);
             return ResponseEntity.ok().body("Associado deletado com sucesso!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

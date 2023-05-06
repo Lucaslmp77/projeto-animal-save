@@ -36,9 +36,10 @@ public class TaskService {
     }
 
     @Transactional
-    public void delete(Task task, Long id) {
-        if (id == task.getId()) {
-            this.taskRepository.delete(task);
+    public void disable(Long id) {
+        var task = this.taskRepository.findById(id);
+        if (id == task.get().getId()) {
+            this.taskRepository.disable(id);
         } else {
             throw new RuntimeException();
         }

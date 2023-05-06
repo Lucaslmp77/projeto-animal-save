@@ -54,13 +54,12 @@ public class ProviderController {
         }
     }
 
-    @DeleteMapping("/delete/{idProvider}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idProvider,
-            @RequestBody Provider provider
+    @PutMapping("/disable/{idProvider}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idProvider
     ) {
         try {
-            this.providerService.delete(provider, idProvider);
+            this.providerService.disable(idProvider);
             return ResponseEntity.ok().body("Fornecedor deletado com sucesso!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

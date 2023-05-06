@@ -36,9 +36,10 @@ public class CaregiverService {
     }
 
     @Transactional
-    public void delete(Caregiver caregiver, Long id) {
-        if (id == caregiver.getId()) {
-            this.caregiverRepository.delete(caregiver);
+    public void disable(Long id) {
+        var caregiver = this.caregiverRepository.findById(id);
+        if (id == caregiver.get().getId()) {
+            this.caregiverRepository.disable(id);
         } else {
             throw new RuntimeException();
         }

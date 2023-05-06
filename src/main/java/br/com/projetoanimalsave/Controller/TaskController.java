@@ -54,14 +54,13 @@ public class TaskController {
         }
     }
 
-    @DeleteMapping("/{idTask}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idTask,
-            @RequestBody Task task
+    @PutMapping("/disable/{idTask}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idTask
     ) {
         try {
-            this.taskService.update(task, idTask);
-            return ResponseEntity.ok().body("Tarefa atualizada");
+            this.taskService.disable(idTask);
+            return ResponseEntity.ok().body("Serviço excluido!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

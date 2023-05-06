@@ -34,4 +34,14 @@ public class VaccinationService {
             throw new RuntimeException();
         }
     }
+
+    @Transactional
+    public void disable(Long id) {
+        var vaccination = this.vaccinationRepository.findById(id);
+        if (id == vaccination.get().getId()) {
+            this.vaccinationRepository.disable(id);
+        } else {
+            throw new RuntimeException();
+        }
+    }
 }
