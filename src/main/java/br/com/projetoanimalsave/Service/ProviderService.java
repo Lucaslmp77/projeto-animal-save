@@ -36,9 +36,10 @@ public class ProviderService {
     }
 
     @Transactional
-    public void delete(Provider provider, Long id) {
-        if (id == provider.getId()) {
-            this.providerRepository.delete(provider);
+    public void disable(Long id) {
+        var provider = this.providerRepository.findById(id);
+        if (id == provider.get().getId()) {
+            this.providerRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
