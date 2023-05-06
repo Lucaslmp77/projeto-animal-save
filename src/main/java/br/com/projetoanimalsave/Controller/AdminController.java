@@ -55,7 +55,7 @@ public class AdminController {
         }
     }
 
-    @PutMapping("/disable{idAdmin}")
+    @PutMapping("/disable/{idAdmin}")
     public ResponseEntity<?> disable(
             @PathVariable Long idAdmin
     ) {

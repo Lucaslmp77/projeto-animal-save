@@ -54,13 +54,12 @@ public class CaregiverController {
         }
     }
 
-    @DeleteMapping("/{idCaregiver}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idCaregiver,
-            @RequestBody Caregiver caregiver
+    @PutMapping("/disable/{idCaregiver}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idCaregiver
     ) {
         try {
-            this.caregiverService.update(caregiver, idCaregiver);
+            this.caregiverService.disable(idCaregiver);
             return ResponseEntity.ok().body("Cuidadora atualizada");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

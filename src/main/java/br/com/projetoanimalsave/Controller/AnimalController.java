@@ -54,7 +54,7 @@ public class AnimalController {
         }
     }
 
-    @PutMapping("/disable{idAnimal}")
+    @PutMapping("/disable/{idAnimal}")
     public ResponseEntity<?> disable(
             @PathVariable Long idAnimal
     ) {
