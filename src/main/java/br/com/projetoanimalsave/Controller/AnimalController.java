@@ -54,13 +54,12 @@ public class AnimalController {
         }
     }
 
-    @DeleteMapping("/{idAnimal}")
-    public ResponseEntity<?> delete(
-            @PathVariable Long idAnimal,
-            @RequestBody Animal animal
+    @PutMapping("/disable{idAnimal}")
+    public ResponseEntity<?> disable(
+            @PathVariable Long idAnimal
     ) {
         try {
-            this.animalService.delete(animal, idAnimal);
+            this.animalService.disable(idAnimal);
             return ResponseEntity.ok().body("Animal Excluido!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
