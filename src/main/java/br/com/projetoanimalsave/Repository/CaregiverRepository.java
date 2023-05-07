@@ -5,11 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface CaregiverRepository extends JpaRepository<Caregiver, Long> {
+    @Query("SELECT caregiver FROM Caregiver caregiver where caregiver.active = true")
+    public List<Caregiver> findByCaregiverActives();
+
     @Modifying
-    @Query("UPDATE Caregiver caregiver SET caregiver.active = false WHERE caregiver.id = :id")
-    public void disable(@Param("id") Long id);
+    @Query("update Caregiver caregiver set caregiver.active = false where caregiver.id = :idCaregiver")
+    public void disable(@Param("idCaregiver")Long id);
 }
