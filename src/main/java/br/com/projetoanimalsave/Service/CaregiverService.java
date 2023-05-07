@@ -10,25 +10,22 @@ import java.util.List;
 
 @Service
 public class CaregiverService {
+
     @Autowired
     private CaregiverRepository caregiverRepository;
 
     @Transactional
-    public Caregiver save(Caregiver caregiver) {
-        return this.caregiverRepository.save(caregiver);
-    }
+    public Caregiver save(Caregiver caregiver){ return this.caregiverRepository.save(caregiver);}
 
-    public List<Caregiver> listAll() {
-        return this.caregiverRepository.findAll();
-    }
+    public List<Caregiver> listAll(){ return this.caregiverRepository.findAll();}
 
-    public Caregiver findById(Long id) {
-        return this.caregiverRepository.findById(id).orElse(new Caregiver());
-    }
+    public List<Caregiver> findByCaregiverActives(){ return this.caregiverRepository.findByCaregiverActives();}
+
+    public Caregiver findById(Long id){ return this.caregiverRepository.findById(id).orElse(new Caregiver());}
 
     @Transactional
-    public void update(Caregiver caregiver, Long id) {
-        if (id == caregiver.getId()) {
+    public void update(Long id, Caregiver caregiver){
+        if (id == caregiver.getId()){
             this.caregiverRepository.save(caregiver);
         } else {
             throw new RuntimeException();
@@ -36,12 +33,13 @@ public class CaregiverService {
     }
 
     @Transactional
-    public void disable(Long id) {
+    public void disable(Long id){
         var caregiver = this.caregiverRepository.findById(id);
-        if (id == caregiver.get().getId()) {
+        if (id == caregiver.get().getId()){
             this.caregiverRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
     }
+
 }
