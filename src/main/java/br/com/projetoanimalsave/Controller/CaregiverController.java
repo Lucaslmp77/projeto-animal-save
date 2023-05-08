@@ -47,7 +47,7 @@ public class CaregiverController {
             @RequestBody Caregiver caregiver
     ) {
         try {
-            this.caregiverService.update(caregiver, idCaregiver);
+            this.caregiverService.update(idCaregiver, caregiver);
             return ResponseEntity.ok().body("Cuidadora atualizada");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
