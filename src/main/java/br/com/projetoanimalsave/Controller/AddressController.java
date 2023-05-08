@@ -53,16 +53,4 @@ public class AddressController {
         }
     }
 
-    @PutMapping("/disable/{idAddress}")
-    public ResponseEntity<?> disable(
-            @PathVariable Long idAddress
-    ) {
-        try {
-            this.addressService.disable(idAddress);
-            return ResponseEntity.ok().body("Endereço excluido!");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
 }

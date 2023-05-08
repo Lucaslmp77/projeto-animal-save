@@ -34,14 +34,4 @@ public class AddressService {
             throw new RuntimeException();
         }
     }
-
-    @Transactional
-    public void disable(Long id) {
-        var address = this.addressRepository.findById(id);
-        if (id == address.get().getId()) {
-            this.addressRepository.disable(id);
-        } else {
-            throw new RuntimeException();
-        }
-    }
 }
