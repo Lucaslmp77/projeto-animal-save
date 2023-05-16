@@ -57,7 +57,7 @@ public class Caregiver extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "gastos", length = 10, nullable = false)
+    @Column(name = "gastos", length = 10, nullable = true)
     private float spending;
 
     @Getter
@@ -71,12 +71,12 @@ public class Caregiver extends AbstractEntity {
     private Aprove aprove;
 
     @Getter @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = false)
+    @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
 
     @Getter @Setter
-    @JoinColumn(name = "id_animal", nullable = false)
+    @JoinColumn(name = "id_animal", nullable = true)
     @OneToMany
     private List<Animal> animal;
 
