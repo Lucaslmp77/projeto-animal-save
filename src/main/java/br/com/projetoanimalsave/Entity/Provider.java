@@ -58,7 +58,7 @@ public class Provider extends AbstractEntity {
     @Getter @Setter
     @JoinColumn(name = "id_serviço", nullable = false)
     @ManyToOne
-    private Service service;
+    private Task service;
 
     @Getter @Setter
     @Column(name = "aprovação", length = 15, nullable = false)
