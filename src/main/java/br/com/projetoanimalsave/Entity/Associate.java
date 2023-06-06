@@ -23,24 +23,18 @@ public class Associate extends AbstractEntity {
 
     @Getter@Setter
     @Email
-    @Column(name = "email", length = 40, nullable = false)
+    @Column(name = "email", length = 40, nullable = false, unique = true)
     private String email;
-
-    @Getter @Setter
-    @Column(name = "contato", length = 14, nullable = false)
-    private String contact;
-
-    @Getter
-    @Setter
-    @Length(min = 3, max = 25, message = "O usuário deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "username", length = 25, nullable = false)
-    private String username;
 
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "A senha deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "senha", length = 25, nullable = false)
     private String password;
+
+    @Getter @Setter
+    @Column(name = "contato", length = 14, nullable = false)
+    private String contact;
 
     @Getter @Setter
     @JoinColumn(name = "id_endereço", nullable = false)
