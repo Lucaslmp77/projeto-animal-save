@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_cuidadores", schema = "projeto-animal-save")
@@ -74,8 +76,9 @@ public class Caregiver extends AbstractEntity {
     @OneToMany
     private List<Animal> animal;
 
-    @Getter @Setter
-    @Column(name = "cargo", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "tb_caregiver_role",
+            joinColumns = @JoinColumn(name = "caregiver_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }

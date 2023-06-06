@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_associados", schema = "projeto-animal-save")
 public class Associate extends AbstractEntity {
@@ -51,8 +54,9 @@ public class Associate extends AbstractEntity {
     @ManyToOne
     private Occurrences occurrences;
 
-    @Getter @Setter
-    @Column(name = "cargo", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "tb_associate_role",
+            joinColumns = @JoinColumn(name = "associate_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }

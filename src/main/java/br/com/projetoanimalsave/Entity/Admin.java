@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_administradores", schema = "projeto-animal-save")
 public class Admin extends AbstractEntity {
@@ -26,8 +29,9 @@ public class Admin extends AbstractEntity {
     @Column(name = "senha", length = 25, nullable = false)
     private String password;
 
-    @Getter @Setter
-    @Column(name = "cargo", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "tb_admin_role",
+            joinColumns = @JoinColumn(name = "admin_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }
