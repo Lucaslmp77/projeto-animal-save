@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_animais", schema = "projeto-animal-save")
 public class Animal extends AbstractEntity {
@@ -20,10 +22,14 @@ public class Animal extends AbstractEntity {
     @Column(name = "raça", length = 25, nullable = false)
     private String breed;
 
-    @Getter @Setter
-    @JoinColumn(name = "id_vacina", nullable = false)
-    @ManyToOne
-    private Vaccination vaccination;
+    @ManyToMany
+    @Getter
+    @Setter
+    @JoinTable(
+            name = "animal_vacina",
+            joinColumns = @JoinColumn(name = "animal_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "vacina_id", nullable = false))
+    private List<Vaccination> vaccination;
 
     @Getter @Setter
     @Column(name = "animal_type", length = 10, nullable = false)
