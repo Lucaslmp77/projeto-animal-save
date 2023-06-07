@@ -34,14 +34,4 @@ public class AdminService {
             throw new RuntimeException();
         }
     }
-
-    @Transactional
-    public void disable(Long id) {
-        var admin = this.adminRepository.findById(id);
-        if (id == admin.get().getId()) {
-            this.adminRepository.disable(id);
-        } else {
-            throw new RuntimeException();
-        }
-    }
 }

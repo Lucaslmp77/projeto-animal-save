@@ -83,6 +83,8 @@ public class Provider implements UserDetails {
     private Occurrences occurrences;
 
     @ManyToMany
+    @Getter
+    @Setter
     @JoinTable(name = "tb_provider_role",
             joinColumns = @JoinColumn(name = "provider_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

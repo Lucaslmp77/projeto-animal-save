@@ -2,7 +2,6 @@ package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Service.AdminService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,18 +49,6 @@ public class AdminController {
         try {
             this.adminService.update(admin, idAdmin);
             return ResponseEntity.ok().body("Administrador atualizado");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @PutMapping("/disable/{idAdmin}")
-    public ResponseEntity<?> disable(
-            @PathVariable Long idAdmin
-    ) {
-        try {
-            this.adminService.disable(idAdmin);
-            return ResponseEntity.ok().body("Administrador excluido");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

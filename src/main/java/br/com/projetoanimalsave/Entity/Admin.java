@@ -23,10 +23,6 @@ public class Admin implements UserDetails {
     @Column(name = "id", length = 30, nullable = false, unique = true)
     private Long id;
 
-    @Getter @Setter
-    @Column(name = "active", nullable = false)
-    private Boolean active;
-
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
@@ -45,6 +41,8 @@ public class Admin implements UserDetails {
     private String password;
 
     @ManyToMany
+    @Getter
+    @Setter
     @JoinTable(name = "tb_admin_role",
             joinColumns = @JoinColumn(name = "admin_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

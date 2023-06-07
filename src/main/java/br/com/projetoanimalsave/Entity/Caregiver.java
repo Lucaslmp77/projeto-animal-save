@@ -24,7 +24,8 @@ public class Caregiver implements UserDetails {
     @Column(name = "id", length = 30, nullable = false, unique = true)
     private Long id;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "active", nullable = false)
     private Boolean active;
 
@@ -40,7 +41,8 @@ public class Caregiver implements UserDetails {
     @Column(name = "sobrenome", length = 25, nullable = false)
     private String lastName;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     @Email
     @Column(name = "email", length = 40, nullable = false, unique = true)
     private String email;
@@ -51,11 +53,13 @@ public class Caregiver implements UserDetails {
     @Column(name = "senha", length = 25, nullable = false)
     private String password;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_endereço", nullable = false)
     @ManyToOne
     private Address address;
@@ -76,22 +80,27 @@ public class Caregiver implements UserDetails {
     @Column(name = "capacidade-animais", length = 10, nullable = false)
     private Integer capacityAnimals;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "aprovação", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_animal", nullable = true)
     @OneToMany
     private List<Animal> animal;
 
     @ManyToMany
+    @Getter
+    @Setter
     @JoinTable(name = "tb_caregiver_role",
             joinColumns = @JoinColumn(name = "caregiver_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

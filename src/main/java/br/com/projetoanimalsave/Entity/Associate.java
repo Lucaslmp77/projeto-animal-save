@@ -39,7 +39,8 @@ public class Associate implements UserDetails {
     @Column(name = "sobrenome", length = 25, nullable = false)
     private String lastName;
 
-    @Getter@Setter
+    @Getter
+    @Setter
     @Email
     @Column(name = "email", length = 40, nullable = false, unique = true)
     private String email;
@@ -70,6 +71,8 @@ public class Associate implements UserDetails {
     private Occurrences occurrences;
 
     @ManyToMany
+    @Getter
+    @Setter
     @JoinTable(name = "tb_associate_role",
             joinColumns = @JoinColumn(name = "associate_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
