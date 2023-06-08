@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AdminService implements UserDetailsService {
+public class AdminService implements UserDetailsService{
     @Autowired
     private AdminRepository adminRepository;
 
