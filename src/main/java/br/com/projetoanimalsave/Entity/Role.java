@@ -1,7 +1,10 @@
 package br.com.projetoanimalsave.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +18,10 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "authority", length = 20, nullable = false)
     private String authority;
+
+    @ManyToMany(mappedBy = "role")
+    @JsonIgnore
+    private List<Admin> admin;
 
     public Long getId() {
         return id;

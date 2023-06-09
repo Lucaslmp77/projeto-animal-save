@@ -17,7 +17,7 @@ public class TokenService {
                 .withSubject(admin.getUsername())
                 .withClaim("id", admin.getId())
                 .withExpiresAt(Date.from(LocalDateTime.now()
-                        .plusSeconds(30)
+                        .plusMinutes(1440)
                         .toInstant(ZoneOffset.of("-03:00")))
                 ).sign(Algorithm.HMAC256("deregues"));
     }

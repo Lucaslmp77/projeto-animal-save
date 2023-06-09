@@ -1,7 +1,9 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Admin;
+import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Repository.AdminRepository;
+import br.com.projetoanimalsave.Repository.RoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,14 +19,27 @@ public class AdminService implements UserDetailsService{
     @Autowired
     private AdminRepository adminRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Transactional
     public Admin save(Admin admin) {
+
+        Role role = new Role();
+        long id = 1;
+        String roleAdm = "ROLE_ADMIN";
+        role.setId(id);
+        role.setAuthority(roleAdm);
+        this.roleRepository.save(role);
+
         admin.setPassword(passwordEncoder().encode(admin.getPassword()));
-        return this.adminRepository.save(admin);
+        this.adminRepository.save(admin);
+        this.roleRepository.addRelationAdmWithRole(admin.getId(), role.getId());
+        return admin;
     }
 
     public List<Admin> listAll() {
