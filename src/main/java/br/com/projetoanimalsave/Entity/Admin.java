@@ -31,13 +31,12 @@ public class Admin implements UserDetails {
 
     @Getter@Setter
     @Email
-    @Column(name = "email", length = 40, nullable = false, unique = true)
-    private String email;
+    @Column(name = "login", length = 40, nullable = false, unique = true)
+    private String login;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A senha deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "senha", length = 25, nullable = false)
+    @Column(name = "senha", length = 90, nullable = false)
     private String password;
 
     @ManyToMany
@@ -68,7 +67,7 @@ public class Admin implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return login;
     }
 
     @Override
