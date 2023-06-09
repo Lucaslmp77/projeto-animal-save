@@ -1,8 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Admin;
-import br.com.projetoanimalsave.Entity.Role;
-import br.com.projetoanimalsave.Projections.UserDetailsProjection;
 import br.com.projetoanimalsave.Repository.AdminRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

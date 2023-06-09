@@ -30,6 +30,7 @@ public class Configurations {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/admin")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();
