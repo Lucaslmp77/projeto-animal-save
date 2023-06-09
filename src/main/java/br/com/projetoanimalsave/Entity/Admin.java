@@ -39,7 +39,7 @@ public class Admin implements UserDetails {
     @Column(name = "senha", length = 90, nullable = false)
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Getter
     @Setter
     @JoinTable(name = "tb_admin_role",

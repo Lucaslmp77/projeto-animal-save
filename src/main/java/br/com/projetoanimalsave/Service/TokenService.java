@@ -13,12 +13,19 @@ import java.util.Date;
 public class TokenService {
     public String gerarToken(Admin admin) {
         return JWT.create()
-                .withIssuer("Produtos")
+                .withIssuer("Administrador")
                 .withSubject(admin.getUsername())
                 .withClaim("id", admin.getId())
                 .withExpiresAt(Date.from(LocalDateTime.now()
-                        .plusMinutes(30)
+                        .plusSeconds(30)
                         .toInstant(ZoneOffset.of("-03:00")))
-                ).sign(Algorithm.HMAC256("secreta"));
+                ).sign(Algorithm.HMAC256("deregues"));
+    }
+
+    public String getSubject(String token) {
+        return JWT.require(Algorithm.HMAC256("deregues"))
+                .withIssuer("Administrador")
+                .build().verify(token).getSubject();
+
     }
 }
