@@ -15,7 +15,7 @@ public class AssociateController {
     @Autowired
     private AssociateService associateService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Associate associate
     ) {

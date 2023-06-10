@@ -19,4 +19,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     @Modifying
     @Query(value = "insert into tb_provider_role (provider_id, role_id) VALUES (:idProv, :idRole)", nativeQuery = true)
     public void addRelationProviderWithRole(Long idProv, Long idRole);
+
+    @Modifying
+    @Query(value = "insert into tb_associate_role (associate_id, role_id) VALUES (:idAssociate, :idRole)", nativeQuery = true)
+    public void addRelationAssociateWithRole(Long idAssociate, Long idRole);
 }
