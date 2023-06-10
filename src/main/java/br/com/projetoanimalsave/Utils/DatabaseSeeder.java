@@ -38,11 +38,14 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         Role roleCaregiver = new Role();
         Role roleProvider = new Role();
+        Role roleAssociate = new Role();
 
         roleCaregiver.setAuthority("ROLE_CAREGIVER");
         roleProvider.setAuthority("ROLE_PROVIDER");
+        roleAssociate.setAuthority("ROLE_ASSOCIATE");
 
         this.roleRepository.save(roleCaregiver);
         this.roleRepository.save(roleProvider);
+        this.roleRepository.save(roleAssociate);
     }
 }
