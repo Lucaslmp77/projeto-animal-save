@@ -15,7 +15,7 @@ public class CaregiverController {
     @Autowired
     private CaregiverService caregiverService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Caregiver caregiver
     ) {
