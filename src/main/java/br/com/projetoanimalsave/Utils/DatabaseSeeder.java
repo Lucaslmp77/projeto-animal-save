@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Utils;
 
 import br.com.projetoanimalsave.Entity.Admin;
+import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void createDefaultUser() {
+
         try {
             Admin admin = new Admin();
 
@@ -29,9 +31,18 @@ public class DatabaseSeeder implements CommandLineRunner {
             admin.setLogin("admin@admin.com");
             admin.setPassword("admin");
 
-            admin = this.adminService.save(admin);
+            this.adminService.save(admin);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        Role roleCaregiver = new Role();
+        Role roleProvider = new Role();
+
+        roleCaregiver.setAuthority("ROLE_CAREGIVER");
+        roleProvider.setAuthority("ROLE_PROVIDER");
+
+        this.roleRepository.save(roleCaregiver);
+        this.roleRepository.save(roleProvider);
     }
 }

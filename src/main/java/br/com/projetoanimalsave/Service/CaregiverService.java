@@ -37,6 +37,8 @@ public class CaregiverService implements UserDetailsService {
         role.setAuthority(roleCgv);
         this.roleRepository.save(role);
 
+        caregiver.setPassword(passwordEncoder().encode(caregiver.getPassword()));
+
         this.caregiverRepository.save(caregiver);
 
         this.roleRepository.addRelationCgvWithRole(caregiver.getId(), role.getId());
