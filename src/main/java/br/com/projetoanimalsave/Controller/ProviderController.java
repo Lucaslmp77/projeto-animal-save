@@ -15,7 +15,7 @@ public class ProviderController {
     @Autowired
     private ProviderService providerService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Provider provider
     ) {

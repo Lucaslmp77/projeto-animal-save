@@ -10,8 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_fornecedores", schema = "projeto-animal-save")
@@ -49,13 +48,12 @@ public class Provider implements UserDetails {
 
     @Getter@Setter
     @Email
-    @Column(name = "email", length = 40, nullable = false, unique = true)
-    private String email;
+    @Column(name = "login", length = 40, nullable = false, unique = true)
+    private String login;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A senha deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "senha", length = 25, nullable = false)
+    @Column(name = "senha", length = 90, nullable = false)
     private String password;
 
     @Getter @Setter
@@ -63,54 +61,41 @@ public class Provider implements UserDetails {
     private String contact;
 
     @Getter @Setter
-    @JoinColumn(name = "id_endereço", nullable = false)
+    @JoinColumn(name = "id_endereço", nullable = true)
     @ManyToOne
     private Address address;
 
     @Getter @Setter
-    @JoinColumn(name = "id_serviço", nullable = false)
+    @JoinColumn(name = "id_serviço", nullable = true)
     @ManyToOne
     private Task service;
 
     @Getter @Setter
-    @Column(name = "aprovação", length = 15, nullable = false)
+    @Column(name = "aprovação", length = 15, nullable = true)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
     @Getter @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = false)
+    @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Getter
     @Setter
     @JoinTable(name = "tb_provider_role",
             joinColumns = @JoinColumn(name = "provider_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
-    public void addRole (Role role) {
-        roles.add(role);
-    }
-
-    public boolean hasRole(String roleName) {
-        for (Role role : roles) {
-            if (role.getAuthority().equals(roleName)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    private List<Role> role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return role;
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return login;
     }
 
     @Override

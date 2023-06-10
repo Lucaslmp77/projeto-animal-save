@@ -1,21 +1,48 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Provider;
+import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Repository.ProviderRepository;
+import br.com.projetoanimalsave.Repository.RoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProviderService {
+public class ProviderService implements UserDetailsService {
     @Autowired
     private ProviderRepository providerRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    private BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Transactional
     public Provider save(Provider provider) {
-        return this.providerRepository.save(provider);
+
+        Role role = new Role();
+        long id = 3;
+        String roleProv = "ROLE_PROVIDER";
+        role.setId(id);
+        role.setAuthority(roleProv);
+        this.roleRepository.save(role);
+
+        provider.setPassword(passwordEncoder().encode(provider.getPassword()));
+
+        this.providerRepository.save(provider);
+
+        this.roleRepository.addRelationProviderWithRole(provider.getId(), role.getId());
+
+        return provider;
     }
 
     public List<Provider> listAll() {
@@ -43,5 +70,10 @@ public class ProviderService {
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        return providerRepository.findByLogin(username);
     }
 }
