@@ -37,8 +37,11 @@ public class AdminService implements UserDetailsService{
         this.roleRepository.save(role);
 
         admin.setPassword(passwordEncoder().encode(admin.getPassword()));
+
         this.adminRepository.save(admin);
+
         this.roleRepository.addRelationAdmWithRole(admin.getId(), role.getId());
+
         return admin;
     }
 

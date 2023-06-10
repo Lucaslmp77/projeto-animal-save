@@ -26,7 +26,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
         @RequestBody Admin admin
     ) {
@@ -66,7 +66,7 @@ public class AdminController {
         return ResponseEntity.ok().body(this.adminService.findById(idAdmin));
     }
 
-    @PutMapping("{idAdmin}")
+    @PutMapping("/{idAdmin}")
     public ResponseEntity<?> update(
             @PathVariable Long idAdmin,
             @RequestBody Admin admin
