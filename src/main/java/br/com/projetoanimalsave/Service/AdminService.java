@@ -53,15 +53,6 @@ public class AdminService implements UserDetailsService{
         return this.adminRepository.findById(id).orElse(new Admin());
     }
 
-    @Transactional
-    public void update(Admin admin, Long id) {
-        if (id == admin.getId()) {
-            this.adminRepository.save(admin);
-        } else {
-            throw new RuntimeException();
-        }
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {

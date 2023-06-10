@@ -65,17 +65,4 @@ public class AdminController {
     ) {
         return ResponseEntity.ok().body(this.adminService.findById(idAdmin));
     }
-
-    @PutMapping("/{idAdmin}")
-    public ResponseEntity<?> update(
-            @PathVariable Long idAdmin,
-            @RequestBody Admin admin
-    ) {
-        try {
-            this.adminService.update(admin, idAdmin);
-            return ResponseEntity.ok().body("Administrador atualizado");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 }
