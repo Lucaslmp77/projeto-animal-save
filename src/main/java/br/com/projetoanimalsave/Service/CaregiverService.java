@@ -2,8 +2,10 @@ package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Caregiver;
 import br.com.projetoanimalsave.Entity.Role;
+import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.CaregiverRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
+import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +25,9 @@ public class CaregiverService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -30,14 +35,16 @@ public class CaregiverService {
     @Transactional
     public Caregiver save(Caregiver caregiver) {
 
-        long idRoleCaregiver = 2;
+        User user = new User();
+        user.setLogin(caregiver.getUser().getLogin());
+        user.setPassword(passwordEncoder().encode(caregiver.getUser().getPassword()));
+        Role caregiverRole = roleRepository.findByAuthority("ROLE_CAREGIVER");
+        user.getRoles().add(caregiverRole);
+        this.userRepository.save(user);
 
+        caregiver.setUser(user);
+        return this.caregiverRepository.save(caregiver);
 
-        this.caregiverRepository.save(caregiver);
-
-        this.roleRepository.addRelationCgvWithRole(caregiver.getId(), idRoleCaregiver);
-
-        return caregiver;
     }
 
     public List<Caregiver> listAll() {

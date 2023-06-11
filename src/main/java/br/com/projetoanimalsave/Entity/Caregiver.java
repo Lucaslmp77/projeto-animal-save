@@ -8,19 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tb_cuidadores", schema = "projeto-animal-save")
-public class Caregiver {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    @Column(name = "id", length = 30, nullable = false, unique = true)
-    private Long id;
-
-    @Getter
-    @Setter
-    @Column(name = "active", nullable = true)
-    private Boolean active;
+public class Caregiver extends AbstractEntity{
 
     @Getter
     @Setter
@@ -78,4 +66,10 @@ public class Caregiver {
     @JoinColumn(name = "id_animal", nullable = true)
     @OneToMany
     private List<Animal> animal;
+
+    @OneToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
