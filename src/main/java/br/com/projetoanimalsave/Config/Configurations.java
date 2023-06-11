@@ -26,12 +26,52 @@ public class Configurations {
         return http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/api/admin/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
+                //CADASTRO E LOGIN
                 .requestMatchers(HttpMethod.POST, "/api/caregiver/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/provider/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/associate/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
+                //ENDEREÇO
+                .requestMatchers(HttpMethod.POST, "/api/address/register").permitAll()
+                //ADMIN
+                .requestMatchers(HttpMethod.POST, "/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/admin/**").hasAuthority("ROLE_ADMIN")
+                //CUIDADOR
+                .requestMatchers(HttpMethod.PUT, "/api/caregiver/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                .requestMatchers(HttpMethod.GET, "/api/caregiver/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                //ANIMAL
+                .requestMatchers(HttpMethod.POST, "/api/animal/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                .requestMatchers(HttpMethod.PUT, "/api/animal/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                .requestMatchers(HttpMethod.GET, "/api/animal/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                //OCORRÊNCIA
+                .requestMatchers(HttpMethod.POST, "/api/occurrences/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_ASSOCIATE")
+                .requestMatchers(HttpMethod.GET, "/api/occurrences/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                //FORNECEDOR
+                .requestMatchers(HttpMethod.PUT, "/api/provider/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                .requestMatchers(HttpMethod.GET, "/api/provider/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                //SERVIÇOS
+                .requestMatchers(HttpMethod.POST, "/api/task/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                .requestMatchers(HttpMethod.PUT, "/api/task/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                .requestMatchers(HttpMethod.GET, "/api/task/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_CAREGIVER")
+                //ASSOCIADO
+                .requestMatchers(HttpMethod.PUT, "/api/associate/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
+                .requestMatchers(HttpMethod.GET, "/api/associate/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
+
+
                 .anyRequest().authenticated()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();
