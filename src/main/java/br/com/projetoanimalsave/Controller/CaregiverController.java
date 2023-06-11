@@ -27,14 +27,14 @@ public class CaregiverController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Caregiver>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.caregiverService.listAll());
     }
 
-    @GetMapping("/{idCaregiver}")
+    @GetMapping("/findbyid/{idCaregiver}")
     public ResponseEntity<Caregiver> findById (
             @PathVariable Long idCaregiver
     ) {

@@ -27,14 +27,14 @@ public class AssociateController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Associate>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.associateService.listAll());
     }
 
-    @GetMapping("/{idAssociate}")
+    @GetMapping("/findbyid/{idAssociate}")
     public ResponseEntity<Associate> findById(
             @PathVariable("idAssociate") Long idAssociate
     ) {

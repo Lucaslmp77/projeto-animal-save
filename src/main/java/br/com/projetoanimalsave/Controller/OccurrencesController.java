@@ -15,7 +15,7 @@ public class OccurrencesController {
     @Autowired
     private OccurrencesService occurrencesService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Occurrences occurrences
     ) {
@@ -27,14 +27,14 @@ public class OccurrencesController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Occurrences>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.occurrencesService.listAll());
     }
 
-    @GetMapping("/{idOccurrences}")
+    @GetMapping("/findbyid/{idOccurrences}")
     public ResponseEntity<Occurrences> findById (
             @PathVariable Long idOccurrences
     ) {

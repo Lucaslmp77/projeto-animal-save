@@ -27,14 +27,14 @@ public class ProviderController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Provider>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.providerService.listAll());
     }
 
-    @GetMapping("/{idProvider}")
+    @GetMapping("/findbyid/{idProvider}")
     public ResponseEntity<Provider> findById(
             @PathVariable("idProvider") Long idprovider
     ) {

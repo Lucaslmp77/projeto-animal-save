@@ -15,7 +15,7 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Task task
     ) {
@@ -27,14 +27,14 @@ public class TaskController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Task>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.taskService.listAll());
     }
 
-    @GetMapping("/{idTask}")
+    @GetMapping("/findbyid/{idTask}")
     public ResponseEntity<Task> findById (
             @PathVariable Long idTask
     ) {

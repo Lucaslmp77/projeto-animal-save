@@ -14,7 +14,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Address address
     ) {
@@ -26,21 +26,21 @@ public class AddressController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Address>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.addressService.listAll());
     }
 
-    @GetMapping("/{idAddress}")
+    @GetMapping("/findbyid/{idAddress}")
     public ResponseEntity<Address> findById (
             @PathVariable Long idAddress
     ) {
         return ResponseEntity.ok().body(this.addressService.findById(idAddress));
     }
 
-    @PutMapping("/{idAddress}")
+    @PutMapping("/update/{idAddress}")
     public ResponseEntity<?> update(
             @PathVariable Long idAddress,
             @RequestBody Address address
