@@ -51,8 +51,15 @@ public class AdminService {
     @Transactional
     public Admin save(Admin admin) {
 
-        return this.adminRepository.save(admin);
+        User user = new User();
+        user.setLogin(admin.getUser().getLogin());
+        user.setPassword(passwordEncoder().encode(admin.getUser().getPassword()));
+        Role adminRole = roleRepository.findByAuthority("ROLE_ADMIN");
+        user.getRoles().add(adminRole);
+        this.userRepository.save(user);
 
+        admin.setUser(user);
+        return this.adminRepository.save(admin);
     }
 
     public List<Admin> listAll() {
