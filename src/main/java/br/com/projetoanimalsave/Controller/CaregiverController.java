@@ -41,7 +41,7 @@ public class CaregiverController {
         return ResponseEntity.ok().body(this.caregiverService.findById(idCaregiver));
     }
 
-    @PutMapping("/{idCaregiver}")
+    @PutMapping("/update/{idCaregiver}")
     public ResponseEntity<?> update(
             @PathVariable Long idCaregiver,
             @RequestBody Caregiver caregiver

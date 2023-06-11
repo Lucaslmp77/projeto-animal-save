@@ -41,7 +41,7 @@ public class AssociateController {
         return ResponseEntity.ok().body(this.associateService.findById(idAssociate));
     }
 
-    @PutMapping("/{idAssociate}")
+    @PutMapping("/update/{idAssociate}")
     public ResponseEntity<?> update(
             @PathVariable Long idAssociate,
             @RequestBody Associate associate

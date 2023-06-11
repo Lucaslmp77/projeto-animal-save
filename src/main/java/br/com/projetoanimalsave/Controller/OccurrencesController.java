@@ -41,7 +41,7 @@ public class OccurrencesController {
         return ResponseEntity.ok().body(this.occurrencesService.findById(idOccurrences));
     }
 
-    @PutMapping("/{idOccurrences}")
+    @PutMapping("/update/{idOccurrences}")
     public ResponseEntity<?> update(
             @PathVariable Long idOccurrences,
             @RequestBody Occurrences occurrences

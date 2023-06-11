@@ -41,7 +41,7 @@ public class AnimalController {
         return ResponseEntity.ok().body(this.animalService.findById(idAnimal));
     }
 
-    @PutMapping("/{idAnimal}")
+    @PutMapping("/update/{idAnimal}")
     public ResponseEntity<?> update(
             @PathVariable Long idAnimal,
             @RequestBody Animal animal

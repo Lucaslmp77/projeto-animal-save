@@ -37,8 +37,10 @@ public class Configurations {
                 .requestMatchers(HttpMethod.POST, "/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/admin/**").hasAuthority("ROLE_ADMIN")
                 //CUIDADOR
-                .requestMatchers(HttpMethod.PUT, "/api/caregiver/**")
+                .requestMatchers(HttpMethod.PUT, "/api/caregiver/update")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
+                .requestMatchers(HttpMethod.PUT, "/api/caregiver/disable")
+                .hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/caregiver/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //ANIMAL
@@ -51,23 +53,33 @@ public class Configurations {
                 //OCORRÊNCIA
                 .requestMatchers(HttpMethod.POST, "/api/occurrences/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_ASSOCIATE")
+                .requestMatchers(HttpMethod.PUT, "/api/occurrences/**")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 .requestMatchers(HttpMethod.GET, "/api/occurrences/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //FORNECEDOR
-                .requestMatchers(HttpMethod.PUT, "/api/provider/**")
+                .requestMatchers(HttpMethod.PUT, "/api/provider/update")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                .requestMatchers(HttpMethod.PUT, "/api/provider/disable")
+                .hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/provider/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
                 //SERVIÇOS
                 .requestMatchers(HttpMethod.POST, "/api/task/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
-                .requestMatchers(HttpMethod.PUT, "/api/task/**")
+                .requestMatchers(HttpMethod.PUT, "/api/task/update")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER")
+                .requestMatchers(HttpMethod.PUT, "/api/task/disable")
+                .hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/task/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_CAREGIVER")
                 //ASSOCIADO
                 .requestMatchers(HttpMethod.PUT, "/api/associate/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
+                .requestMatchers(HttpMethod.PUT, "/api/associate/update")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
+                .requestMatchers(HttpMethod.PUT, "/api/associate/disable")
+                .hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/associate/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
                 //QUALQUER UM COM AUTENTICAÇÃO

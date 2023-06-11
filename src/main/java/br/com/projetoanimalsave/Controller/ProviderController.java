@@ -41,7 +41,7 @@ public class ProviderController {
         return ResponseEntity.ok().body(this.providerService.findById(idprovider));
     }
 
-    @PutMapping("/{idProvider}")
+    @PutMapping("/update/{idProvider}")
     public ResponseEntity<?> update(
             @PathVariable Long idProvider,
             @RequestBody Provider provider
