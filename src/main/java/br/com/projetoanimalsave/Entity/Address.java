@@ -2,6 +2,7 @@ package br.com.projetoanimalsave.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +31,9 @@ public class Address extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 1, max = 6, message = "O número da residência deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "número", length = 25, nullable = false)
     private Integer houseNumber;
+
+    @OneToOne(mappedBy = "address")
+    private Associate associate;
 }

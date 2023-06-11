@@ -26,10 +26,10 @@ public class Associate extends AbstractEntity {
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
 
+    @OneToOne
     @Getter
     @Setter
-    @JoinColumn(name = "id_endereço", nullable = true)
-    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @Getter
