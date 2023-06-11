@@ -40,4 +40,11 @@ public class AdminController {
     ) {
         return ResponseEntity.ok().body(this.adminService.findById(idAdmin));
     }
+
+    @GetMapping("/aproves/pending")
+    public ResponseEntity<?> findAllPending(
+
+    ) {
+        return ResponseEntity.ok().body(this.adminService.findAllPending());
+    }
 }

@@ -1,9 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Aprove;
-import br.com.projetoanimalsave.Entity.Associate;
-import br.com.projetoanimalsave.Entity.Role;
-import br.com.projetoanimalsave.Entity.User;
+import br.com.projetoanimalsave.Entity.*;
 import br.com.projetoanimalsave.Repository.AssociateRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
