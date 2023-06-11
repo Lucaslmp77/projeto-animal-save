@@ -1,5 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Entity.Aprove;
 import br.com.projetoanimalsave.Entity.Associate;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
@@ -38,6 +39,7 @@ public class AssociateService {
         this.userRepository.save(user);
 
         associate.setUser(user);
+        associate.setAprove(Aprove.PENDENTE);
         return this.associateRepository.save(associate);
     }
 

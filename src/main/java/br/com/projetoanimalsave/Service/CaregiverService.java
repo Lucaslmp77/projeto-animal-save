@@ -1,5 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Entity.Aprove;
 import br.com.projetoanimalsave.Entity.Caregiver;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
@@ -39,6 +40,7 @@ public class CaregiverService {
         this.userRepository.save(user);
 
         caregiver.setUser(user);
+        caregiver.setAprove(Aprove.PENDENTE);
         return this.caregiverRepository.save(caregiver);
 
     }
