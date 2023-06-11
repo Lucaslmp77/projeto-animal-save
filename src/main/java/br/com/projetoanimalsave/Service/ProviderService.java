@@ -29,18 +29,13 @@ public class ProviderService implements UserDetailsService {
     @Transactional
     public Provider save(Provider provider) {
 
-        Role role = new Role();
-        long id = 3;
-        String roleProv = "ROLE_PROVIDER";
-        role.setId(id);
-        role.setAuthority(roleProv);
-        this.roleRepository.save(role);
+        long idRoleProvider = 3;
 
         provider.setPassword(passwordEncoder().encode(provider.getPassword()));
 
         this.providerRepository.save(provider);
 
-        this.roleRepository.addRelationProviderWithRole(provider.getId(), role.getId());
+        this.roleRepository.addRelationProviderWithRole(provider.getId(), idRoleProvider);
 
         return provider;
     }

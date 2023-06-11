@@ -29,18 +29,13 @@ public class AssociateService implements UserDetailsService {
     @Transactional
     public Associate save(Associate associate) {
 
-        Role role = new Role();
-        long id = 4;
-        String roleAssoc = "ROLE_ASSOCIATE";
-        role.setId(id);
-        role.setAuthority(roleAssoc);
-        this.roleRepository.save(role);
+        long idRoleAssociate = 4;
 
         associate.setPassword(passwordEncoder().encode(associate.getPassword()));
 
         this.associateRepository.save(associate);
 
-        this.roleRepository.addRelationAssociateWithRole(associate.getId(), role.getId());
+        this.roleRepository.addRelationAssociateWithRole(associate.getId(), idRoleAssociate);
 
         return associate;
     }

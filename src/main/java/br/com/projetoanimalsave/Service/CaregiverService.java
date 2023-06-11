@@ -30,18 +30,13 @@ public class CaregiverService implements UserDetailsService {
     @Transactional
     public Caregiver save(Caregiver caregiver) {
 
-        Role role = new Role();
-        long id = 2;
-        String roleCgv = "ROLE_CAREGIVER";
-        role.setId(id);
-        role.setAuthority(roleCgv);
-        this.roleRepository.save(role);
+        long idRoleCaregiver = 2;
 
         caregiver.setPassword(passwordEncoder().encode(caregiver.getPassword()));
 
         this.caregiverRepository.save(caregiver);
 
-        this.roleRepository.addRelationCgvWithRole(caregiver.getId(), role.getId());
+        this.roleRepository.addRelationCgvWithRole(caregiver.getId(), idRoleCaregiver);
 
         return caregiver;
     }

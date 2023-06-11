@@ -30,9 +30,9 @@ public class AdminService implements UserDetailsService{
     public Admin save(Admin admin) {
 
         Role role = new Role();
-        long id = 1;
+        long idRoleAdm = 1;
         String roleAdm = "ROLE_ADMIN";
-        role.setId(id);
+        role.setId(idRoleAdm);
         role.setAuthority(roleAdm);
         this.roleRepository.save(role);
 
