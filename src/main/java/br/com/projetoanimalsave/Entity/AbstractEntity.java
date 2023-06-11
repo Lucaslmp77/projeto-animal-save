@@ -15,19 +15,22 @@ public abstract class AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    @Column(name = "id", length = 10, nullable = false, unique = true)
+    @Column(name = "id", length = 30, nullable = false, unique = true)
     private Long id;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "active", nullable = false)
     private Boolean active;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     @Column(name = "register", nullable = false)
     private LocalDateTime register;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     @Column(name = "update", nullable = true)
     private LocalDateTime update;

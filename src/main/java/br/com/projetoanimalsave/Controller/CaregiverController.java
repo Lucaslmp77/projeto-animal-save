@@ -15,7 +15,7 @@ public class CaregiverController {
     @Autowired
     private CaregiverService caregiverService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Caregiver caregiver
     ) {
@@ -27,21 +27,21 @@ public class CaregiverController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Caregiver>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.caregiverService.listAll());
     }
 
-    @GetMapping("/{idCaregiver}")
+    @GetMapping("/findbyid/{idCaregiver}")
     public ResponseEntity<Caregiver> findById (
             @PathVariable Long idCaregiver
     ) {
         return ResponseEntity.ok().body(this.caregiverService.findById(idCaregiver));
     }
 
-    @PutMapping("/{idCaregiver}")
+    @PutMapping("/update/{idCaregiver}")
     public ResponseEntity<?> update(
             @PathVariable Long idCaregiver,
             @RequestBody Caregiver caregiver

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_animais", schema = "projeto-animal-save")
 public class Animal extends AbstractEntity {
@@ -20,17 +22,23 @@ public class Animal extends AbstractEntity {
     @Column(name = "raça", length = 25, nullable = false)
     private String breed;
 
-    @Getter @Setter
-    @JoinColumn(name = "id_vacina", nullable = false)
-    @ManyToOne
-    private Vaccination vaccination;
+    @ManyToMany
+    @Getter
+    @Setter
+    @JoinTable(
+            name = "animal_vacina",
+            joinColumns = @JoinColumn(name = "animal_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacina_id"))
+    private List<Vaccination> vaccination;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "animal_type", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "animal_size", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
@@ -43,7 +51,6 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A idade deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "idade", length = 25, nullable = false)
     private Integer age;
 
@@ -53,8 +60,9 @@ public class Animal extends AbstractEntity {
     @Column(name = "observação", length = 100, nullable = false)
     private String observation;
 
-    @Getter @Setter
-    @JoinColumn(name = "id_cuidador", nullable = false)
     @ManyToOne
+    @Getter
+    @Setter
+    @JoinColumn(name="caregiver_id", nullable = false)
     private Caregiver caregiver;
 }
