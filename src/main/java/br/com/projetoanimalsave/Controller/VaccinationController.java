@@ -15,7 +15,7 @@ public class VaccinationController {
     @Autowired
     private VaccinationService vaccinationService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Vaccination vaccination
     ) {
@@ -27,21 +27,21 @@ public class VaccinationController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Vaccination>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.vaccinationService.listAll());
     }
 
-    @GetMapping("/{idVaccination}")
+    @GetMapping("/findbyid/{idVaccination}")
     public ResponseEntity<Vaccination> findById(
             @PathVariable("idProvider") Long idVaccination
     ) {
         return ResponseEntity.ok().body(this.vaccinationService.findById(idVaccination));
     }
 
-    @PutMapping("/{idVaccination}")
+    @PutMapping("/update/{idVaccination}")
     public ResponseEntity<?> update(
             @PathVariable Long idVaccination,
             @RequestBody Vaccination vaccination

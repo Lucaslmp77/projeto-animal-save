@@ -1,16 +1,15 @@
 package br.com.projetoanimalsave.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-
 import java.util.List;
 
 @Entity
 @Table(name = "tb_cuidadores", schema = "projeto-animal-save")
-public class Caregiver extends AbstractEntity {
+public class Caregiver extends AbstractEntity{
+
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
@@ -23,30 +22,15 @@ public class Caregiver extends AbstractEntity {
     @Column(name = "sobrenome", length = 25, nullable = false)
     private String lastName;
 
-    @Getter@Setter
-    @Email
-    @Column(name = "email", length = 40, nullable = false)
-    private String email;
-
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
 
+    @OneToOne
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O usuário deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "username", length = 25, nullable = false)
-    private String username;
-
-    @Getter
-    @Setter
-    @Length(min = 3, max = 25, message = "A senha deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "senha", length = 25, nullable = false)
-    private String password;
-
-    @Getter @Setter
-    @JoinColumn(name = "id_endereço", nullable = false)
-    @ManyToOne
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @Getter
@@ -57,31 +41,34 @@ public class Caregiver extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "gastos", length = 10, nullable = true)
-    private float spending;
+    @Column(name = "gastos", length = 10, nullable = false)
+    private Double spending;
 
     @Getter
     @Setter
     @Column(name = "capacidade-animais", length = 10, nullable = false)
-    private Integer capacityAnimals;
+    private Double capacityAnimals;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "aprovação", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
-    @Getter @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "id_ocorrência", nullable = true)
     private Occurrences occurrences;
 
-    @Getter @Setter
-    @JoinColumn(name = "id_animal", nullable = true)
-    @OneToMany
+    @OneToMany(mappedBy = "caregiver")
+    @Getter
+    @Setter
     private List<Animal> animal;
 
-    @Getter @Setter
-    @Column(name = "cargo", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @OneToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

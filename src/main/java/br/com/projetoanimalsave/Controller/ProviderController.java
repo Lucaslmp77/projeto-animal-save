@@ -15,7 +15,7 @@ public class ProviderController {
     @Autowired
     private ProviderService providerService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Provider provider
     ) {
@@ -27,21 +27,21 @@ public class ProviderController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Provider>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.providerService.listAll());
     }
 
-    @GetMapping("/{idProvider}")
+    @GetMapping("/findbyid/{idProvider}")
     public ResponseEntity<Provider> findById(
             @PathVariable("idProvider") Long idprovider
     ) {
         return ResponseEntity.ok().body(this.providerService.findById(idprovider));
     }
 
-    @PutMapping("/{idProvider}")
+    @PutMapping("/update/{idProvider}")
     public ResponseEntity<?> update(
             @PathVariable Long idProvider,
             @RequestBody Provider provider

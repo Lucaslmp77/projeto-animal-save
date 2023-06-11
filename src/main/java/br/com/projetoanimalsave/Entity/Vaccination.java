@@ -2,9 +2,12 @@ package br.com.projetoanimalsave.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_vacinas", schema = "projeto-animal-save")
@@ -24,4 +27,7 @@ public class Vaccination extends AbstractEntity {
     @Getter @Setter
     @Column(name = "hepatite-canina", nullable = false)
     private Boolean canineHepatitis;
+
+    @ManyToMany(mappedBy = "vaccination")
+    private List<Animal> animal;
 }

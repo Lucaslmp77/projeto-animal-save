@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Long> {
+
     @Modifying
     @Query("UPDATE Provider provider SET provider.active = false WHERE provider.id = :id")
     public void disable(@Param("id") Long id);

@@ -15,7 +15,7 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Animal animal
     ) {
@@ -27,21 +27,21 @@ public class AnimalController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Animal>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.animalService.listAll());
     }
 
-    @GetMapping("/{idAnimal}")
+    @GetMapping("/findbyid{idAnimal}")
     public ResponseEntity<Animal> findById (
             @PathVariable Long idAnimal
     ) {
         return ResponseEntity.ok().body(this.animalService.findById(idAnimal));
     }
 
-    @PutMapping("/{idAnimal}")
+    @PutMapping("/update/{idAnimal}")
     public ResponseEntity<?> update(
             @PathVariable Long idAnimal,
             @RequestBody Animal animal

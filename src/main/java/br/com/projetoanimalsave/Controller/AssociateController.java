@@ -15,7 +15,7 @@ public class AssociateController {
     @Autowired
     private AssociateService associateService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> save(
             @RequestBody Associate associate
     ) {
@@ -27,21 +27,21 @@ public class AssociateController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/listall")
     public ResponseEntity<List<Associate>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.associateService.listAll());
     }
 
-    @GetMapping("/{idAssociate}")
+    @GetMapping("/findbyid/{idAssociate}")
     public ResponseEntity<Associate> findById(
             @PathVariable("idAssociate") Long idAssociate
     ) {
         return ResponseEntity.ok().body(this.associateService.findById(idAssociate));
     }
 
-    @PutMapping("/{idAssociate}")
+    @PutMapping("/update/{idAssociate}")
     public ResponseEntity<?> update(
             @PathVariable Long idAssociate,
             @RequestBody Associate associate
