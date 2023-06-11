@@ -1,6 +1,8 @@
 package br.com.projetoanimalsave.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -27,8 +29,8 @@ public class Animal extends AbstractEntity {
     @Setter
     @JoinTable(
             name = "animal_vacina",
-            joinColumns = @JoinColumn(name = "animal_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "vacina_id", nullable = false))
+            joinColumns = @JoinColumn(name = "animal_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacina_id"))
     private List<Vaccination> vaccination;
 
     @Getter
@@ -51,7 +53,6 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A idade deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "idade", length = 25, nullable = false)
     private Integer age;
 
@@ -61,9 +62,9 @@ public class Animal extends AbstractEntity {
     @Column(name = "observação", length = 100, nullable = false)
     private String observation;
 
+    @ManyToOne
     @Getter
     @Setter
-    @JoinColumn(name = "id_cuidador", nullable = false)
-    @ManyToOne
+    @JoinColumn(name="caregiver_id", nullable = false)
     private Caregiver caregiver;
 }
