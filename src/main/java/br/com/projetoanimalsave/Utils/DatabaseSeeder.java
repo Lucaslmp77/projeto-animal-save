@@ -48,30 +48,6 @@ public class DatabaseSeeder implements CommandLineRunner {
         this.roleRepository.save(roleProvider);
         this.roleRepository.save(roleAssociate);
 
-        try {
-            User user = new User();
-
-            user.setLogin("admin@admin.com");
-            user.setPassword(passwordEncoder().encode("admin"));
-
-            // Obtenha a instância de Role relacionada ao ROLE_ADMIN
-            Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
-
-            // Verifique se a Role foi encontrada antes de prosseguir
-            if (adminRole != null) {
-                user.getRoles().add(adminRole); // Correção: alterado getRole() para getRoles()
-                this.userRepository.save(user);
-
-                Admin admin = new Admin();
-                admin.setName("admin");
-                admin.setUser(user);
-
-                this.adminService.save(admin);
-            } else {
-                throw new RuntimeException("Role ROLE_ADMIN não encontrada.");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
+        this.adminService.saveAdmin("admin@admin.com", "admin");
     }
 }

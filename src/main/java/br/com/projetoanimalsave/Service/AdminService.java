@@ -2,8 +2,10 @@ package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Entity.Role;
+import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.AdminRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
+import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,8 +21,31 @@ public class AdminService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Transactional
+    public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
+
+            User user = new User();
+
+            user.setLogin(loginAdmin);
+            user.setPassword(passwordEncoder().encode(senhaAdmin));
+
+            Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
+
+            user.getRoles().add(adminRole);
+            this.userRepository.save(user);
+
+            Admin admin = new Admin();
+            admin.setName("admin");
+            admin.setUser(user);
+
+            return this.adminRepository.save(admin);
     }
 
     @Transactional
