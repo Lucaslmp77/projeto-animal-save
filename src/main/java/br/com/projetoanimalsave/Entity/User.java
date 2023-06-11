@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Admin admin;
 
+    @OneToOne(mappedBy = "user")
+    private Associate associate;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),

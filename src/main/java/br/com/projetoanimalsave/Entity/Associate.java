@@ -7,18 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_associados", schema = "projeto-animal-save")
-public class Associate {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    @Column(name = "id", length = 30, nullable = false, unique = true)
-    private Long id;
-
-    @Getter @Setter
-    @Column(name = "active", nullable = true)
-    private Boolean active;
+public class Associate extends AbstractEntity {
 
     @Getter
     @Setter
@@ -50,4 +39,10 @@ public class Associate {
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
+
+    @OneToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

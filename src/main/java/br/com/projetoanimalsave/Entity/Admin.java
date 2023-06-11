@@ -7,14 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_administradores", schema = "projeto-animal-save")
-public class Admin {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    @Column(name = "id", length = 30, nullable = false, unique = true)
-    private Long id;
+public class Admin extends AbstractEntity {
 
     @Getter
     @Setter
@@ -27,4 +20,5 @@ public class Admin {
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
 }

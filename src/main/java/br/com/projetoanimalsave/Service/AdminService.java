@@ -32,19 +32,15 @@ public class AdminService {
     public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
 
             User user = new User();
-
             user.setLogin(loginAdmin);
             user.setPassword(passwordEncoder().encode(senhaAdmin));
-
             Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
-
             user.getRoles().add(adminRole);
             this.userRepository.save(user);
 
             Admin admin = new Admin();
             admin.setName("admin");
             admin.setUser(user);
-
             return this.adminRepository.save(admin);
     }
 
