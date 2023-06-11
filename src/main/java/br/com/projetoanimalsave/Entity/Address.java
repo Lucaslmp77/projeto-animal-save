@@ -39,4 +39,7 @@ public class Address extends AbstractEntity {
 
     @OneToOne(mappedBy = "address")
     private Caregiver caregiver;
+
+    @OneToOne(mappedBy = "address")
+    private Provider provider;
 }
