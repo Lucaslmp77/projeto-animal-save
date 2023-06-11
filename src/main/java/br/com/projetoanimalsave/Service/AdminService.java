@@ -26,17 +26,11 @@ public class AdminService {
     @Transactional
     public Admin save(Admin admin) {
 
-        Role role = new Role();
         long idRoleAdm = 1;
-        String roleAdm = "ROLE_ADMIN";
-        role.setId(idRoleAdm);
-        role.setAuthority(roleAdm);
-        this.roleRepository.save(role);
-
 
         this.adminRepository.save(admin);
 
-        this.roleRepository.addRelationAdmWithRole(admin.getId(), role.getId());
+        this.roleRepository.addRelationAdmWithRole(admin.getId(), idRoleAdm);
 
         return admin;
     }

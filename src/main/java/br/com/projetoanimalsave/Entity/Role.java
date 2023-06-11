@@ -19,7 +19,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "authority", length = 20, nullable = false)
     private String authority;
 
-    @ManyToMany(mappedBy = "role")
+    @ManyToMany(mappedBy = "roles")
     @JsonIgnore
     private List<User> user;
 

@@ -30,29 +30,39 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void createDefaultUser() {
+        Role roleAdmin = new Role();
+        Role roleCaregiver = new Role();
+        Role roleProvider = new Role();
+        Role roleAssociate = new Role();
+
+        roleAdmin.setAuthority("ROLE_ADMIN");
+        roleCaregiver.setAuthority("ROLE_CAREGIVER");
+        roleProvider.setAuthority("ROLE_PROVIDER");
+        roleAssociate.setAuthority("ROLE_ASSOCIATE");
+
+        this.roleRepository.save(roleAdmin);
+        this.roleRepository.save(roleCaregiver);
+        this.roleRepository.save(roleProvider);
+        this.roleRepository.save(roleAssociate);
 
         try {
             User user = new User();
 
             user.setLogin("admin@admin.com");
-
             user.setPassword(passwordEncoder().encode("admin"));
 
-            this.userRepository.save(user);
+            // Obtenha a instância de Role relacionada ao ROLE_ADMIN
+            Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
+
+            // Verifique se a Role foi encontrada antes de prosseguir
+            if (adminRole != null) {
+                user.getRoles().add(adminRole); // Correção: alterado getRole() para getRoles()
+                this.userRepository.save(user);
+            } else {
+                throw new RuntimeException("Role ROLE_ADMIN não encontrada.");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-
-        Role roleCaregiver = new Role();
-        Role roleProvider = new Role();
-        Role roleAssociate = new Role();
-
-        roleCaregiver.setAuthority("ROLE_CAREGIVER");
-        roleProvider.setAuthority("ROLE_PROVIDER");
-        roleAssociate.setAuthority("ROLE_ASSOCIATE");
-
-        this.roleRepository.save(roleCaregiver);
-        this.roleRepository.save(roleProvider);
-        this.roleRepository.save(roleAssociate);
     }
 }
