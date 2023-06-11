@@ -21,21 +21,25 @@ public class Associate extends AbstractEntity {
     @Column(name = "sobrenome", length = 25, nullable = false)
     private String lastName;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_endereço", nullable = true)
     @ManyToOne
     private Address address;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "aprovação", length = 15, nullable = true)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;

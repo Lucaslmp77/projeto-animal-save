@@ -29,26 +29,31 @@ public class Provider extends AbstractEntity {
     @Column(name = "cnpj", length = 25, nullable = false)
     private String cnpj;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_endereço", nullable = true)
     @ManyToOne
     private Address address;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_serviço", nullable = true)
     @ManyToOne
     private Task service;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "aprovação", length = 15, nullable = true)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;

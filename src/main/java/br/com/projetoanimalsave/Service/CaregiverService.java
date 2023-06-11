@@ -8,9 +8,6 @@ import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +31,6 @@ public class CaregiverService {
 
     @Transactional
     public Caregiver save(Caregiver caregiver) {
-
         User user = new User();
         user.setLogin(caregiver.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(caregiver.getUser().getPassword()));
@@ -60,7 +56,7 @@ public class CaregiverService {
     }
 
     @Transactional
-    public void update(Long id, Caregiver caregiver){
+    public void update(Long id, Caregiver caregiver) {
         if (id == caregiver.getId()){
             this.caregiverRepository.save(caregiver);
         } else {
@@ -69,7 +65,7 @@ public class CaregiverService {
     }
 
     @Transactional
-    public void disable(Long id){
+    public void disable(Long id) {
         var caregiver = this.caregiverRepository.findById(id);
         if (id == caregiver.get().getId()){
             this.caregiverRepository.disable(id);

@@ -70,8 +70,7 @@ public class Configurations {
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
                 .requestMatchers(HttpMethod.GET, "/api/associate/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
-
-
+                //QUALQUER UM COM AUTENTICAÇÃO
                 .anyRequest().authenticated()
                 .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .build();

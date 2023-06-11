@@ -20,7 +20,7 @@ public class Task extends AbstractEntity {
     @Setter
     @Length(min = 3, max = 25, message = "O custo deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "custo", length = 25, nullable = false)
-    private float cost;
+    private Integer cost;
 
     @Getter
     @Setter

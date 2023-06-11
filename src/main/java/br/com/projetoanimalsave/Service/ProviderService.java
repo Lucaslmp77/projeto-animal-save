@@ -1,6 +1,5 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
@@ -9,9 +8,6 @@ import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +30,6 @@ public class ProviderService {
 
     @Transactional
     public Provider save(Provider provider) {
-
         User user = new User();
         user.setLogin(provider.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(provider.getUser().getPassword()));
@@ -56,7 +51,7 @@ public class ProviderService {
     }
 
     @Transactional
-    public void update(Provider provider, Long id){
+    public void update(Provider provider, Long id) {
         if (id == provider.getId()) {
             this.providerRepository.save(provider);
         } else {

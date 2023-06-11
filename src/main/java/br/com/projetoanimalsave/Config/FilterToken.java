@@ -1,6 +1,5 @@
 package br.com.projetoanimalsave.Config;
 
-import br.com.projetoanimalsave.Repository.AdminRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import br.com.projetoanimalsave.Service.TokenService;
 import jakarta.servlet.FilterChain;

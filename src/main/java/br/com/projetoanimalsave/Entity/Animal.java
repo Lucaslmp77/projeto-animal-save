@@ -31,12 +31,14 @@ public class Animal extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "vacina_id", nullable = false))
     private List<Vaccination> vaccination;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "animal_type", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(name = "animal_size", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
@@ -59,7 +61,8 @@ public class Animal extends AbstractEntity {
     @Column(name = "observação", length = 100, nullable = false)
     private String observation;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @JoinColumn(name = "id_cuidador", nullable = false)
     @ManyToOne
     private Caregiver caregiver;

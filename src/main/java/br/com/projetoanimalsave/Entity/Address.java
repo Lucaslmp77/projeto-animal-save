@@ -32,5 +32,5 @@ public class Address extends AbstractEntity {
     @Setter
     @Length(min = 1, max = 6, message = "O número da residência deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "número", length = 25, nullable = false)
-    private int houseNumber;
+    private Integer houseNumber;
 }

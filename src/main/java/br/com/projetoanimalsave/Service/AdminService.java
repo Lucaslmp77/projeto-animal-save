@@ -30,7 +30,6 @@ public class AdminService {
 
     @Transactional
     public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
-
             User user = new User();
             user.setLogin(loginAdmin);
             user.setPassword(passwordEncoder().encode(senhaAdmin));
@@ -46,7 +45,6 @@ public class AdminService {
 
     @Transactional
     public Admin save(Admin admin) {
-
         User user = new User();
         user.setLogin(admin.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(admin.getUser().getPassword()));

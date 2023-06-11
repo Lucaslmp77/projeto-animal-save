@@ -1,8 +1,6 @@
 package br.com.projetoanimalsave.Utils;
 
-import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Entity.Role;
-import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import br.com.projetoanimalsave.Service.AdminService;
