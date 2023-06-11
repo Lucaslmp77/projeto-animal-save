@@ -1,20 +1,14 @@
 package br.com.projetoanimalsave.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_fornecedores", schema = "projeto-animal-save")
-public class Provider implements UserDetails {
+public class Provider {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,16 +40,6 @@ public class Provider implements UserDetails {
     @Column(name = "cnpj", length = 25, nullable = false)
     private String cnpj;
 
-    @Getter@Setter
-    @Email
-    @Column(name = "login", length = 40, nullable = false, unique = true)
-    private String login;
-
-    @Getter
-    @Setter
-    @Column(name = "senha", length = 90, nullable = false)
-    private String password;
-
     @Getter @Setter
     @Column(name = "contato", length = 14, nullable = false)
     private String contact;
@@ -79,42 +63,4 @@ public class Provider implements UserDetails {
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Getter
-    @Setter
-    @JoinTable(name = "tb_provider_role",
-            joinColumns = @JoinColumn(name = "provider_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role;
-    }
-
-    @Override
-    public String getUsername() {
-        return login;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

@@ -27,7 +27,7 @@ public class Configurations {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/admin/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/admin/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/caregiver/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/provider/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/associate/register").permitAll()

@@ -1,21 +1,13 @@
 package br.com.projetoanimalsave.Entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "tb_administradores", schema = "projeto-animal-save")
-public class Admin implements UserDetails {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,54 +19,12 @@ public class Admin implements UserDetails {
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "nome", length = 25, nullable = false)
+    @Column(name = "nome", length = 25, nullable = true)
     private String name;
 
-    @Getter@Setter
-    @Email
-    @Column(name = "login", length = 40, nullable = false, unique = true)
-    private String login;
-
+    @OneToOne
     @Getter
     @Setter
-    @Column(name = "senha", length = 90, nullable = false)
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Getter
-    @Setter
-    @JoinTable(name = "tb_admin_role",
-            joinColumns = @JoinColumn(name = "admin_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> role;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role;
-    }
-
-    @Override
-    public String getUsername() {
-        return login;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

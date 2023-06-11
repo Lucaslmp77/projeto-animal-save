@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CaregiverService implements UserDetailsService {
+public class CaregiverService {
 
     @Autowired
     private CaregiverRepository caregiverRepository;
@@ -32,7 +32,6 @@ public class CaregiverService implements UserDetailsService {
 
         long idRoleCaregiver = 2;
 
-        caregiver.setPassword(passwordEncoder().encode(caregiver.getPassword()));
 
         this.caregiverRepository.save(caregiver);
 
@@ -70,12 +69,6 @@ public class CaregiverService implements UserDetailsService {
         } else {
             throw new RuntimeException();
         }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        return caregiverRepository.findByLogin(username);
     }
 
 }

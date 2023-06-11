@@ -6,16 +6,13 @@ import br.com.projetoanimalsave.Repository.AdminRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AdminService implements UserDetailsService{
+public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
@@ -36,7 +33,6 @@ public class AdminService implements UserDetailsService{
         role.setAuthority(roleAdm);
         this.roleRepository.save(role);
 
-        admin.setPassword(passwordEncoder().encode(admin.getPassword()));
 
         this.adminRepository.save(admin);
 
@@ -51,11 +47,5 @@ public class AdminService implements UserDetailsService{
 
     public Admin findById(Long id) {
         return this.adminRepository.findById(id).orElse(new Admin());
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        return adminRepository.findByLogin(username);
     }
 }

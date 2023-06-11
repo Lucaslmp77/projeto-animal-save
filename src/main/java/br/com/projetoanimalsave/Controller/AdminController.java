@@ -2,6 +2,7 @@ package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Dto.Login;
 import br.com.projetoanimalsave.Entity.Admin;
+import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Service.AdminService;
 import br.com.projetoanimalsave.Service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,20 +37,6 @@ public class AdminController {
         } catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody Login login) {
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                new UsernamePasswordAuthenticationToken(login.login(),
-                        login.password());
-
-        Authentication authenticate = this.authenticationManager
-                .authenticate(usernamePasswordAuthenticationToken);
-
-        var admin = (Admin) authenticate.getPrincipal();
-
-        return tokenService.gerarToken(admin);
     }
 
     @GetMapping

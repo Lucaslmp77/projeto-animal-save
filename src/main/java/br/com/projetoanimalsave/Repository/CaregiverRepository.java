@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface CaregiverRepository extends JpaRepository<Caregiver, Long> {
 
-    Caregiver findByLogin(String login);
-
     @Query("SELECT caregiver FROM Caregiver caregiver where caregiver.active = true")
     public List<Caregiver> findByCaregiverActives();
 

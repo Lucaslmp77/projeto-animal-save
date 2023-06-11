@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AssociateRepository extends JpaRepository<Associate, Long> {
 
-    Associate findByLogin(String login);
-
     @Modifying
     @Query("UPDATE Associate associate SET associate.active = false WHERE associate.id = :id")
     public void disable(@Param("id") Long id);

@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Config;
 
 import br.com.projetoanimalsave.Repository.AdminRepository;
+import br.com.projetoanimalsave.Repository.UserRepository;
 import br.com.projetoanimalsave.Service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +22,7 @@ public class FilterToken extends OncePerRequestFilter {
     private TokenService tokenService;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,7 +37,7 @@ public class FilterToken extends OncePerRequestFilter {
             token = authorizationHeader.replace("Bearer ", "");
             var subject = this.tokenService.getSubject(token);
 
-            var usuario = this.adminRepository.findByLogin(subject);
+            var usuario = this.userRepository.findByLogin(subject);
 
             var authentication = new UsernamePasswordAuthenticationToken(usuario,
                     null, usuario.getAuthorities());

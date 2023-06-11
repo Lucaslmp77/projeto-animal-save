@@ -21,19 +21,7 @@ public class Role implements GrantedAuthority {
 
     @ManyToMany(mappedBy = "role")
     @JsonIgnore
-    private List<Admin> admin;
-
-    @ManyToMany(mappedBy = "role")
-    @JsonIgnore
-    private List<Caregiver> caregiver;
-
-    @ManyToMany(mappedBy = "role")
-    @JsonIgnore
-    private List<Provider> provider;
-
-    @ManyToMany(mappedBy = "role")
-    @JsonIgnore
-    private List<Associate> associate;
+    private List<User> user;
 
     public Long getId() {
         return id;

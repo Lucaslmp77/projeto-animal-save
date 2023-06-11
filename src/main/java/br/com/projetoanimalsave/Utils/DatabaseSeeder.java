@@ -2,17 +2,20 @@ package br.com.projetoanimalsave.Utils;
 
 import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Entity.Role;
+import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.RoleRepository;
+import br.com.projetoanimalsave.Repository.UserRepository;
 import br.com.projetoanimalsave.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
 
     @Autowired
-    AdminService adminService;
+    UserRepository userRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -22,16 +25,20 @@ public class DatabaseSeeder implements CommandLineRunner {
         this.createDefaultUser();
     }
 
+    private BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     private void createDefaultUser() {
 
         try {
-            Admin admin = new Admin();
+            User user = new User();
 
-            admin.setName("admin");
-            admin.setLogin("admin@admin.com");
-            admin.setPassword("admin");
+            user.setLogin("admin@admin.com");
 
-            this.adminService.save(admin);
+            user.setPassword(passwordEncoder().encode("admin"));
+
+            this.userRepository.save(user);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }

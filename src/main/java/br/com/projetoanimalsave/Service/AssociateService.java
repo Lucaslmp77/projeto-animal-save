@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AssociateService implements UserDetailsService {
+public class AssociateService {
     @Autowired
     private AssociateRepository associateRepository;
 
@@ -31,7 +31,6 @@ public class AssociateService implements UserDetailsService {
 
         long idRoleAssociate = 4;
 
-        associate.setPassword(passwordEncoder().encode(associate.getPassword()));
 
         this.associateRepository.save(associate);
 
@@ -65,11 +64,5 @@ public class AssociateService implements UserDetailsService {
         } else {
             throw new RuntimeException();
         }
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        return associateRepository.findByLogin(username);
     }
 }
