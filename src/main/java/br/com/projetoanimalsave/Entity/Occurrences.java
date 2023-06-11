@@ -36,4 +36,10 @@ public class Occurrences extends AbstractEntity {
     @Column(name = "situação", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private Situation situation;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    @JoinColumn(name="user_id", nullable = false)
+    private User user;
 }

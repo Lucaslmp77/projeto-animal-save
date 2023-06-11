@@ -41,24 +41,24 @@ public class Caregiver extends AbstractEntity{
 
     @Getter
     @Setter
-    @Column(name = "gastos", length = 10, nullable = true)
-    private float spending;
+    @Column(name = "gastos", length = 10, nullable = false)
+    private Double spending;
 
     @Getter
     @Setter
     @Column(name = "capacidade-animais", length = 10, nullable = false)
-    private Integer capacityAnimals;
+    private Double capacityAnimals;
 
     @Getter
     @Setter
-    @Column(name = "aprovação", length = 15, nullable = true)
+    @Column(name = "aprovação", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
+    @ManyToOne
     @Getter
     @Setter
     @JoinColumn(name = "id_ocorrência", nullable = true)
-    @ManyToOne
     private Occurrences occurrences;
 
     @OneToMany(mappedBy = "caregiver")

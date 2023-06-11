@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_fornecedores", schema = "projeto-animal-save")
 public class Provider extends AbstractEntity {
@@ -40,23 +42,14 @@ public class Provider extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Getter
-    @Setter
-    @JoinColumn(name = "id_serviço", nullable = true)
-    @ManyToOne
-    private Task service;
+    @OneToMany(mappedBy = "provider")
+    private Set<Task> tasks;
 
     @Getter
     @Setter
-    @Column(name = "aprovação", length = 15, nullable = true)
+    @Column(name = "aprovação", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
-
-    @Getter
-    @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = true)
-    @ManyToOne
-    private Occurrences occurrences;
 
     @OneToOne
     @Getter

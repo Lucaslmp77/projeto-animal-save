@@ -1,8 +1,6 @@
 package br.com.projetoanimalsave.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
@@ -18,13 +16,11 @@ public class Task extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O custo deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "custo", length = 25, nullable = false)
     private Integer cost;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O valor mensal deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "valor-mensal", length = 25, nullable = false)
     private Integer monthlyAmount;
 
@@ -33,4 +29,10 @@ public class Task extends AbstractEntity {
     @Length(min = 5, max = 100, message = "A descrição deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "descrição", length = 100, nullable = false)
     private String drescription;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    @JoinColumn(name="provider_id", nullable = false)
+    private Provider provider;
 }

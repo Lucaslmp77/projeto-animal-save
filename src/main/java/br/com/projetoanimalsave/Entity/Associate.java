@@ -34,7 +34,7 @@ public class Associate extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "aprovação", length = 15, nullable = true)
+    @Column(name = "aprovação", length = 15, nullable = false)
     @Enumerated(EnumType.STRING)
     private Aprove aprove;
 
