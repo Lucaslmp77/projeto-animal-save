@@ -19,12 +19,6 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private TokenService tokenService;
-
-    @Autowired
     private AdminService adminService;
 
     @PostMapping("/register")

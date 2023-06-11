@@ -20,6 +20,9 @@ public class DatabaseSeeder implements CommandLineRunner {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    AdminService adminService;
+
     @Override
     public void run(String... args) {
         this.createDefaultUser();
@@ -58,6 +61,12 @@ public class DatabaseSeeder implements CommandLineRunner {
             if (adminRole != null) {
                 user.getRoles().add(adminRole); // Correção: alterado getRole() para getRoles()
                 this.userRepository.save(user);
+
+                Admin admin = new Admin();
+                admin.setName("admin");
+                admin.setUser(user);
+
+                this.adminService.save(admin);
             } else {
                 throw new RuntimeException("Role ROLE_ADMIN não encontrada.");
             }
