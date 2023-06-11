@@ -1,9 +1,12 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Entity.Admin;
 import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.Role;
+import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.ProviderRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
+import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +25,9 @@ public class ProviderService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -29,14 +35,16 @@ public class ProviderService {
     @Transactional
     public Provider save(Provider provider) {
 
-        long idRoleProvider = 3;
+        User user = new User();
+        user.setLogin(provider.getUser().getLogin());
+        user.setPassword(passwordEncoder().encode(provider.getUser().getPassword()));
+        Role providerRole = roleRepository.findByAuthority("ROLE_PROVIDER");
+        user.getRoles().add(providerRole);
+        this.userRepository.save(user);
 
+        provider.setUser(user);
+        return this.providerRepository.save(provider);
 
-        this.providerRepository.save(provider);
-
-        this.roleRepository.addRelationProviderWithRole(provider.getId(), idRoleProvider);
-
-        return provider;
     }
 
     public List<Provider> listAll() {

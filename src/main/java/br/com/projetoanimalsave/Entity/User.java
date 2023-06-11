@@ -41,6 +41,9 @@ public class User implements UserDetails {
     private Caregiver caregiver;
 
     @OneToOne(mappedBy = "user")
+    private Provider provider;
+
+    @OneToOne(mappedBy = "user")
     private Associate associate;
 
     @ManyToMany(fetch = FetchType.EAGER)

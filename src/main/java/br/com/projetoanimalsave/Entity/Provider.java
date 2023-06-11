@@ -8,18 +8,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 @Table(name = "tb_fornecedores", schema = "projeto-animal-save")
-public class Provider {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    @Column(name = "id", length = 30, nullable = false, unique = true)
-    private Long id;
-
-    @Getter @Setter
-    @Column(name = "active", nullable = false)
-    private Boolean active;
+public class Provider extends AbstractEntity {
 
     @Getter
     @Setter
@@ -63,4 +52,10 @@ public class Provider {
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
+
+    @OneToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
