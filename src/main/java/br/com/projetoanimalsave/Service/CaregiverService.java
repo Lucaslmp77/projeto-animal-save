@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.*;
+import br.com.projetoanimalsave.Repository.AddressRepository;
 import br.com.projetoanimalsave.Repository.CaregiverRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
@@ -23,6 +24,9 @@ public class CaregiverService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -36,7 +40,15 @@ public class CaregiverService {
         user.getRoles().add(caregiverRole);
         this.userRepository.save(user);
 
+        Address address = new Address();
+        address.setCep(caregiver.getAddress().getCep());
+        address.setNeighborhood(caregiver.getAddress().getNeighborhood());
+        address.setRoad(caregiver.getAddress().getRoad());
+        address.setHouseNumber(caregiver.getAddress().getHouseNumber());
+        this.addressRepository.save(address);
+
         caregiver.setUser(user);
+        caregiver.setAddress(address);
         caregiver.setPending(true);
         caregiver.setApproved(false);
         caregiver.setRejected(false);
