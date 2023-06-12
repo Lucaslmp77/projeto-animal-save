@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.*;
+import br.com.projetoanimalsave.Repository.AddressRepository;
 import br.com.projetoanimalsave.Repository.AssociateRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
@@ -22,6 +23,10 @@ public class AssociateService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -35,7 +40,15 @@ public class AssociateService {
         user.getRoles().add(associateRole);
         this.userRepository.save(user);
 
+        Address address = new Address();
+        address.setCep(associate.getAddress().getCep());
+        address.setNeighborhood(associate.getAddress().getNeighborhood());
+        address.setRoad(associate.getAddress().getRoad());
+        address.setHouseNumber(associate.getAddress().getHouseNumber());
+        this.addressRepository.save(address);
+
         associate.setUser(user);
+        associate.setAddress(address);
         associate.setPending(true);
         associate.setApproved(false);
         associate.setRejected(false);
