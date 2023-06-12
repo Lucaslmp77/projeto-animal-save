@@ -2,7 +2,9 @@ package br.com.projetoanimalsave.Repository;
 
 import br.com.projetoanimalsave.Entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +19,9 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
 
     @Query("SELECT provider FROM Provider provider WHERE provider.pending = true")
     public List<Object> findProviderPending();
+
+    @Modifying
+    @Query("UPDATE Associate associate SET associate.pending = false, associate.approved = true," +
+            " associate.rejected = false WHERE associate.id = :id")
+    public void updateStatusPendingToApproved(@Param("id") Long id);
 }

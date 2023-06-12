@@ -41,10 +41,22 @@ public class AdminController {
         return ResponseEntity.ok().body(this.adminService.findById(idAdmin));
     }
 
-    @GetMapping("/aproves/pending")
+    @GetMapping("/approves/pending")
     public ResponseEntity<?> findAllPending(
 
     ) {
         return ResponseEntity.ok().body(this.adminService.findAllPending());
+    }
+
+    @PutMapping("/approved/associate/{idAssociate}")
+    public ResponseEntity<?> updateStatusPendingToApproved(
+            @PathVariable Long idAssociate
+    ) {
+        try {
+            this.adminService.updateStatusPendingToApproved(idAssociate);
+            return ResponseEntity.ok().body("Associado aprovado!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

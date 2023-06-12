@@ -23,6 +23,9 @@ public class AdminService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AssociateRepository associateRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -69,6 +72,16 @@ public class AdminService {
         results.addAll(this.adminRepository.findCaregiverPending());
         results.addAll(this.adminRepository.findProviderPending());
         return results;
+    }
+
+    @Transactional
+    public void updateStatusPendingToApproved(Long id) {
+        var associate = this.associateRepository.findById(id);
+        if (id == associate.get().getId()) {
+            this.adminRepository.updateStatusPendingToApproved(id);
+        } else {
+            throw new RuntimeException();
+        }
     }
 
 }
