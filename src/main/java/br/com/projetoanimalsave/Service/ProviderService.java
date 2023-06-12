@@ -1,6 +1,5 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Aprove;
 import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
@@ -39,7 +38,9 @@ public class ProviderService {
         this.userRepository.save(user);
 
         provider.setUser(user);
-        provider.setAprove(Aprove.PENDENTE);
+        provider.setPending(true);
+        provider.setApproved(false);
+        provider.setRejected(false);
         return this.providerRepository.save(provider);
 
     }

@@ -36,7 +36,9 @@ public class AssociateService {
         this.userRepository.save(user);
 
         associate.setUser(user);
-        associate.setAprove(Aprove.PENDENTE);
+        associate.setPending(true);
+        associate.setApproved(false);
+        associate.setRejected(false);
         return this.associateRepository.save(associate);
     }
 

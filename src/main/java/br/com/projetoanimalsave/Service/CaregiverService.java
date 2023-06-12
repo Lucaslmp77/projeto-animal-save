@@ -37,7 +37,9 @@ public class CaregiverService {
         this.userRepository.save(user);
 
         caregiver.setUser(user);
-        caregiver.setAprove(Aprove.PENDENTE);
+        caregiver.setPending(true);
+        caregiver.setApproved(false);
+        caregiver.setRejected(false);
         return this.caregiverRepository.save(caregiver);
 
     }

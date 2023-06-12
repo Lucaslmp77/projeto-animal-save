@@ -1,7 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Admin;
-import br.com.projetoanimalsave.Entity.Aprove;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Repository.*;
@@ -66,9 +65,9 @@ public class AdminService {
 
     public List<Object> findAllPending() {
         List<Object> results = new ArrayList<>();
-        results.addAll(this.adminRepository.findAssociatePending(Aprove.PENDENTE));
-        results.addAll(this.adminRepository.findCaregiverPending(Aprove.PENDENTE));
-        results.addAll(this.adminRepository.findProviderPending(Aprove.PENDENTE));
+        results.addAll(this.adminRepository.findAssociatePending());
+        results.addAll(this.adminRepository.findCaregiverPending());
+        results.addAll(this.adminRepository.findProviderPending());
         return results;
     }
 

@@ -34,12 +34,6 @@ public class Associate extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "aprovação", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Aprove aprove;
-
-    @Getter
-    @Setter
     @JoinColumn(name = "id_ocorrência", nullable = true)
     @ManyToOne
     private Occurrences occurrences;
@@ -49,4 +43,19 @@ public class Associate extends AbstractEntity {
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Getter
+    @Setter
+    @Column(name = "aprovado", length = 25, nullable = false)
+    private Boolean approved;
+
+    @Getter
+    @Setter
+    @Column(name = "pendente", length = 25, nullable = false)
+    private Boolean pending;
+
+    @Getter
+    @Setter
+    @Column(name = "rejeitado", length = 25, nullable = false)
+    private Boolean rejected;
 }
