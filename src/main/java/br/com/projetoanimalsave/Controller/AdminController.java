@@ -34,7 +34,7 @@ public class AdminController {
         return ResponseEntity.ok().body(this.adminService.listAll());
     }
 
-    @GetMapping("/findbyid{idAdmin}")
+    @GetMapping("/findbyid/{idAdmin}")
     public ResponseEntity<Admin> findById (
             @PathVariable Long idAdmin
     ) {
