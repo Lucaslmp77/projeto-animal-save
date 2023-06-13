@@ -45,9 +45,6 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Associate associate;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Occurrences> occurrences;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),

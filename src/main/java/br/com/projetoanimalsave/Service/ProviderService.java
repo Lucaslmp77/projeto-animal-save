@@ -1,8 +1,10 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Entity.Address;
 import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.Role;
 import br.com.projetoanimalsave.Entity.User;
+import br.com.projetoanimalsave.Repository.AddressRepository;
 import br.com.projetoanimalsave.Repository.ProviderRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
 import br.com.projetoanimalsave.Repository.UserRepository;
@@ -24,6 +26,9 @@ public class ProviderService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -37,7 +42,18 @@ public class ProviderService {
         user.getRoles().add(providerRole);
         this.userRepository.save(user);
 
+        Address address = new Address();
+        address.setCep(provider.getAddress().getCep());
+        address.setNeighborhood(provider.getAddress().getNeighborhood());
+        address.setRoad(provider.getAddress().getRoad());
+        address.setHouseNumber(provider.getAddress().getHouseNumber());
+        this.addressRepository.save(address);
+
         provider.setUser(user);
+        provider.setAddress(address);
+        provider.setPending(true);
+        provider.setApproved(false);
+        provider.setRejected(false);
         return this.providerRepository.save(provider);
 
     }
