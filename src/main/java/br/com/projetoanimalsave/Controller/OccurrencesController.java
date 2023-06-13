@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/occurrences")
+@RequestMapping("/api/occurrence")
 public class OccurrencesController {
 
     @Autowired
@@ -64,5 +64,10 @@ public class OccurrencesController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/actives")
+    public ResponseEntity<?> findByOccurrenceActives() {
+        return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceActives());
     }
 }

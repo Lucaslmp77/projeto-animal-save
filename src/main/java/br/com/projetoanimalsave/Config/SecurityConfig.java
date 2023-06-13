@@ -66,11 +66,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/animal/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //OCORRÊNCIA
-                .requestMatchers(HttpMethod.POST, "/api/occurrences/**")
-                .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_ASSOCIATE")
-                .requestMatchers(HttpMethod.PUT, "/api/occurrences/**")
+                .requestMatchers(HttpMethod.POST, "/api/occurrence/**")
+                .permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/occurrence/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
-                .requestMatchers(HttpMethod.GET, "/api/occurrences/**")
+                .requestMatchers(HttpMethod.GET, "/api/occurrence/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //FORNECEDOR
                 .requestMatchers(HttpMethod.PUT, "/api/provider/update")

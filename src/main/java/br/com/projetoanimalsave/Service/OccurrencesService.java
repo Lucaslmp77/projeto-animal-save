@@ -11,25 +11,25 @@ import java.util.List;
 @Service
 public class OccurrencesService {
     @Autowired
-    private OccurrenceRepository occurrencesRepository;
+    private OccurrenceRepository occurrenceRepository;
 
     @Transactional
     public Occurrence save(Occurrence occurrences) {
-        return this.occurrencesRepository.save(occurrences);
+        return this.occurrenceRepository.save(occurrences);
     }
 
     public List<Occurrence> listAll() {
-        return this.occurrencesRepository.findAll();
+        return this.occurrenceRepository.findAll();
     }
 
     public Occurrence findById(Long id) {
-        return this.occurrencesRepository.findById(id).orElse(new Occurrence());
+        return this.occurrenceRepository.findById(id).orElse(new Occurrence());
     }
 
     @Transactional
     public void update(Occurrence occurrences, Long id) {
         if (id == occurrences.getId()) {
-            this.occurrencesRepository.save(occurrences);
+            this.occurrenceRepository.save(occurrences);
         } else {
             throw new RuntimeException();
         }
@@ -37,11 +37,15 @@ public class OccurrencesService {
 
     @Transactional
     public void disable(Long id) {
-        var occurrences = this.occurrencesRepository.findById(id);
-        if (id == occurrences.get().getId()) {
-            this.occurrencesRepository.disable(id);
+        var occurrence = this.occurrenceRepository.findById(id);
+        if (id == occurrence.get().getId()) {
+            this.occurrenceRepository.disable(id);
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public List<Occurrence> findByOccurrenceActives() {
+        return this.occurrenceRepository.findByOccurrenceActives();
     }
 }
