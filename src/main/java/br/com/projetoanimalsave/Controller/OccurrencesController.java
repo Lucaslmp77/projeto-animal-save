@@ -1,6 +1,6 @@
 package br.com.projetoanimalsave.Controller;
 
-import br.com.projetoanimalsave.Entity.Occurrences;
+import br.com.projetoanimalsave.Entity.Occurrence;
 import br.com.projetoanimalsave.Service.OccurrencesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class OccurrencesController {
 
     @PostMapping("/register")
     public ResponseEntity<?> save(
-            @RequestBody Occurrences occurrences
+            @RequestBody Occurrence occurrences
     ) {
         try {
             this.occurrencesService.save(occurrences);
@@ -28,14 +28,14 @@ public class OccurrencesController {
     }
 
     @GetMapping("/listall")
-    public ResponseEntity<List<Occurrences>> listAll(
+    public ResponseEntity<List<Occurrence>> listAll(
 
     ) {
         return ResponseEntity.ok().body(this.occurrencesService.listAll());
     }
 
     @GetMapping("/findbyid/{idOccurrences}")
-    public ResponseEntity<Occurrences> findById (
+    public ResponseEntity<Occurrence> findById (
             @PathVariable Long idOccurrences
     ) {
         return ResponseEntity.ok().body(this.occurrencesService.findById(idOccurrences));
@@ -44,7 +44,7 @@ public class OccurrencesController {
     @PutMapping("/update/{idOccurrences}")
     public ResponseEntity<?> update(
             @PathVariable Long idOccurrences,
-            @RequestBody Occurrences occurrences
+            @RequestBody Occurrence occurrences
     ) {
         try {
             this.occurrencesService.update(occurrences, idOccurrences);

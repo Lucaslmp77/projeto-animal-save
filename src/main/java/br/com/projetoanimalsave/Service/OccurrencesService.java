@@ -1,7 +1,7 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Occurrences;
-import br.com.projetoanimalsave.Repository.OccurrencesRepository;
+import br.com.projetoanimalsave.Entity.Occurrence;
+import br.com.projetoanimalsave.Repository.OccurrenceRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,23 +11,23 @@ import java.util.List;
 @Service
 public class OccurrencesService {
     @Autowired
-    private OccurrencesRepository occurrencesRepository;
+    private OccurrenceRepository occurrencesRepository;
 
     @Transactional
-    public Occurrences save(Occurrences occurrences) {
+    public Occurrence save(Occurrence occurrences) {
         return this.occurrencesRepository.save(occurrences);
     }
 
-    public List<Occurrences> listAll() {
+    public List<Occurrence> listAll() {
         return this.occurrencesRepository.findAll();
     }
 
-    public Occurrences findById(Long id) {
-        return this.occurrencesRepository.findById(id).orElse(new Occurrences());
+    public Occurrence findById(Long id) {
+        return this.occurrencesRepository.findById(id).orElse(new Occurrence());
     }
 
     @Transactional
-    public void update(Occurrences occurrences, Long id) {
+    public void update(Occurrence occurrences, Long id) {
         if (id == occurrences.getId()) {
             this.occurrencesRepository.save(occurrences);
         } else {

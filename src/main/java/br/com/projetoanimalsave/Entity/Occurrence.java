@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_ocorrências", schema = "projeto-animal-save")
-public class Occurrences extends AbstractEntity {
+public class Occurrence extends AbstractEntity {
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
@@ -36,4 +36,10 @@ public class Occurrences extends AbstractEntity {
     @Column(name = "situação", length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private Situation situation;
+
+    @ManyToOne
+    @Getter
+    @Setter
+    @JoinColumn(name="caregiver_id", nullable = true)
+    private Caregiver caregiver;
 }
