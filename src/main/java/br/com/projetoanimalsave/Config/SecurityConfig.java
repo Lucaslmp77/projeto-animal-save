@@ -27,7 +27,7 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class Configurations {
+public class SecurityConfig {
 
     @Autowired
     private FilterToken filter;
