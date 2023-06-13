@@ -1,5 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Config.JwtConstants;
 import br.com.projetoanimalsave.Entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -19,11 +20,11 @@ public class TokenService {
                 .withExpiresAt(Date.from(LocalDateTime.now()
                         .plusMinutes(1440)
                         .toInstant(ZoneOffset.of("-03:00")))
-                ).sign(Algorithm.HMAC256("deregues"));
+                ).sign(Algorithm.HMAC256(JwtConstants.SECRET));
     }
 
     public String getSubject(String token) {
-        return JWT.require(Algorithm.HMAC256("deregues"))
+        return JWT.require(Algorithm.HMAC256(JwtConstants.SECRET))
                 .withIssuer("Administrador")
                 .build().verify(token).getSubject();
 
