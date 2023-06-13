@@ -45,15 +45,24 @@ public class Provider extends AbstractEntity {
     @OneToMany(mappedBy = "provider")
     private Set<Task> tasks;
 
-    @Getter
-    @Setter
-    @Column(name = "aprovação", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Aprove aprove;
-
     @OneToOne
     @Getter
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Getter
+    @Setter
+    @Column(name = "aprovado", length = 25, nullable = false)
+    private Boolean approved;
+
+    @Getter
+    @Setter
+    @Column(name = "pendente", length = 25, nullable = false)
+    private Boolean pending;
+
+    @Getter
+    @Setter
+    @Column(name = "rejeitado", length = 25, nullable = false)
+    private Boolean rejected;
 }

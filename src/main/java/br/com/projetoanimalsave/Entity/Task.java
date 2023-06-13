@@ -28,7 +28,7 @@ public class Task extends AbstractEntity {
     @Setter
     @Length(min = 5, max = 100, message = "A descrição deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "descrição", length = 100, nullable = false)
-    private String drescription;
+    private String description;
 
     @ManyToOne
     @Getter

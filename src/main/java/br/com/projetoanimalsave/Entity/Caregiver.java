@@ -49,12 +49,6 @@ public class Caregiver extends AbstractEntity{
     @Column(name = "capacidade-animais", length = 10, nullable = false)
     private Double capacityAnimals;
 
-    @Getter
-    @Setter
-    @Column(name = "aprovação", length = 15, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Aprove aprove;
-
     @ManyToOne
     @Getter
     @Setter
@@ -71,4 +65,19 @@ public class Caregiver extends AbstractEntity{
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Getter
+    @Setter
+    @Column(name = "aprovado", length = 25, nullable = false)
+    private Boolean approved;
+
+    @Getter
+    @Setter
+    @Column(name = "pendente", length = 25, nullable = false)
+    private Boolean pending;
+
+    @Getter
+    @Setter
+    @Column(name = "rejeitado", length = 25, nullable = false)
+    private Boolean rejected;
 }
