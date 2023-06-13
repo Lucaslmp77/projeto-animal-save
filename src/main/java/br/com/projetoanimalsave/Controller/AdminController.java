@@ -71,4 +71,16 @@ public class AdminController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/approved/provider/{idProvider}")
+    public ResponseEntity<?> updateStatusProviderPendingToApproved(
+            @PathVariable Long idProvider
+    ) {
+        try {
+            this.adminService.updateStatusProviderPendingToApproved(idProvider);
+            return ResponseEntity.ok().body("Fornecedor aprovado!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

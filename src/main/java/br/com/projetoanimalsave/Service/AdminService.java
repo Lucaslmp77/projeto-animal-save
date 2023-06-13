@@ -100,4 +100,14 @@ public class AdminService {
         }
     }
 
+    @Transactional
+    public void updateStatusProviderPendingToApproved(Long id) {
+        var provider = this.providerRepository.findById(id);
+        if (id == provider.get().getId()) {
+            this.adminRepository.updateStatusProviderPendingToApproved(id);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
 }
