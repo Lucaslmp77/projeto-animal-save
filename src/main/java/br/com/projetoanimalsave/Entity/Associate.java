@@ -32,12 +32,6 @@ public class Associate extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
-    @Getter
-    @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = true)
-    @ManyToOne
-    private Occurrences occurrences;
-
     @OneToOne
     @Getter
     @Setter
