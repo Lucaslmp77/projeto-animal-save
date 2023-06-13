@@ -49,16 +49,15 @@ public class Caregiver extends AbstractEntity{
     @Column(name = "capacidade-animais", length = 10, nullable = false)
     private Double capacityAnimals;
 
-    @ManyToOne
-    @Getter
-    @Setter
-    @JoinColumn(name = "id_ocorrência", nullable = true)
-    private Occurrences occurrences;
-
     @OneToMany(mappedBy = "caregiver")
     @Getter
     @Setter
     private List<Animal> animal;
+
+    @OneToMany(mappedBy = "caregiver")
+    @Getter
+    @Setter
+    private List<Occurrence> occurrence;
 
     @OneToOne
     @Getter
