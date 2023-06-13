@@ -60,7 +60,7 @@ public class OccurrencesController {
     ) {
         try {
             this.occurrencesService.disable(idOccurrences);
-            return ResponseEntity.ok().body("Ocorrência excluida!");
+            return ResponseEntity.ok().body("Ocorrência desativada!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -69,5 +69,17 @@ public class OccurrencesController {
     @GetMapping("/actives")
     public ResponseEntity<?> findByOccurrenceActives() {
         return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceActives());
+    }
+
+    @PutMapping("/respond/{idCaregiver}")
+    public ResponseEntity<?> respondToOccurrence(
+            @PathVariable Long idCaregiver
+    ) {
+        try {
+            this.occurrencesService.respondToOccurrence(idCaregiver);
+            return ResponseEntity.ok().body("Ocorrência atendida!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

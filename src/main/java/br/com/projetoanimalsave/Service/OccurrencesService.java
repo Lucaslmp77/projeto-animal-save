@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Occurrence;
+import br.com.projetoanimalsave.Repository.CaregiverRepository;
 import br.com.projetoanimalsave.Repository.OccurrenceRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import java.util.List;
 public class OccurrencesService {
     @Autowired
     private OccurrenceRepository occurrenceRepository;
+
+    @Autowired
+    private CaregiverRepository caregiverRepository;
 
     @Transactional
     public Occurrence save(Occurrence occurrences) {
@@ -47,5 +51,15 @@ public class OccurrencesService {
 
     public List<Occurrence> findByOccurrenceActives() {
         return this.occurrenceRepository.findByOccurrenceActives();
+    }
+
+    @Transactional
+    public void respondToOccurrence(Long id) {
+        var caregiver = this.caregiverRepository.findById(id);
+        if (id == caregiver.get().getId()) {
+            this.occurrenceRepository.respondToOccurrence(id);
+        } else {
+            throw new RuntimeException();
+        }
     }
 }
