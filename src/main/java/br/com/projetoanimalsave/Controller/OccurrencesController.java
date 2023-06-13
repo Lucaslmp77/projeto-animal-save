@@ -71,6 +71,11 @@ public class OccurrencesController {
         return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceActives());
     }
 
+    @GetMapping("/inactives")
+    public ResponseEntity<?> findByOccurrenceInactives() {
+        return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceInactives());
+    }
+
     @PutMapping("/respond/{idCaregiver}")
     public ResponseEntity<?> respondToOccurrence(
             @PathVariable Long idCaregiver

@@ -19,6 +19,9 @@ public interface OccurrenceRepository extends JpaRepository<Occurrence, Long> {
     @Query("UPDATE Occurrence occurrence SET occurrence.caregiver.id = :id")
     public void respondToOccurrence(@Param("id") Long id);
 
+    @Query("SELECT occurrence FROM Occurrence occurrence where occurrence.active = false")
+    public List<Occurrence> findByOccurrenceInactives();
+
     @Query("SELECT occurrence FROM Occurrence occurrence where occurrence.active = true")
     public List<Occurrence> findByOccurrenceActives();
 }

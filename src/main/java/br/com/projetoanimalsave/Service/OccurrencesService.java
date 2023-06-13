@@ -53,6 +53,10 @@ public class OccurrencesService {
         return this.occurrenceRepository.findByOccurrenceActives();
     }
 
+    public List<Occurrence> findByOccurrenceInactives() {
+        return this.occurrenceRepository.findByOccurrenceInactives();
+    }
+
     @Transactional
     public void respondToOccurrence(Long id) {
         var caregiver = this.caregiverRepository.findById(id);
