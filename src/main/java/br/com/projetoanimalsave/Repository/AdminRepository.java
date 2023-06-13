@@ -23,5 +23,10 @@ public interface AdminRepository extends JpaRepository<Admin, Long> {
     @Modifying
     @Query("UPDATE Associate associate SET associate.pending = false, associate.approved = true," +
             " associate.rejected = false WHERE associate.id = :id")
-    public void updateStatusPendingToApproved(@Param("id") Long id);
+    public void updateStatusAssociatePendingToApproved(@Param("id") Long id);
+
+    @Modifying
+    @Query("UPDATE Caregiver caregiver SET caregiver.pending = false, caregiver.approved = true," +
+            " caregiver.rejected = false WHERE caregiver.id = :id")
+    public void updateStatusCaregiverPendingToApproved(@Param("id") Long id);
 }

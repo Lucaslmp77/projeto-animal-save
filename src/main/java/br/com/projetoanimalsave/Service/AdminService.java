@@ -26,6 +26,12 @@ public class AdminService {
     @Autowired
     private AssociateRepository associateRepository;
 
+    @Autowired
+    private CaregiverRepository caregiverRepository;
+
+    @Autowired
+    private ProviderRepository providerRepository;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -75,10 +81,20 @@ public class AdminService {
     }
 
     @Transactional
-    public void updateStatusPendingToApproved(Long id) {
+    public void updateStatusAssociatePendingToApproved(Long id) {
         var associate = this.associateRepository.findById(id);
         if (id == associate.get().getId()) {
-            this.adminRepository.updateStatusPendingToApproved(id);
+            this.adminRepository.updateStatusAssociatePendingToApproved(id);
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
+    @Transactional
+    public void updateStatusCaregiverPendingToApproved(Long id) {
+        var caregiver = this.caregiverRepository.findById(id);
+        if (id == caregiver.get().getId()) {
+            this.adminRepository.updateStatusCaregiverPendingToApproved(id);
         } else {
             throw new RuntimeException();
         }

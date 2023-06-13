@@ -53,8 +53,20 @@ public class AdminController {
             @PathVariable Long idAssociate
     ) {
         try {
-            this.adminService.updateStatusPendingToApproved(idAssociate);
+            this.adminService.updateStatusAssociatePendingToApproved(idAssociate);
             return ResponseEntity.ok().body("Associado aprovado!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/approved/caregiver/{idCaregiver}")
+    public ResponseEntity<?> updateStatusCaregiverPendingToApproved(
+            @PathVariable Long idCaregiver
+    ) {
+        try {
+            this.adminService.updateStatusCaregiverPendingToApproved(idCaregiver);
+            return ResponseEntity.ok().body("Cuidador aprovado!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
