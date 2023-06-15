@@ -14,7 +14,7 @@ import java.util.Date;
 public class TokenService {
     public String gerarToken(User user) {
         return JWT.create()
-                .withIssuer("Administrador")
+                .withIssuer("Usuarios")
                 .withSubject(user.getUsername())
                 .withClaim("id", user.getId())
                 .withExpiresAt(Date.from(LocalDateTime.now()
@@ -25,7 +25,7 @@ public class TokenService {
 
     public String getSubject(String token) {
         return JWT.require(Algorithm.HMAC256(JwtConstants.SECRET))
-                .withIssuer("Administrador")
+                .withIssuer("Usuarios")
                 .build().verify(token).getSubject();
 
     }

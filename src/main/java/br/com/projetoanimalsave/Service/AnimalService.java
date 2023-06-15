@@ -1,7 +1,8 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Animal;
+import br.com.projetoanimalsave.Entity.*;
 import br.com.projetoanimalsave.Repository.AnimalRepository;
+import br.com.projetoanimalsave.Repository.VaccinationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,19 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepository;
 
+    @Autowired
+    private VaccinationRepository vaccinationRepository;
+
     @Transactional
     public Animal save(Animal animal) {
+        Vaccination vaccination = new Vaccination();
+        vaccination.setRabies(animal.getVaccination().getRabies());
+        vaccination.setCanineParvovirus(animal.getVaccination().getCanineParvovirus());
+        vaccination.setDistemper(animal.getVaccination().getDistemper());
+        vaccination.setCanineHepatitis(animal.getVaccination().getCanineHepatitis());
+        this.vaccinationRepository.save(vaccination);
+
+        animal.setVaccination(vaccination);
         return this.animalRepository.save(animal);
     }
 

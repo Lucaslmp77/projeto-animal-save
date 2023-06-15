@@ -52,11 +52,6 @@ public class Caregiver extends AbstractEntity{
     @OneToMany(mappedBy = "caregiver")
     @Getter
     @Setter
-    private List<Animal> animal;
-
-    @OneToMany(mappedBy = "caregiver")
-    @Getter
-    @Setter
     private List<Occurrence> occurrence;
 
     @OneToOne
