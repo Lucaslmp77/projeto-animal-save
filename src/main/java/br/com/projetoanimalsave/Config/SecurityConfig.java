@@ -56,7 +56,9 @@ public class SecurityConfig {
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 .requestMatchers(HttpMethod.PUT, "/api/caregiver/disable")
                 .hasAnyAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/caregiver/**")
+                .requestMatchers(HttpMethod.GET, "/api/caregiver/listall")
+                .hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/caregiver/findbyid/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //ANIMAL
                 .requestMatchers(HttpMethod.POST, "/api/animal/**")
@@ -70,7 +72,9 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/occurrence/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
-                .requestMatchers(HttpMethod.GET, "/api/occurrence/**")
+                .requestMatchers(HttpMethod.GET, "/api/occurrence/listall")
+                .hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/occurrence/findbyid/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //FORNECEDOR
                 .requestMatchers(HttpMethod.PUT, "/api/provider/update")
@@ -95,7 +99,9 @@ public class SecurityConfig {
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
                 .requestMatchers(HttpMethod.PUT, "/api/associate/disable")
                 .hasAnyAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/associate/**")
+                .requestMatchers(HttpMethod.GET, "/api/associate/listall")
+                .hasAnyAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/associate/findbyid/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
                 //QUALQUER UM COM AUTENTICAÇÃO
                 .anyRequest().authenticated()
