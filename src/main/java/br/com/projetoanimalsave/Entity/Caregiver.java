@@ -49,8 +49,6 @@ public class Caregiver extends AbstractEntity{
     @Column(name = "capacidade-animais", length = 10, nullable = false)
     private Double capacityAnimals;
 
-
-
     @OneToMany(mappedBy = "caregiver")
     @Getter
     @Setter
