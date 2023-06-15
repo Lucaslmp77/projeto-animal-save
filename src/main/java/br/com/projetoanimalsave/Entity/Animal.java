@@ -22,14 +22,11 @@ public class Animal extends AbstractEntity {
     @Column(name = "raça", length = 25, nullable = false)
     private String breed;
 
-    @ManyToMany
+    @OneToOne
     @Getter
     @Setter
-    @JoinTable(
-            name = "animal_vacina",
-            joinColumns = @JoinColumn(name = "animal_id"),
-            inverseJoinColumns = @JoinColumn(name = "vacina_id"))
-    private List<Vaccination> vaccination;
+    @JoinColumn(name = "vaccination_id", referencedColumnName = "id", nullable = false)
+    private Vaccination vaccination;
 
     @Getter
     @Setter
