@@ -14,20 +14,17 @@ public class Provider extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome_fantasia", length = 25, nullable = false)
     private String fantasyName;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O sobrenome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome_empresarial", length = 25, nullable = false)
     private String businessName;
 
     @Getter
     @Setter
     @CNPJ
-    @Length(min = 3, max = 25, message = "O CNPJ deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "cnpj", length = 25, nullable = false)
     private String cnpj;
 

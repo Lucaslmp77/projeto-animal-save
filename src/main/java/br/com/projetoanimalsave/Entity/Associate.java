@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -13,13 +12,11 @@ public class Associate extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome", length = 25, nullable = false)
     private String firstName;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O sobrenome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "sobrenome", length = 25, nullable = false)
     private String lastName;
 
@@ -31,7 +28,7 @@ public class Associate extends AbstractEntity {
     @Getter
     @Setter
     @CPF
-    @Column(name = "cpf", length = 16, nullable = false)
+    @Column(name = "cpf", length = 30, nullable = false)
     private String cpf;
 
 
