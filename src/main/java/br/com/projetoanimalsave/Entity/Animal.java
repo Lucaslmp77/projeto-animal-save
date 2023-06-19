@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tb_animais", schema = "projeto-animal-save")
 public class Animal extends AbstractEntity {

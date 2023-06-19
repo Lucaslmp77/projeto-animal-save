@@ -33,6 +33,21 @@ public class User implements UserDetails {
     @Column(name = "senha", length = 90, nullable = false)
     private String password;
 
+    @Getter
+    @Setter
+    @Column(name = "aprovado", length = 25, nullable = false)
+    private Boolean approved;
+
+    @Getter
+    @Setter
+    @Column(name = "pendente", length = 25, nullable = false)
+    private Boolean pending;
+
+    @Getter
+    @Setter
+    @Column(name = "rejeitado", length = 25, nullable = false)
+    private Boolean rejected;
+
     @OneToOne(mappedBy = "user")
     private Admin admin;
 

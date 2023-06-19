@@ -73,7 +73,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/occurrence/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 .requestMatchers(HttpMethod.GET, "/api/occurrence/listall")
-                .hasAnyAuthority("ROLE_ADMIN")
+                .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 .requestMatchers(HttpMethod.GET, "/api/occurrence/findbyid/**")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
                 //FORNECEDOR

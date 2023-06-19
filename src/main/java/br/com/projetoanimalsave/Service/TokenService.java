@@ -9,14 +9,23 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TokenService {
     public String gerarToken(User user) {
+        List<String> authorities = user.getAuthorities()
+                .stream()
+                .map(authority -> authority.getAuthority())
+                .collect(Collectors.toList());
+
         return JWT.create()
                 .withIssuer("Usuarios")
                 .withSubject(user.getUsername())
                 .withClaim("id", user.getId())
+                .withClaim("authorities", authorities)
+                .withClaim("approved", user.getApproved())
                 .withExpiresAt(Date.from(LocalDateTime.now()
                         .plusMinutes(1440)
                         .toInstant(ZoneOffset.of("-03:00")))
