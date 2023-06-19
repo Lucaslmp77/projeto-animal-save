@@ -25,7 +25,7 @@ public class Provider extends AbstractEntity {
     @Getter
     @Setter
     @CNPJ
-    @Column(name = "cnpj", length = 25, nullable = false)
+    @Column(name = "cnpj", length = 25, nullable = false, unique = true)
     private String cnpj;
 
     @Getter

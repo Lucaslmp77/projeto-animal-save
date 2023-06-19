@@ -30,7 +30,7 @@ public class Caregiver extends AbstractEntity{
     @Getter
     @Setter
     @CPF
-    @Column(name = "cpf", length = 30, nullable = false)
+    @Column(name = "cpf", length = 30, nullable = false, unique = true)
     private String cpf;
 
     @OneToOne

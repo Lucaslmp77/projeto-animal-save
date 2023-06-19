@@ -13,19 +13,16 @@ import org.hibernate.validator.constraints.Length;
 public class Address extends AbstractEntity {
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O CEP deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "cep", length = 25, nullable = false)
     private String cep;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O bairro deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "bairro", length = 25, nullable = false)
     private String neighborhood;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A rua deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "rua", length = 25, nullable = false)
     private String road;
 

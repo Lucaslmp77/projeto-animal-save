@@ -11,7 +11,6 @@ public class Admin extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome", length = 25, nullable = false)
     private String name;
 

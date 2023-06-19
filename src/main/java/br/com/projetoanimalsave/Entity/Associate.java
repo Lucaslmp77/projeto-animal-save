@@ -3,7 +3,6 @@ package br.com.projetoanimalsave.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -28,7 +27,7 @@ public class Associate extends AbstractEntity {
     @Getter
     @Setter
     @CPF
-    @Column(name = "cpf", length = 30, nullable = false)
+    @Column(name = "cpf", length = 30, nullable = false, unique = true)
     private String cpf;
 
 
