@@ -38,6 +38,9 @@ public class ProviderService {
         User user = new User();
         user.setLogin(provider.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(provider.getUser().getPassword()));
+        user.setPending(true);
+        user.setApproved(false);
+        user.setRejected(false);
         Role providerRole = roleRepository.findByAuthority("ROLE_PROVIDER");
         user.getRoles().add(providerRole);
         this.userRepository.save(user);
@@ -51,9 +54,6 @@ public class ProviderService {
 
         provider.setUser(user);
         provider.setAddress(address);
-        provider.setPending(true);
-        provider.setApproved(false);
-        provider.setRejected(false);
         return this.providerRepository.save(provider);
 
     }

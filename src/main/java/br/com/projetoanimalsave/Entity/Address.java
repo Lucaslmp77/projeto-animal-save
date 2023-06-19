@@ -6,7 +6,6 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_endereços", schema = "projeto-animal-save")

@@ -1,7 +1,6 @@
 package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Dto.Login;
-import br.com.projetoanimalsave.Entity.Task;
 import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Service.TokenService;
 import br.com.projetoanimalsave.Service.UserService;

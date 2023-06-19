@@ -25,6 +25,7 @@ public class TokenService {
                 .withSubject(user.getUsername())
                 .withClaim("id", user.getId())
                 .withClaim("authorities", authorities)
+                .withClaim("approved", user.getApproved())
                 .withExpiresAt(Date.from(LocalDateTime.now()
                         .plusMinutes(1440)
                         .toInstant(ZoneOffset.of("-03:00")))

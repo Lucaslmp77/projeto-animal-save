@@ -3,7 +3,6 @@ package br.com.projetoanimalsave.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import java.util.Set;
@@ -47,19 +46,4 @@ public class Provider extends AbstractEntity {
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
-    @Getter
-    @Setter
-    @Column(name = "aprovado", length = 25, nullable = false)
-    private Boolean approved;
-
-    @Getter
-    @Setter
-    @Column(name = "pendente", length = 25, nullable = false)
-    private Boolean pending;
-
-    @Getter
-    @Setter
-    @Column(name = "rejeitado", length = 25, nullable = false)
-    private Boolean rejected;
 }

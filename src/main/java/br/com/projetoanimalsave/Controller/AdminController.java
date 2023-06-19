@@ -48,37 +48,25 @@ public class AdminController {
         return ResponseEntity.ok().body(this.adminService.findAllPending());
     }
 
-    @PutMapping("/approved/associate/{idAssociate}")
-    public ResponseEntity<?> updateStatusPendingToApproved(
-            @PathVariable Long idAssociate
+    @PutMapping("/approved/user/{idUser}")
+    public ResponseEntity<?> updateStatusUserPendingToApproved(
+            @PathVariable Long idUser
     ) {
         try {
-            this.adminService.updateStatusAssociatePendingToApproved(idAssociate);
-            return ResponseEntity.ok().body("Associado aprovado!");
+            this.adminService.updateStatusUserPendingToApproved(idUser);
+            return ResponseEntity.ok().body("Usuário aprovado!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PutMapping("/approved/caregiver/{idCaregiver}")
-    public ResponseEntity<?> updateStatusCaregiverPendingToApproved(
-            @PathVariable Long idCaregiver
+    @PutMapping("/rejected/user/{idUser}")
+    public ResponseEntity<?> updateStatusUserPendingToRejected(
+            @PathVariable Long idUser
     ) {
         try {
-            this.adminService.updateStatusCaregiverPendingToApproved(idCaregiver);
-            return ResponseEntity.ok().body("Cuidador aprovado!");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @PutMapping("/approved/provider/{idProvider}")
-    public ResponseEntity<?> updateStatusProviderPendingToApproved(
-            @PathVariable Long idProvider
-    ) {
-        try {
-            this.adminService.updateStatusProviderPendingToApproved(idProvider);
-            return ResponseEntity.ok().body("Fornecedor aprovado!");
+            this.adminService.updateStatusUserPendingToRejected(idUser);
+            return ResponseEntity.ok().body("Usuário reprovado!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
