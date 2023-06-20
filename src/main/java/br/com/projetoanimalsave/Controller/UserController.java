@@ -38,11 +38,4 @@ public class UserController {
 
         return tokenService.gerarToken(usuario);
     }
-
-    @GetMapping("/findbyemail/{email}")
-    public ResponseEntity<UserDetails> findById (
-            @PathVariable String email
-    ) {
-        return ResponseEntity.ok().body(this.userService.loadUserByUsername(email));
-    }
 }

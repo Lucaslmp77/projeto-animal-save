@@ -24,27 +24,35 @@ public class FilterToken extends OncePerRequestFilter {
     private UserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response, FilterChain filterChain) throws ServletException,
-            IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         String token;
 
         var authorizationHeader = request.getHeader("Authorization");
 
-        if(authorizationHeader != null) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.replace("Bearer ", "");
-            var subject = this.tokenService.getSubject(token);
 
-            var usuario = this.userRepository.findByLogin(subject);
+            try {
+                var subject = this.tokenService.getSubject(token);
 
-            var authentication = new UsernamePasswordAuthenticationToken(usuario,
-                    null, usuario.getAuthorities());
+                if (subject != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    var usuario = this.userRepository.findByLogin(subject);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                    if (usuario != null) {
+                        var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
+                                usuario.getAuthorities());
+
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
         }
 
         filterChain.doFilter(request, response);
-
     }
+
 }
