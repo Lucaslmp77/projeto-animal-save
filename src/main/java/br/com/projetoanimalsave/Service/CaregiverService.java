@@ -33,6 +33,9 @@ public class CaregiverService {
         User user = new User();
         user.setLogin(caregiver.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(caregiver.getUser().getPassword()));
+        user.setPending(true);
+        user.setApproved(false);
+        user.setRejected(false);
         Role caregiverRole = roleRepository.findByAuthority("ROLE_CAREGIVER");
         user.getRoles().add(caregiverRole);
         this.userRepository.save(user);
@@ -46,9 +49,6 @@ public class CaregiverService {
 
         caregiver.setUser(user);
         caregiver.setAddress(address);
-        caregiver.setPending(true);
-        caregiver.setApproved(false);
-        caregiver.setRejected(false);
         return this.caregiverRepository.save(caregiver);
 
     }

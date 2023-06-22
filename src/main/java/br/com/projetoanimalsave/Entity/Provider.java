@@ -3,7 +3,6 @@ package br.com.projetoanimalsave.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 
 import java.util.Set;
@@ -14,21 +13,18 @@ public class Provider extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome_fantasia", length = 25, nullable = false)
     private String fantasyName;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O sobrenome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome_empresarial", length = 25, nullable = false)
     private String businessName;
 
     @Getter
     @Setter
     @CNPJ
-    @Length(min = 3, max = 25, message = "O CNPJ deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "cnpj", length = 25, nullable = false)
+    @Column(name = "cnpj", length = 25, nullable = false, unique = true)
     private String cnpj;
 
     @Getter
@@ -50,19 +46,4 @@ public class Provider extends AbstractEntity {
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-
-    @Getter
-    @Setter
-    @Column(name = "aprovado", length = 25, nullable = false)
-    private Boolean approved;
-
-    @Getter
-    @Setter
-    @Column(name = "pendente", length = 25, nullable = false)
-    private Boolean pending;
-
-    @Getter
-    @Setter
-    @Column(name = "rejeitado", length = 25, nullable = false)
-    private Boolean rejected;
 }

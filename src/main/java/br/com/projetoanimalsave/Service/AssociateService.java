@@ -36,6 +36,9 @@ public class AssociateService {
         User user = new User();
         user.setLogin(associate.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(associate.getUser().getPassword()));
+        user.setPending(true);
+        user.setApproved(false);
+        user.setRejected(false);
         Role associateRole = roleRepository.findByAuthority("ROLE_ASSOCIATE");
         user.getRoles().add(associateRole);
         this.userRepository.save(user);
@@ -49,9 +52,6 @@ public class AssociateService {
 
         associate.setUser(user);
         associate.setAddress(address);
-        associate.setPending(true);
-        associate.setApproved(false);
-        associate.setRejected(false);
         return this.associateRepository.save(associate);
     }
 

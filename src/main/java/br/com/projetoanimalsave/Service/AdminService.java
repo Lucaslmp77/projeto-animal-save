@@ -23,15 +23,6 @@ public class AdminService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private AssociateRepository associateRepository;
-
-    @Autowired
-    private CaregiverRepository caregiverRepository;
-
-    @Autowired
-    private ProviderRepository providerRepository;
-
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -41,6 +32,9 @@ public class AdminService {
             User user = new User();
             user.setLogin(loginAdmin);
             user.setPassword(passwordEncoder().encode(senhaAdmin));
+            user.setApproved(true);
+            user.setPending(false);
+            user.setRejected(false);
             Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
             user.getRoles().add(adminRole);
             this.userRepository.save(user);
@@ -81,30 +75,20 @@ public class AdminService {
     }
 
     @Transactional
-    public void updateStatusAssociatePendingToApproved(Long id) {
-        var associate = this.associateRepository.findById(id);
+    public void updateStatusUserPendingToApproved(Long id) {
+        var associate = this.userRepository.findById(id);
         if (id == associate.get().getId()) {
-            this.adminRepository.updateStatusAssociatePendingToApproved(id);
+            this.adminRepository.updateStatusUserPendingToApproved(id);
         } else {
             throw new RuntimeException();
         }
     }
 
     @Transactional
-    public void updateStatusCaregiverPendingToApproved(Long id) {
-        var caregiver = this.caregiverRepository.findById(id);
-        if (id == caregiver.get().getId()) {
-            this.adminRepository.updateStatusCaregiverPendingToApproved(id);
-        } else {
-            throw new RuntimeException();
-        }
-    }
-
-    @Transactional
-    public void updateStatusProviderPendingToApproved(Long id) {
-        var provider = this.providerRepository.findById(id);
-        if (id == provider.get().getId()) {
-            this.adminRepository.updateStatusProviderPendingToApproved(id);
+    public void updateStatusUserPendingToRejected(Long id) {
+        var associate = this.userRepository.findById(id);
+        if (id == associate.get().getId()) {
+            this.adminRepository.updateStatusUserPendingToRejected(id);
         } else {
             throw new RuntimeException();
         }
