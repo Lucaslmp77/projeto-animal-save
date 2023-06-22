@@ -1,10 +1,7 @@
 package br.com.projetoanimalsave.Controller;
 
-import br.com.projetoanimalsave.Dto.SendEmailDto;
 import br.com.projetoanimalsave.Entity.SendEmail;
 import br.com.projetoanimalsave.Service.SendEmailService;
-import jakarta.validation.Valid;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +18,9 @@ public class SendEmailController {
     SendEmailService sendEmailService;
 
     @PostMapping("/sending-email")
-    public ResponseEntity<SendEmail> sendingEmail(@RequestBody @Valid SendEmailDto sendEmailDto) {
-        SendEmail sendEmail = new SendEmail();
-        BeanUtils.copyProperties(sendEmailDto, sendEmail);
+    public ResponseEntity<SendEmail> sendingEmail(
+            @RequestBody SendEmail sendEmail
+    ) {
         sendEmailService.sendEmail(sendEmail);
         return new ResponseEntity<>(sendEmail, HttpStatus.CREATED);
     }
