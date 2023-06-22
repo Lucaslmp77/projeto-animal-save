@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OccurrencesService {
+public class OccurrenceService {
     @Autowired
     private OccurrenceRepository occurrenceRepository;
 
@@ -18,8 +18,8 @@ public class OccurrencesService {
     private CaregiverRepository caregiverRepository;
 
     @Transactional
-    public Occurrence save(Occurrence occurrences) {
-        return this.occurrenceRepository.save(occurrences);
+    public Occurrence save(Occurrence occurrence) {
+        return this.occurrenceRepository.save(occurrence);
     }
 
     public List<Occurrence> listAll() {
@@ -31,9 +31,9 @@ public class OccurrencesService {
     }
 
     @Transactional
-    public void update(Occurrence occurrences, Long id) {
-        if (id == occurrences.getId()) {
-            this.occurrenceRepository.save(occurrences);
+    public void update(Occurrence occurrence, Long id) {
+        if (id == occurrence.getId()) {
+            this.occurrenceRepository.save(occurrence);
         } else {
             throw new RuntimeException();
         }
@@ -55,15 +55,5 @@ public class OccurrencesService {
 
     public List<Occurrence> findByOccurrenceInactives() {
         return this.occurrenceRepository.findByOccurrenceInactives();
-    }
-
-    @Transactional
-    public void respondToOccurrence(Long id) {
-        var caregiver = this.caregiverRepository.findById(id);
-        if (id == caregiver.get().getId()) {
-            this.occurrenceRepository.respondToOccurrence(id);
-        } else {
-            throw new RuntimeException();
-        }
     }
 }

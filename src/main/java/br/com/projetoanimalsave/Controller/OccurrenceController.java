@@ -1,7 +1,7 @@
 package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Entity.Occurrence;
-import br.com.projetoanimalsave.Service.OccurrencesService;
+import br.com.projetoanimalsave.Service.OccurrenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,17 +10,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/occurrence")
-public class OccurrencesController {
+public class OccurrenceController {
 
     @Autowired
-    private OccurrencesService occurrencesService;
+    private OccurrenceService occurrenceService;
 
     @PostMapping("/register")
     public ResponseEntity<?> save(
-            @RequestBody Occurrence occurrences
+            @RequestBody Occurrence occurrence
     ) {
         try {
-            this.occurrencesService.save(occurrences);
+            this.occurrenceService.save(occurrence);
             return ResponseEntity.ok().body("Ocorrência cadastrada");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -31,35 +31,35 @@ public class OccurrencesController {
     public ResponseEntity<List<Occurrence>> listAll(
 
     ) {
-        return ResponseEntity.ok().body(this.occurrencesService.listAll());
+        return ResponseEntity.ok().body(this.occurrenceService.listAll());
     }
 
-    @GetMapping("/findbyid/{idOccurrences}")
+    @GetMapping("/findbyid/{idOccurrence}")
     public ResponseEntity<Occurrence> findById (
-            @PathVariable Long idOccurrences
+            @PathVariable Long idOccurrence
     ) {
-        return ResponseEntity.ok().body(this.occurrencesService.findById(idOccurrences));
+        return ResponseEntity.ok().body(this.occurrenceService.findById(idOccurrence));
     }
 
-    @PutMapping("/update/{idOccurrences}")
+    @PutMapping("/update/{idOccurrence}")
     public ResponseEntity<?> update(
-            @PathVariable Long idOccurrences,
-            @RequestBody Occurrence occurrences
+            @PathVariable Long idOccurrence,
+            @RequestBody Occurrence occurrence
     ) {
         try {
-            this.occurrencesService.update(occurrences, idOccurrences);
+            this.occurrenceService.update(occurrence, idOccurrence);
             return ResponseEntity.ok().body("Ocorrência atualizada");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
-    @PutMapping("/disable/{idOccurrences}")
+    @PutMapping("/disable/{idOccurrence}")
     public ResponseEntity<?> disable(
-            @PathVariable Long idOccurrences
+            @PathVariable Long idOccurrence
     ) {
         try {
-            this.occurrencesService.disable(idOccurrences);
+            this.occurrenceService.disable(idOccurrence);
             return ResponseEntity.ok().body("Ocorrência desativada!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -68,23 +68,11 @@ public class OccurrencesController {
 
     @GetMapping("/actives")
     public ResponseEntity<?> findByOccurrenceActives() {
-        return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceActives());
+        return ResponseEntity.ok().body(this.occurrenceService.findByOccurrenceActives());
     }
 
     @GetMapping("/inactives")
     public ResponseEntity<?> findByOccurrenceInactives() {
-        return ResponseEntity.ok().body(this.occurrencesService.findByOccurrenceInactives());
-    }
-
-    @PutMapping("/respond/{idCaregiver}")
-    public ResponseEntity<?> respondToOccurrence(
-            @PathVariable Long idCaregiver
-    ) {
-        try {
-            this.occurrencesService.respondToOccurrence(idCaregiver);
-            return ResponseEntity.ok().body("Ocorrência atendida!");
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok().body(this.occurrenceService.findByOccurrenceInactives());
     }
 }
