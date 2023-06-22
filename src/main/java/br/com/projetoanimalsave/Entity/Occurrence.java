@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_ocorrências", schema = "projeto-animal-save")
 public class Occurrence extends AbstractEntity {
@@ -33,9 +35,12 @@ public class Occurrence extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private Situation situation;
 
-    @ManyToOne
+    @ManyToMany
     @Getter
     @Setter
-    @JoinColumn(name="caregiver_id", nullable = true)
-    private Caregiver caregiver;
+    @JoinTable(
+            name = "occurrence_caregiver",
+            joinColumns = @JoinColumn(name = "occurrence_id"),
+            inverseJoinColumns = @JoinColumn(name = "caregiver_id"))
+    private List<Caregiver> caregiver;
 }
