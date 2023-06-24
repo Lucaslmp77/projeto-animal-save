@@ -27,29 +27,19 @@ public class AssociateService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private GenerateCodeService generateCodeService;
+
 
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    private static String generateCode(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-        StringBuilder code = new StringBuilder();
-
-        for (int i = 0; i < length; i++) {
-            int randomIndex = ThreadLocalRandom.current().nextInt(characters.length());
-            char randomChar = characters.charAt(randomIndex);
-            code.append(randomChar);
-        }
-
-        return code.toString();
     }
 
     @Transactional
     public Associate save(Associate associate) {
         User user = new User();
         user.setLogin(associate.getUser().getLogin());
-        user.setFirstCredential(generateCode(5));
+        user.setFirstCredential(generateCodeService.generateCode(7));
         user.setPassword(passwordEncoder().encode(user.getFirstCredential()));
         user.setPending(true);
         user.setApproved(false);
