@@ -94,7 +94,16 @@ public class AdminService {
         message.setFrom("animalsavepi@gmail.com");
         message.setTo(associate.get().getLogin());
         message.setSubject("Credenciais de acesso");
-        message.setText("Senha" + associate.get().getFirstCredential());
+        message.setText("Prezado(a) associado"+"/n" +
+                "Parabenizamos você por ter sido aprovado em nosso site! Acesse agora mesmo e aproveite os recursos " +
+                "exclusivos." + "\n" + "Login: " + associate.get().getLogin() + "\n" + "Senha: "
+                + associate.get().getFirstCredential() + "\n" + "Lembre-se de alterar sua senha ao fazer o primeiro " +
+                "login para garantir a segurança da sua conta.\n" +
+                "\n" +
+                "Tenha uma ótima experiência em nosso site!" + "\n" + "Atenciosamente,\n" +
+                "Equipe Animal Save\n"
+        );
+
         emailSender.send(message);
         sendEmailRepository.save(sendEmail);
 
