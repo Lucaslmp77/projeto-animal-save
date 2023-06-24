@@ -86,18 +86,18 @@ public class AdminService {
 
     @Transactional
     public void updateStatusUserPendingToApproved(Long id) {
-        var associate = this.userRepository.findById(id);
+        var user = this.userRepository.findById(id);
 
         SendEmail sendEmail = new SendEmail();
         sendEmail.setSendDateEmail(LocalDateTime.now());
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("animalsavepi@gmail.com");
-        message.setTo(associate.get().getLogin());
+        message.setTo(user.get().getLogin());
         message.setSubject("Credenciais de acesso");
-        message.setText("Prezado(a) associado"+"/n" +
+        message.setText(
                 "Parabenizamos você por ter sido aprovado em nosso site! Acesse agora mesmo e aproveite os recursos " +
-                "exclusivos." + "\n" + "Login: " + associate.get().getLogin() + "\n" + "Senha: "
-                + associate.get().getFirstCredential() + "\n" + "Lembre-se de alterar sua senha ao fazer o primeiro " +
+                "exclusivos." + "\n" + "\n" + "Login: " + user.get().getLogin() + "\n" + "Senha: "
+                + user.get().getFirstCredential() + "\n" + "\n" + "Lembre-se de alterar sua senha ao fazer o primeiro " +
                 "login para garantir a segurança da sua conta.\n" +
                 "\n" +
                 "Tenha uma ótima experiência em nosso site!" + "\n" + "Atenciosamente,\n" +
@@ -107,7 +107,7 @@ public class AdminService {
         emailSender.send(message);
         sendEmailRepository.save(sendEmail);
 
-        if (id == associate.get().getId()) {
+        if (id == user.get().getId()) {
             this.adminRepository.updateStatusUserPendingToApproved(id);
         } else {
             throw new RuntimeException();

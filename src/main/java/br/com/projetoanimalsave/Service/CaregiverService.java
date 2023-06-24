@@ -24,6 +24,9 @@ public class CaregiverService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private GenerateCodeService generateCodeService;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -32,7 +35,8 @@ public class CaregiverService {
     public Caregiver save(Caregiver caregiver) {
         User user = new User();
         user.setLogin(caregiver.getUser().getLogin());
-        user.setPassword(passwordEncoder().encode(caregiver.getUser().getPassword()));
+        user.setFirstCredential(generateCodeService.generateCode(7));
+        user.setPassword(passwordEncoder().encode(user.getFirstCredential()));
         user.setPending(true);
         user.setApproved(false);
         user.setRejected(false);
