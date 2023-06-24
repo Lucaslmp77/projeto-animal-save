@@ -1,10 +1,12 @@
 package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Dto.Login;
+import br.com.projetoanimalsave.Dto.NewPassword;
 import br.com.projetoanimalsave.Entity.Task;
 import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Service.TokenService;
 import br.com.projetoanimalsave.Service.UserService;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,10 +45,10 @@ public class UserController {
     @PutMapping("/new/password/{idUser}")
     public ResponseEntity<?> newPassword(
             @PathVariable Long idUser,
-            @RequestBody String password
-    ) {
+            @RequestBody NewPassword newPassword
+            ) {
         try {
-            this.userService.newPassword(password, idUser);
+            this.userService.newPassword(newPassword.getNewPassword(), idUser);
             return ResponseEntity.ok().body("Senha atualizada com sucesso!");
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

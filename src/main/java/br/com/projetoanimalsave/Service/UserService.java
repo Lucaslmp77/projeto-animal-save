@@ -1,5 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
+import br.com.projetoanimalsave.Dto.NewPassword;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,10 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void newPassword(String password, Long id) {
+    public void newPassword(String newPassword, Long id) {
         var user = this.userRepository.findById(id);
         if (id == user.get().getId()){
-            this.userRepository.newPassword(passwordEncoder().encode(password), id);
+            this.userRepository.newPassword(passwordEncoder().encode(newPassword), id);
         } else {
             throw new RuntimeException();
         }
