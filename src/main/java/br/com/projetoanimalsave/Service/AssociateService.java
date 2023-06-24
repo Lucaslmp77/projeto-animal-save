@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class AssociateService {
@@ -31,11 +32,25 @@ public class AssociateService {
         return new BCryptPasswordEncoder();
     }
 
+    private static String generateCode(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        StringBuilder code = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = ThreadLocalRandom.current().nextInt(characters.length());
+            char randomChar = characters.charAt(randomIndex);
+            code.append(randomChar);
+        }
+
+        return code.toString();
+    }
+
     @Transactional
     public Associate save(Associate associate) {
         User user = new User();
         user.setLogin(associate.getUser().getLogin());
-        user.setPassword(passwordEncoder().encode(associate.getUser().getPassword()));
+        user.setFirstCredential(generateCode(5));
+        user.setPassword(passwordEncoder().encode(user.getFirstCredential()));
         user.setPending(true);
         user.setApproved(false);
         user.setRejected(false);

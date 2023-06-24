@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Dto.Login;
+import br.com.projetoanimalsave.Entity.Task;
 import br.com.projetoanimalsave.Entity.User;
 import br.com.projetoanimalsave.Service.TokenService;
 import br.com.projetoanimalsave.Service.UserService;
@@ -37,5 +38,18 @@ public class UserController {
         var usuario = (User) authenticate.getPrincipal();
 
         return tokenService.gerarToken(usuario);
+    }
+
+    @PutMapping("/new/password/{idUser}")
+    public ResponseEntity<?> newPassword(
+            @PathVariable Long idUser,
+            @RequestBody String password
+    ) {
+        try {
+            this.userService.newPassword(password, idUser);
+            return ResponseEntity.ok().body("Senha atualizada com sucesso!");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

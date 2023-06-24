@@ -94,7 +94,7 @@ public class AdminService {
         message.setFrom("animalsavepi@gmail.com");
         message.setTo(associate.get().getLogin());
         message.setSubject("Credenciais de acesso");
-        message.setText("Senha gerada aleatoria");
+        message.setText("Senha" + associate.get().getFirstCredential());
         emailSender.send(message);
         sendEmailRepository.save(sendEmail);
 
