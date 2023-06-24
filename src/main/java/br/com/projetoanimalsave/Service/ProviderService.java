@@ -29,6 +29,9 @@ public class ProviderService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private GenerateCodeService generateCodeService;
+
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -37,7 +40,8 @@ public class ProviderService {
     public Provider save(Provider provider) {
         User user = new User();
         user.setLogin(provider.getUser().getLogin());
-        user.setPassword(passwordEncoder().encode(provider.getUser().getPassword()));
+        user.setFirstCredential(generateCodeService.generateCode(7));
+        user.setPassword(passwordEncoder().encode(user.getFirstCredential()));
         user.setPending(true);
         user.setApproved(false);
         user.setRejected(false);
