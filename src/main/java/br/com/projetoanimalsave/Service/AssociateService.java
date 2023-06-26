@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class AssociateService {
@@ -26,6 +27,9 @@ public class AssociateService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private GenerateCodeService generateCodeService;
+
 
     private BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,7 +39,8 @@ public class AssociateService {
     public Associate save(Associate associate) {
         User user = new User();
         user.setLogin(associate.getUser().getLogin());
-        user.setPassword(passwordEncoder().encode(associate.getUser().getPassword()));
+        user.setFirstCredential(generateCodeService.generateCode(7));
+        user.setPassword(passwordEncoder().encode(user.getFirstCredential()));
         user.setPending(true);
         user.setApproved(false);
         user.setRejected(false);
@@ -66,6 +71,13 @@ public class AssociateService {
     @Transactional
     public void update(Associate associate, Long id) {
         if (id == associate.getId()){
+            Address address = new Address();
+            address.setCep(associate.getAddress().getCep());
+            address.setNeighborhood(associate.getAddress().getNeighborhood());
+            address.setRoad(associate.getAddress().getRoad());
+            address.setHouseNumber(associate.getAddress().getHouseNumber());
+            this.addressRepository.save(address);
+            associate.setAddress(address);
             this.associateRepository.save(associate);
         } else {
             throw new RuntimeException();

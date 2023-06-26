@@ -30,6 +30,11 @@ public class User implements UserDetails {
 
     @Getter
     @Setter
+    @Column(name = "primeira-credencial", length = 90)
+    private String firstCredential;
+
+    @Getter
+    @Setter
     @Column(name = "senha", length = 90, nullable = false)
     private String password;
 
