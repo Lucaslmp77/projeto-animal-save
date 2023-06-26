@@ -39,6 +39,7 @@ public class AdminService {
 
     @Transactional
     public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
+        try{
             User user = new User();
             user.setLogin(loginAdmin);
             user.setPassword(passwordEncoder().encode(senhaAdmin));
@@ -51,8 +52,12 @@ public class AdminService {
 
             Admin admin = new Admin();
             admin.setName("admin");
+            admin.setName("admin");
             admin.setUser(user);
             return this.adminRepository.save(admin);
+        }catch (Exception ex){
+            throw new RuntimeException(ex.getMessage());
+        }
     }
 
     @Transactional
