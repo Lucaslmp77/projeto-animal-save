@@ -9,4 +9,8 @@ public class NewPassword {
     @Setter
     @Column(name = "nova-senha", length = 90, nullable = false)
     private String newPassword;
+
+    public NewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 }

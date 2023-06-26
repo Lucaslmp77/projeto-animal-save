@@ -1,6 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Dto.NewPassword;
+import br.com.projetoanimalsave.Entity.Associate;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -34,5 +36,9 @@ public class UserService implements UserDetailsService {
         } else {
             throw new RuntimeException();
         }
+    }
+
+    public Optional<Associate> findAssociateByIdUser(Long id) {
+        return this.userRepository.findAssociateByIdUser(id);
     }
 }

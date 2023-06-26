@@ -45,12 +45,15 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/caregiver/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/provider/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/associate/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/user/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/user/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/user/**").permitAll()
                 //ENDEREÇO
                 .requestMatchers(HttpMethod.POST, "/api/address/register").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/address/**").permitAll()
                 //ADMIN
                 .requestMatchers(HttpMethod.POST, "/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/user/findAssociateByIdUser/{idUser}").permitAll()
                 //CUIDADOR
                 .requestMatchers(HttpMethod.PUT, "/api/caregiver/update")
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_CAREGIVER")
@@ -94,9 +97,7 @@ public class SecurityConfig {
                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_PROVIDER", "ROLE_CAREGIVER")
                 //ASSOCIADO
                 .requestMatchers(HttpMethod.PUT, "/api/associate/**")
-                .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
-                .requestMatchers(HttpMethod.PUT, "/api/associate/update")
-                .hasAnyAuthority("ROLE_ADMIN", "ROLE_ASSOCIATE")
+                .permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/associate/disable")
                 .hasAnyAuthority("ROLE_ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/associate/listall")
