@@ -2,6 +2,7 @@ package br.com.projetoanimalsave.Service;
 
 import br.com.projetoanimalsave.Entity.Associate;
 import br.com.projetoanimalsave.Entity.Caregiver;
+import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,9 @@ public class UserService implements UserDetailsService {
 
     public Optional<Caregiver> findCaregiverByIdUser(Long id) {
         return this.userRepository.findCaregiverByIdUser(id);
+    }
+
+    public Optional<Provider> findProviderByIdUser(Long id) {
+        return this.userRepository.findProviderByIdUser(id);
     }
 }

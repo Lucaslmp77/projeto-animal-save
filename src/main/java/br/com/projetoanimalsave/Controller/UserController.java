@@ -65,4 +65,11 @@ public class UserController {
     ) {
         return ResponseEntity.ok().body(this.userService.findCaregiverByIdUser(idUser));
     }
+
+    @GetMapping("/findProviderByIdUser/{idUser}")
+    public ResponseEntity<?> findProviderByIdUser (
+            @PathVariable Long idUser
+    ) {
+        return ResponseEntity.ok().body(this.userService.findProviderByIdUser(idUser));
+    }
 }
