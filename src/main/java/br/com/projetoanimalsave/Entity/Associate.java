@@ -11,23 +11,23 @@ public class Associate extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "nome", length = 25, nullable = false)
+    @Column(name = "nome", length = 30, nullable = false)
     private String firstName;
 
     @Getter
     @Setter
-    @Column(name = "sobrenome", length = 25, nullable = false)
+    @Column(name = "sobrenome", length = 30, nullable = false)
     private String lastName;
 
     @Getter
     @Setter
-    @Column(name = "contato", length = 14, nullable = false)
+    @Column(name = "contato", length = 30, nullable = false)
     private String contact;
 
     @Getter
     @Setter
     @CPF
-    @Column(name = "cpf", length = 30, nullable = false, unique = true)
+    @Column(name = "cpf", length = 50, nullable = false, unique = true)
     private String cpf;
 
 

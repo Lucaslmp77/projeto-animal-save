@@ -13,23 +13,23 @@ public class Provider extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "nome_fantasia", length = 25, nullable = false)
+    @Column(name = "nome_fantasia", length = 50, nullable = false)
     private String fantasyName;
 
     @Getter
     @Setter
-    @Column(name = "nome_empresarial", length = 25, nullable = false)
+    @Column(name = "nome_empresarial", length = 50, nullable = false)
     private String businessName;
 
     @Getter
     @Setter
     @CNPJ
-    @Column(name = "cnpj", length = 25, nullable = false, unique = true)
+    @Column(name = "cnpj", length = 50, nullable = false, unique = true)
     private String cnpj;
 
     @Getter
     @Setter
-    @Column(name = "contato", length = 14, nullable = false)
+    @Column(name = "contato", length = 50, nullable = false)
     private String contact;
 
     @OneToOne
