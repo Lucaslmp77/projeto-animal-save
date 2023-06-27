@@ -66,6 +66,22 @@ public class AdminService {
         return results;
     }
 
+    public List<Object> findAllApproved() {
+        List<Object> results = new ArrayList<>();
+        results.addAll(this.adminRepository.findAssociateApproved());
+        results.addAll(this.adminRepository.findCaregiverApproved());
+        results.addAll(this.adminRepository.findProviderApproved());
+        return results;
+    }
+
+    public List<Object> findAllRejected() {
+        List<Object> results = new ArrayList<>();
+        results.addAll(this.adminRepository.findAssociateRejected());
+        results.addAll(this.adminRepository.findCaregiverRejected());
+        results.addAll(this.adminRepository.findProviderRejected());
+        return results;
+    }
+
     @Transactional
     public void updateStatusUserPendingToApproved(Long id) {
         var user = this.userRepository.findById(id);
