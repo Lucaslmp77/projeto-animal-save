@@ -34,11 +34,18 @@ public class AnimalController {
         return ResponseEntity.ok().body(this.animalService.listAll());
     }
 
-    @GetMapping("/findbyid{idAnimal}")
+    @GetMapping("/findbyid/{idAnimal}")
     public ResponseEntity<Animal> findById (
             @PathVariable Long idAnimal
     ) {
         return ResponseEntity.ok().body(this.animalService.findById(idAnimal));
+    }
+
+    @GetMapping("/findAnimalByIdCaregiver/{idCaregiver}")
+    public ResponseEntity<List<Animal>> findAnimalByIdCaregiver (
+            @PathVariable Long idCaregiver
+    ) {
+        return ResponseEntity.ok().body(this.animalService.findAnimalByIdCaregiver(idCaregiver));
     }
 
     @PutMapping("/update/{idAnimal}")
