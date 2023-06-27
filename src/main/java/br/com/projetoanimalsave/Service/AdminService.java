@@ -38,29 +38,6 @@ public class AdminService {
     }
 
     @Transactional
-    public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
-        try{
-            User user = new User();
-            user.setLogin(loginAdmin);
-            user.setPassword(passwordEncoder().encode(senhaAdmin));
-            user.setApproved(true);
-            user.setPending(false);
-            user.setRejected(false);
-            Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
-            user.getRoles().add(adminRole);
-            this.userRepository.save(user);
-
-            Admin admin = new Admin();
-            admin.setName("admin");
-            admin.setName("admin");
-            admin.setUser(user);
-            return this.adminRepository.save(admin);
-        }catch (Exception ex){
-            throw new RuntimeException(ex.getMessage());
-        }
-    }
-
-    @Transactional
     public Admin save(Admin admin) {
         User user = new User();
         user.setLogin(admin.getUser().getLogin());
