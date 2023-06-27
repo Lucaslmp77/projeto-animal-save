@@ -1,6 +1,8 @@
 package br.com.projetoanimalsave.Repository;
 
 import br.com.projetoanimalsave.Entity.Associate;
+import br.com.projetoanimalsave.Entity.Caregiver;
+import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,5 +22,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT associate FROM Associate associate" +
             " INNER JOIN associate.user user WHERE user.id = :id")
     public Optional<Associate> findAssociateByIdUser(Long id);
+
+    @Query("SELECT caregiver FROM Caregiver caregiver" +
+            " INNER JOIN caregiver.user user WHERE user.id = :id")
+    public Optional<Caregiver> findCaregiverByIdUser(Long id);
+
+    @Query("SELECT provider FROM Provider provider" +
+            " INNER JOIN provider.user user WHERE user.id = :id")
+    public Optional<Provider> findProviderByIdUser(Long id);
 
 }
