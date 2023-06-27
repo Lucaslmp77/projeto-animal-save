@@ -19,13 +19,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    @Column(name = "id", length = 30, nullable = false, unique = true)
+    @Column(name = "id", length = 50, nullable = false, unique = true)
     private Long id;
 
     @Getter
     @Setter
     @Email
-    @Column(name = "login", length = 40, nullable = false, unique = true)
+    @Column(name = "login", length = 50, nullable = false, unique = true)
     private String login;
 
     @Getter
@@ -35,22 +35,22 @@ public class User implements UserDetails {
 
     @Getter
     @Setter
-    @Column(name = "senha", length = 90, nullable = false)
+    @Column(name = "senha", length = 150, nullable = false)
     private String password;
 
     @Getter
     @Setter
-    @Column(name = "aprovado", length = 25, nullable = false)
+    @Column(name = "aprovado", length = 50, nullable = false)
     private Boolean approved;
 
     @Getter
     @Setter
-    @Column(name = "pendente", length = 25, nullable = false)
+    @Column(name = "pendente", length = 50, nullable = false)
     private Boolean pending;
 
     @Getter
     @Setter
-    @Column(name = "rejeitado", length = 25, nullable = false)
+    @Column(name = "rejeitado", length = 50, nullable = false)
     private Boolean rejected;
 
     @OneToOne(mappedBy = "user")

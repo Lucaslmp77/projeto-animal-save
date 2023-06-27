@@ -12,17 +12,17 @@ import lombok.Setter;
 public class Address extends AbstractEntity {
     @Getter
     @Setter
-    @Column(name = "cep", length = 25, nullable = false)
+    @Column(name = "cep", length = 90, nullable = false)
     private String cep;
 
     @Getter
     @Setter
-    @Column(name = "bairro", length = 25, nullable = false)
+    @Column(name = "bairro", length = 90, nullable = false)
     private String neighborhood;
 
     @Getter
     @Setter
-    @Column(name = "rua", length = 25, nullable = false)
+    @Column(name = "rua", length = 90, nullable = false)
     private String road;
 
     @Getter
