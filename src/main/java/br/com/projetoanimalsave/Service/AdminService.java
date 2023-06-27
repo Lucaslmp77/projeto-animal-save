@@ -114,8 +114,31 @@ public class AdminService {
 
     @Transactional
     public void updateStatusUserPendingToRejected(Long id) {
-        var associate = this.userRepository.findById(id);
-        if (id == associate.get().getId()) {
+
+        var user = this.userRepository.findById(id);
+
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.setSendDateEmail(LocalDateTime.now());
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("animalsavepi@gmail.com");
+        message.setTo(user.get().getLogin());
+        message.setSubject("Usuário rejeitado");
+        message.setText(
+                "Gostaríamos de informar que sua solicitação de cadastro foi rejeitada. Pedimos que entre em contato com" +
+                        " nossa equipe para obter mais informações sobre o motivo dessa decisão.\n" +
+                        "\n" +
+                        "Estamos à disposição para esclarecer quaisquer dúvidas ou fornecer informações adicionais que " +
+                        "possam ser necessárias.\n" +
+                        "\n" +
+                        "Atenciosamente,\n" +
+                        "\n" +
+                        "Equipe Animal Save"
+        );
+
+        emailSender.send(message);
+        sendEmailRepository.save(sendEmail);
+
+        if (id == user.get().getId()) {
             this.adminRepository.updateStatusUserPendingToRejected(id);
         } else {
             throw new RuntimeException();
