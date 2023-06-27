@@ -58,4 +58,11 @@ public class UserController {
     ) {
         return ResponseEntity.ok().body(this.userService.findAssociateByIdUser(idUser));
     }
+
+    @GetMapping("/findCaregiverByIdUser/{idUser}")
+    public ResponseEntity<?> findCaregiverByIdUser (
+            @PathVariable Long idUser
+    ) {
+        return ResponseEntity.ok().body(this.userService.findCaregiverByIdUser(idUser));
+    }
 }
