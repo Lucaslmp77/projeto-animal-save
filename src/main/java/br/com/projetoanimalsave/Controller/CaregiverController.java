@@ -34,6 +34,20 @@ public class CaregiverController {
         return ResponseEntity.ok().body(this.caregiverService.listAll());
     }
 
+    @GetMapping("/actives")
+    public ResponseEntity<List<Caregiver>> findByCaregiverActives(
+
+    ) {
+        return ResponseEntity.ok().body(this.caregiverService.findByCaregiverActives());
+    }
+
+    @GetMapping("/inactives")
+    public ResponseEntity<List<Caregiver>> findByCaregiverInactives(
+
+    ) {
+        return ResponseEntity.ok().body(this.caregiverService.findByCaregiverInactives());
+    }
+
     @GetMapping("/findbyid/{idCaregiver}")
     public ResponseEntity<Caregiver> findById (
             @PathVariable Long idCaregiver

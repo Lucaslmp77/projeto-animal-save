@@ -54,7 +54,6 @@ public class CaregiverService {
         caregiver.setUser(user);
         caregiver.setAddress(address);
         return this.caregiverRepository.save(caregiver);
-
     }
 
     public List<Caregiver> listAll() {
@@ -63,6 +62,10 @@ public class CaregiverService {
 
     public List<Caregiver> findByCaregiverActives() {
         return this.caregiverRepository.findByCaregiverActives();
+    }
+
+    public List<Caregiver> findByCaregiverInactives() {
+        return this.caregiverRepository.findByCaregiverInactives();
     }
 
     public Caregiver findById(Long id) {

@@ -12,10 +12,13 @@ import java.util.List;
 @Repository
 public interface CaregiverRepository extends JpaRepository<Caregiver, Long> {
 
+    @Modifying
+    @Query("UPDATE Caregiver caregiver set caregiver.active = FALSE WHERE caregiver.id = :idCaregiver")
+    public void disable(@Param("idCaregiver")Long id);
+
     @Query("SELECT caregiver FROM Caregiver caregiver where caregiver.active = true")
     public List<Caregiver> findByCaregiverActives();
 
-    @Modifying
-    @Query("update Caregiver caregiver set caregiver.active = false where caregiver.id = :idCaregiver")
-    public void disable(@Param("idCaregiver")Long id);
+    @Query("SELECT caregiver FROM Caregiver caregiver where caregiver.active = false")
+    public List<Caregiver> findByCaregiverInactives();
 }
