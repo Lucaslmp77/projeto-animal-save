@@ -3,20 +3,17 @@ package br.com.projetoanimalsave.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "tb_animais", schema = "projeto-animal-save")
 public class Animal extends AbstractEntity {
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "O nome deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "nome", length = 25, nullable = false)
     private String name;
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A raça deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "raça", length = 25, nullable = false)
     private String breed;
 
@@ -40,7 +37,6 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 25, message = "A cor deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "cor", length = 40, nullable = false)
     private String color;
 
@@ -51,7 +47,6 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Length(min = 3, max = 100, message = "A observação deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
     @Column(name = "observação", length = 200, nullable = false)
     private String observation;
 
