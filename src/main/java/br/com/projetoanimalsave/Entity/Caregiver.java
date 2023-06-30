@@ -12,17 +12,14 @@ import java.util.List;
 public class Caregiver extends AbstractEntity{
 
     @Getter
-    @Setter
     @Column(name = "nome", length = 50, nullable = false)
     private String firstName;
 
     @Getter
-    @Setter
     @Column(name = "sobrenome", length = 50, nullable = false)
     private String lastName;
 
     @Getter
-    @Setter
     @Column(name = "contato", length = 50, nullable = false)
     private String contact;
 
@@ -39,22 +36,17 @@ public class Caregiver extends AbstractEntity{
     private Address address;
 
     @Getter
-    @Setter
     @Column(name = "espaço-físico", length = 50, nullable = false)
     private String physicalSpace;
 
     @Getter
-    @Setter
     @Column(name = "gastos", length = 50, nullable = false)
     private String spending;
 
     @Getter
-    @Setter
     @Column(name = "capacidade-animais", length = 50, nullable = false)
     private Double capacityAnimals;
 
-    @Getter
-    @Setter
     @ManyToMany(mappedBy = "caregiver")
     private List<Occurrence> occurrence;
 
@@ -63,4 +55,84 @@ public class Caregiver extends AbstractEntity{
     @Setter
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public void setFirstName(String firstName) {
+        if(firstName == null) {
+            throw new RuntimeException("O primeiro nome do protetor inserido é nulo");
+        } else if (firstName.isEmpty()) {
+            throw new RuntimeException("O primeiro nome do protetor inserido está vazio");
+        } else if (firstName.trim().length() < 3) {
+            throw new RuntimeException("O primeiro nome do protetor inserido é muito curto");
+        } else if (firstName.trim().length() > 30) {
+            throw new RuntimeException("O primeiro nome do protetor inserido ultrapassa o limite máximo");
+        } else if (firstName.matches("[0-9]+")) {
+            throw new RuntimeException("O primeiro nome do protetor inserido é composto por números");
+        }
+        else {
+            this.firstName = firstName;
+        }
+    }
+
+    public void setLastName(String lastName) {
+        if(lastName == null) {
+            throw new RuntimeException("O sobrenome do protetor inserido é nulo");
+        } else if (lastName.isEmpty()) {
+            throw new RuntimeException("O sobrenome do protetor inserido está vazio");
+        } else if (lastName.trim().length() < 2) {
+            throw new RuntimeException("O sobrenome do protetor inserido é muito curto");
+        } else if (lastName.trim().length() > 50) {
+            throw new RuntimeException("O sobrenome do protetor inserido ultrapassa o limite máximo");
+        } else if (lastName.matches("[0-9]+")) {
+            throw new RuntimeException("O sobrenome do protetor inserido é composto por números");
+        }
+        else {
+            this.lastName = lastName;
+        }
+    }
+
+    public void setContact(String contact) {
+        if(contact == null) {
+            throw new RuntimeException("O contato inserido é nulo");
+        } else if (contact.isEmpty()) {
+            throw new RuntimeException("O contato inserido está vazio");
+        } else if (contact.trim().length() < 5) {
+            throw new RuntimeException("O contato inserido é muito curto");
+        } else if (contact.trim().length() > 25) {
+            throw new RuntimeException("O contato do associado inserido ultrapassa o limite máximo");
+        } else {
+            this.contact = contact;
+        }
+    }
+
+    public void setPhysicalSpace(String physicalSpace) {
+        if(physicalSpace == null) {
+            throw new RuntimeException("O espaço físico nome do protetor inserido é nulo");
+        } else if (physicalSpace.isEmpty()) {
+            throw new RuntimeException("O espaço físico do protetor inserido está vazio");
+        } else if (physicalSpace.trim().length() < 3) {
+            throw new RuntimeException("O espaço físico do protetor inserido é muito curto");
+        } else if (physicalSpace.trim().length() > 35) {
+            throw new RuntimeException("O pespaço físico do protetor inserido ultrapassa o limite máximo");
+        } else {
+            this.physicalSpace = physicalSpace;
+        }
+    }
+
+    public void setSpending(String spending) {
+        if(spending == null) {
+            throw new RuntimeException("Os gastos do protetor inserido é nulo");
+        } else if (spending.isEmpty()) {
+            throw new RuntimeException("Os gastos do protetor inserido está vazio");
+        } else if (spending.trim().length() < 2) {
+            throw new RuntimeException("Os gastos do protetor inserido é muito curto");
+        } else if (spending.trim().length() > 35) {
+            throw new RuntimeException("Os gastos do protetor inserido ultrapassa o limite máximo");
+        } else {
+            this.spending = spending;
+        }
+    }
+
+    public void setCapacityAnimals(Double capacityAnimals) {
+        this.capacityAnimals = capacityAnimals;
+    }
 }

@@ -23,13 +23,6 @@ public class Role implements GrantedAuthority {
     @JsonIgnore
     private List<User> user;
 
-    public Role() {
-    }
-
-    public Role(String authority) {
-        this.authority = authority;
-    }
-
     public Long getId() {
         return id;
     }
@@ -47,12 +40,12 @@ public class Role implements GrantedAuthority {
         this.authority = authority;
     }
 
-    public List<User> getUser() {
-        return user;
+    public Role() {
     }
 
-    public void setUser(List<User> user) {
-        this.user = user;
+    public Role(Long id, String authority) {
+        this.id = id;
+        this.authority = authority;
     }
 
     @Override
@@ -60,11 +53,11 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(id, role.id) && Objects.equals(authority, role.authority);
+        return id.equals(role.id) && Objects.equals(authority, role.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, authority);
+        return Objects.hash(id);
     }
 }

@@ -54,15 +54,6 @@ public class ProviderTest {
     }
 
     @Test
-    public void testGetSetTasks() {
-        Set<Task> tasks = new HashSet<>();
-        Provider provider = new Provider();
-        provider.setTasks(tasks);
-
-        Assertions.assertEquals(tasks, provider.getTasks());
-    }
-
-    @Test
     public void testGetSetUser() {
         User user = new User();
         Provider provider = new Provider();

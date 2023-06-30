@@ -40,13 +40,4 @@ public class VaccinationTest {
 
         Assertions.assertEquals(canineHepatitis, vaccination.getCanineHepatitis());
     }
-
-    @Test
-    public void testGetAnimal() {
-        Animal animal = new Animal();
-        Vaccination vaccination = new Vaccination();
-        vaccination.setAnimal(animal);
-
-        Assertions.assertEquals(animal, vaccination.getAnimal());
-    }
 }

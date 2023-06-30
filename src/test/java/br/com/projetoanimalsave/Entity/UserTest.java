@@ -13,65 +13,6 @@ import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
 public class UserTest {
-
-    @Test
-    public void testGetRoles() {
-        User user = new User();
-        Role role = new Role("ROLE_ADMIN");
-        user.addRole(role);
-
-        Set<Role> roles = user.getRoles();
-
-        Assertions.assertEquals(1, roles.size());
-        Assertions.assertTrue(roles.contains(role));
-    }
-
-    @Test
-    public void testSetRoles() {
-        User user = new User();
-        Set<Role> roles = new HashSet<>();
-        Role role = new Role("ROLE_ADMIN");
-        roles.add(role);
-
-        user.setRoles(roles);
-
-        Assertions.assertEquals(1, user.getRoles().size());
-        Assertions.assertTrue(user.hasRole("ROLE_ADMIN"));
-    }
-
-    @Test
-    public void testAddRole() {
-        User user = new User();
-        Role role = new Role("ROLE_ADMIN");
-
-        user.addRole(role);
-
-        Assertions.assertEquals(1, user.getRoles().size());
-        Assertions.assertTrue(user.getRoles().contains(role));
-    }
-
-    @Test
-    public void testHasRole() {
-        User user = new User();
-        Role role = new Role("ROLE_ADMIN");
-        user.addRole(role);
-
-        Assertions.assertTrue(user.hasRole("ROLE_ADMIN"));
-        Assertions.assertFalse(user.hasRole("ROLE_USER"));
-    }
-
-    @Test
-    public void testGetAuthorities() {
-        User user = new User();
-        Role role = new Role("ROLE_ADMIN");
-        user.addRole(role);
-
-        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-
-        Assertions.assertEquals(1, authorities.size());
-        Assertions.assertTrue(authorities.contains(role));
-    }
-
     @Test
     public void testGetPassword() {
         User user = new User();

@@ -15,6 +15,41 @@ public class AdminTest {
     }
 
     @Test
+    public void testSetAdm_NullAdm() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName(null));
+    }
+
+    @Test
+    public void testSetAdm_EmptyAdm() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName(""));
+    }
+
+    @Test
+    public void testSetAdm_ShortAdm() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("RF"));
+    }
+
+    @Test
+    public void testSetAdm_LongAdm() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("Rodrigo Ferreira Silvio Valerio Da Silva"));
+    }
+
+    @Test
+    public void testSetAdm_NameCompostNumbers() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("5353"));
+    }
+
+    @Test
     public void testGetSetUser() {
         User user = new User();
         Admin admin = new Admin();
