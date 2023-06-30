@@ -12,6 +12,12 @@ public class Admin extends AbstractEntity {
     @Column(name = "nome", length = 25, nullable = false)
     private String name;
 
+    @OneToOne
+    @Getter
+    @Setter
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     public void setName(String name) {
         if(name == null) {
             throw new RuntimeException("O nome do administrador inserido é nulo");
@@ -28,11 +34,5 @@ public class Admin extends AbstractEntity {
             this.name = name;
         }
     }
-
-    @OneToOne
-    @Getter
-    @Setter
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 
 }
