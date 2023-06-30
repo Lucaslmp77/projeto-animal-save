@@ -30,18 +30,12 @@ public class Address extends AbstractEntity {
     @Column(name = "número", length = 25, nullable = false)
     private Integer houseNumber;
 
-    @Getter
-    @Setter
     @OneToOne(mappedBy = "address")
     private Associate associate;
 
-    @Getter
-    @Setter
     @OneToOne(mappedBy = "address")
     private Caregiver caregiver;
 
-    @Getter
-    @Setter
     @OneToOne(mappedBy = "address")
     private Provider provider;
 }
