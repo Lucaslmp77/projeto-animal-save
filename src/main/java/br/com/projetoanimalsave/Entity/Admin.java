@@ -9,9 +9,25 @@ import lombok.Setter;
 public class Admin extends AbstractEntity {
 
     @Getter
-    @Setter
     @Column(name = "nome", length = 25, nullable = false)
     private String name;
+
+    public void setName(String name) {
+        if(name == null) {
+            throw new RuntimeException("O nome do administrador inserido é nulo");
+        } else if (name.isEmpty()) {
+            throw new RuntimeException("O nome do administrador inserido está vazio");
+        } else if (name.trim().length() < 3) {
+            throw new RuntimeException("O nome do administrador inserido é muito curto");
+        } else if (name.trim().length() > 25) {
+            throw new RuntimeException("O nome do administrador inserido ultrapassa o limite máximo");
+        } else if (name.matches("[0-9]+")) {
+            throw new RuntimeException("O nome do administrador inserido é composto por números");
+        }
+        else {
+            this.name = name;
+        }
+    }
 
     @OneToOne
     @Getter

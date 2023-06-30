@@ -15,6 +15,27 @@ public class AdminTest {
     }
 
     @Test
+    public void naoDeveRetornarNomeDoAdminMenorQue3Letras() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("RF"));
+    }
+
+    @Test
+    public void naoDeveRetornarNomeDoAdminMaiorQue25Letras() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("Rodrigo Ferreira Silvio Valerio Da Silva"));
+    }
+
+    @Test
+    public void naoDeveCadastrarAdminComNomeCompostoPorNumeros() {
+        Admin admin = new Admin();
+
+        Assertions.assertThrows(RuntimeException.class, () -> admin.setName("5353"));
+    }
+
+    @Test
     public void testGetSetUser() {
         User user = new User();
         Admin admin = new Admin();

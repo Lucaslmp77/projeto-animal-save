@@ -42,6 +42,9 @@ public class AdminService {
         User user = new User();
         user.setLogin(admin.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(admin.getUser().getPassword()));
+        user.setPending(false);
+        user.setApproved(true);
+        user.setRejected(false);
         Role adminRole = roleRepository.findByAuthority("ROLE_ADMIN");
         user.getRoles().add(adminRole);
         this.userRepository.save(user);
