@@ -47,7 +47,7 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "observação", length = 200, nullable = false)
+    @Column(name = "observação", length = 200)
     private String observation;
 
     @ManyToOne
