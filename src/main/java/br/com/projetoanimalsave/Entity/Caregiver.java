@@ -53,6 +53,8 @@ public class Caregiver extends AbstractEntity{
     @Column(name = "capacidade-animais", length = 50, nullable = false)
     private Double capacityAnimals;
 
+    @Getter
+    @Setter
     @ManyToMany(mappedBy = "caregiver")
     private List<Occurrence> occurrence;
 
