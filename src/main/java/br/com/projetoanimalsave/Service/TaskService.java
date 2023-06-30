@@ -26,6 +26,10 @@ public class TaskService {
         return this.taskRepository.findById(id).orElse(new Task());
     }
 
+    public List<Task> findTaskByIdProvider(Long id) {
+        return this.taskRepository.findTaskByIdProvider(id);
+    }
+
     @Transactional
     public void update(Task task, Long id) {
         if (id == task.getId()) {

@@ -38,6 +38,10 @@ public class AnimalService {
         return this.animalRepository.findById(id).orElse(new Animal());
     }
 
+    public List<Animal> findAnimalByIdCaregiver(Long id) {
+        return this.animalRepository.findAnimalByIdCaregiver(id);
+    }
+
     @Transactional
     public void update(Animal animal, Long id) {
         if (id == animal.getId()) {

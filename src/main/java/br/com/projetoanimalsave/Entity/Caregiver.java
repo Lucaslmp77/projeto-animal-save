@@ -13,23 +13,23 @@ public class Caregiver extends AbstractEntity{
 
     @Getter
     @Setter
-    @Column(name = "nome", length = 25, nullable = false)
+    @Column(name = "nome", length = 50, nullable = false)
     private String firstName;
 
     @Getter
     @Setter
-    @Column(name = "sobrenome", length = 25, nullable = false)
+    @Column(name = "sobrenome", length = 50, nullable = false)
     private String lastName;
 
     @Getter
     @Setter
-    @Column(name = "contato", length = 14, nullable = false)
+    @Column(name = "contato", length = 50, nullable = false)
     private String contact;
 
     @Getter
     @Setter
     @CPF
-    @Column(name = "cpf", length = 30, nullable = false, unique = true)
+    @Column(name = "cpf", length = 50, nullable = false, unique = true)
     private String cpf;
 
     @OneToOne
@@ -40,19 +40,21 @@ public class Caregiver extends AbstractEntity{
 
     @Getter
     @Setter
-    @Column(name = "espaço-físico", length = 25, nullable = false)
+    @Column(name = "espaço-físico", length = 50, nullable = false)
     private String physicalSpace;
 
     @Getter
     @Setter
-    @Column(name = "gastos", length = 20, nullable = false)
+    @Column(name = "gastos", length = 50, nullable = false)
     private String spending;
 
     @Getter
     @Setter
-    @Column(name = "capacidade-animais", length = 10, nullable = false)
+    @Column(name = "capacidade-animais", length = 50, nullable = false)
     private Double capacityAnimals;
 
+    @Getter
+    @Setter
     @ManyToMany(mappedBy = "caregiver")
     private List<Occurrence> occurrence;
 

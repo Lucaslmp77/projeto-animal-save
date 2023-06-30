@@ -38,29 +38,6 @@ public class AdminService {
     }
 
     @Transactional
-    public Admin saveAdmin(String loginAdmin, String senhaAdmin) {
-        try{
-            User user = new User();
-            user.setLogin(loginAdmin);
-            user.setPassword(passwordEncoder().encode(senhaAdmin));
-            user.setApproved(true);
-            user.setPending(false);
-            user.setRejected(false);
-            Role adminRole = this.roleRepository.findByAuthority("ROLE_ADMIN");
-            user.getRoles().add(adminRole);
-            this.userRepository.save(user);
-
-            Admin admin = new Admin();
-            admin.setName("admin");
-            admin.setName("admin");
-            admin.setUser(user);
-            return this.adminRepository.save(admin);
-        }catch (Exception ex){
-            throw new RuntimeException(ex.getMessage());
-        }
-    }
-
-    @Transactional
     public Admin save(Admin admin) {
         User user = new User();
         user.setLogin(admin.getUser().getLogin());
@@ -86,6 +63,22 @@ public class AdminService {
         results.addAll(this.adminRepository.findAssociatePending());
         results.addAll(this.adminRepository.findCaregiverPending());
         results.addAll(this.adminRepository.findProviderPending());
+        return results;
+    }
+
+    public List<Object> findAllApproved() {
+        List<Object> results = new ArrayList<>();
+        results.addAll(this.adminRepository.findAssociateApproved());
+        results.addAll(this.adminRepository.findCaregiverApproved());
+        results.addAll(this.adminRepository.findProviderApproved());
+        return results;
+    }
+
+    public List<Object> findAllRejected() {
+        List<Object> results = new ArrayList<>();
+        results.addAll(this.adminRepository.findAssociateRejected());
+        results.addAll(this.adminRepository.findCaregiverRejected());
+        results.addAll(this.adminRepository.findProviderRejected());
         return results;
     }
 
@@ -121,8 +114,31 @@ public class AdminService {
 
     @Transactional
     public void updateStatusUserPendingToRejected(Long id) {
-        var associate = this.userRepository.findById(id);
-        if (id == associate.get().getId()) {
+
+        var user = this.userRepository.findById(id);
+
+        SendEmail sendEmail = new SendEmail();
+        sendEmail.setSendDateEmail(LocalDateTime.now());
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("animalsavepi@gmail.com");
+        message.setTo(user.get().getLogin());
+        message.setSubject("Usuário rejeitado");
+        message.setText(
+                "Gostaríamos de informar que sua solicitação de cadastro foi rejeitada. Pedimos que entre em contato com" +
+                        " nossa equipe para obter mais informações sobre o motivo dessa decisão.\n" +
+                        "\n" +
+                        "Estamos à disposição para esclarecer quaisquer dúvidas ou fornecer informações adicionais que " +
+                        "possam ser necessárias.\n" +
+                        "\n" +
+                        "Atenciosamente,\n" +
+                        "\n" +
+                        "Equipe Animal Save"
+        );
+
+        emailSender.send(message);
+        sendEmailRepository.save(sendEmail);
+
+        if (id == user.get().getId()) {
             this.adminRepository.updateStatusUserPendingToRejected(id);
         } else {
             throw new RuntimeException();

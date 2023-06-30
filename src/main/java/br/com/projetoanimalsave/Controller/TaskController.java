@@ -34,6 +34,13 @@ public class TaskController {
         return ResponseEntity.ok().body(this.taskService.listAll());
     }
 
+    @GetMapping("/findTaskByIdProvider/{idProvider}")
+    public ResponseEntity<List<Task>> findTaskByIdProvider (
+            @PathVariable Long idProvider
+    ) {
+        return ResponseEntity.ok().body(this.taskService.findTaskByIdProvider(idProvider));
+    }
+
     @GetMapping("/findbyid/{idTask}")
     public ResponseEntity<Task> findById (
             @PathVariable Long idTask

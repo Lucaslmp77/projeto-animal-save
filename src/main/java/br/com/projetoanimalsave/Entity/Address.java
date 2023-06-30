@@ -12,17 +12,17 @@ import lombok.Setter;
 public class Address extends AbstractEntity {
     @Getter
     @Setter
-    @Column(name = "cep", length = 25, nullable = false)
+    @Column(name = "cep", length = 90, nullable = false)
     private String cep;
 
     @Getter
     @Setter
-    @Column(name = "bairro", length = 25, nullable = false)
+    @Column(name = "bairro", length = 90, nullable = false)
     private String neighborhood;
 
     @Getter
     @Setter
-    @Column(name = "rua", length = 25, nullable = false)
+    @Column(name = "rua", length = 90, nullable = false)
     private String road;
 
     @Getter
@@ -30,12 +30,18 @@ public class Address extends AbstractEntity {
     @Column(name = "número", length = 25, nullable = false)
     private Integer houseNumber;
 
+    @Getter
+    @Setter
     @OneToOne(mappedBy = "address")
     private Associate associate;
 
+    @Getter
+    @Setter
     @OneToOne(mappedBy = "address")
     private Caregiver caregiver;
 
+    @Getter
+    @Setter
     @OneToOne(mappedBy = "address")
     private Provider provider;
 }

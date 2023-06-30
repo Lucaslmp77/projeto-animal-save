@@ -48,6 +48,20 @@ public class AdminController {
         return ResponseEntity.ok().body(this.adminService.findAllPending());
     }
 
+    @GetMapping("/approves/approved")
+    public ResponseEntity<?> findAllApproved(
+
+    ) {
+        return ResponseEntity.ok().body(this.adminService.findAllApproved());
+    }
+
+    @GetMapping("/approves/rejected")
+    public ResponseEntity<?> findAllRejected(
+
+    ) {
+        return ResponseEntity.ok().body(this.adminService.findAllRejected());
+    }
+
     @PutMapping("/approved/user/{idUser}")
     public ResponseEntity<?> updateStatusUserPendingToApproved(
             @PathVariable Long idUser

@@ -28,20 +28,20 @@ public class Animal extends AbstractEntity {
 
     @Getter
     @Setter
-    @Column(name = "animal_type", length = 10, nullable = false)
+    @Column(name = "animal_type", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalType animalType;
 
     @Getter
     @Setter
-    @Column(name = "animal_size", length = 10, nullable = false)
+    @Column(name = "animal_size", length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
     private AnimalSize animalSize;
 
     @Getter
     @Setter
     @Length(min = 3, max = 25, message = "A cor deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "cor", length = 25, nullable = false)
+    @Column(name = "cor", length = 40, nullable = false)
     private String color;
 
     @Getter
@@ -52,7 +52,7 @@ public class Animal extends AbstractEntity {
     @Getter
     @Setter
     @Length(min = 3, max = 100, message = "A observação deve ter no mínimo {min} caracteres e no maximo {max} caracteres")
-    @Column(name = "observação", length = 100, nullable = false)
+    @Column(name = "observação", length = 200, nullable = false)
     private String observation;
 
     @ManyToOne
