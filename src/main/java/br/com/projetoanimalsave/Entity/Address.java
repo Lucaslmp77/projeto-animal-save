@@ -49,7 +49,7 @@ public class Address extends AbstractEntity {
         } else if (cep.trim().length() < 8) {
             throw new RuntimeException("O cep inserido é muito curto");
         } else if (cep.trim().length() > 8) {
-            throw new RuntimeException("O nome do administrador inserido ultrapassa o limite máximo");
+            throw new RuntimeException("O cep inserido ultrapassa o limite máximo");
         } else {
             this.cep = cep;
         }
