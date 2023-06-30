@@ -38,6 +38,8 @@ public class Provider extends AbstractEntity {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @Getter
+    @Setter
     @OneToMany(mappedBy = "provider")
     private Set<Task> tasks;
 
