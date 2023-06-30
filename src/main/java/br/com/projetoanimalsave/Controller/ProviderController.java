@@ -34,6 +34,20 @@ public class ProviderController {
         return ResponseEntity.ok().body(this.providerService.listAll());
     }
 
+    @GetMapping("/actives")
+    public ResponseEntity<List<Provider>> findByProviderActives(
+
+    ) {
+        return ResponseEntity.ok().body(this.providerService.findByProviderActives());
+    }
+
+    @GetMapping("/inactives")
+    public ResponseEntity<List<Provider>> findByProviderInactives(
+
+    ) {
+        return ResponseEntity.ok().body(this.providerService.findByProviderInactives());
+    }
+
     @GetMapping("/findbyid/{idProvider}")
     public ResponseEntity<Provider> findById(
             @PathVariable("idProvider") Long idprovider

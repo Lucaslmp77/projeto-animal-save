@@ -64,6 +64,14 @@ public class AssociateService {
         return this.associateRepository.findAll();
     }
 
+    public List<Associate> findByAssociateActives() {
+        return this.associateRepository.findByAssociateActives();
+    }
+
+    public List<Associate> findByAssociateInactives() {
+        return this.associateRepository.findByAssociateInactives();
+    }
+
     public Associate findById(Long id) {
         return this.associateRepository.findById(id).orElse(new Associate());
     }

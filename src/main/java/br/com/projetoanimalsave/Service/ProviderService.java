@@ -66,6 +66,14 @@ public class ProviderService {
         return this.providerRepository.findAll();
     }
 
+    public List<Provider> findByProviderActives() {
+        return this.providerRepository.findByProviderActives();
+    }
+
+    public List<Provider> findByProviderInactives() {
+        return this.providerRepository.findByProviderInactives();
+    }
+
     public Provider findById(Long id) {
         return this.providerRepository.findById(id).orElse(new Provider());
     }
