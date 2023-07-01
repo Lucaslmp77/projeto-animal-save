@@ -133,6 +133,15 @@ public class Caregiver extends AbstractEntity{
     }
 
     public void setCapacityAnimals(Double capacityAnimals) {
-        this.capacityAnimals = capacityAnimals;
+        if(capacityAnimals == null) {
+            throw new RuntimeException("A capacidade de animais inserida tem o valor nulo");
+        } else if (capacityAnimals < 0) {
+            throw new RuntimeException("A capacidade de animais inserida é menor que 0");
+        } else if (capacityAnimals > 1000000000) {
+            throw new RuntimeException("A capacidade de animais inserida ultrapassa o limite máximo de caracteres");
+        }
+        else {
+            this.capacityAnimals = capacityAnimals;
+        }
     }
 }

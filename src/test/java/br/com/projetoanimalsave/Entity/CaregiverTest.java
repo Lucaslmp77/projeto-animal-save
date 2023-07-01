@@ -235,6 +235,24 @@ public class CaregiverTest {
     }
 
     @Test
+    public void testSetCapacityAnimals_NullValue() {
+        Caregiver caregiver = new Caregiver();
+        Assertions.assertThrows(RuntimeException.class, () -> caregiver.setCapacityAnimals(null));
+    }
+
+    @Test
+    public void testSetCapacityAnimals_NegativeValue() {
+        Caregiver caregiver = new Caregiver();
+        Assertions.assertThrows(RuntimeException.class, () -> caregiver.setCapacityAnimals(-10.0));
+    }
+
+    @Test
+    public void testSetCapacityAnimals_ExceedsLimit() {
+        Caregiver caregiver = new Caregiver();
+        Assertions.assertThrows(RuntimeException.class, () -> caregiver.setCapacityAnimals(2000000000.0));
+    }
+
+    @Test
     public void testGetSetUser() {
         User user = new User();
         Caregiver caregiver = new Caregiver();
