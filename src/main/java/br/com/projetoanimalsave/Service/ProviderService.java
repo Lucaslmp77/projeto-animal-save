@@ -1,9 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Address;
-import br.com.projetoanimalsave.Entity.Provider;
-import br.com.projetoanimalsave.Entity.Role;
-import br.com.projetoanimalsave.Entity.User;
+import br.com.projetoanimalsave.Entity.*;
 import br.com.projetoanimalsave.Repository.AddressRepository;
 import br.com.projetoanimalsave.Repository.ProviderRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
@@ -14,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProviderService {
@@ -68,6 +66,10 @@ public class ProviderService {
 
     public Provider findById(Long id) {
         return this.providerRepository.findById(id).orElse(new Provider());
+    }
+
+    public List<Task> findTaskActiveByIdProvider(Long id) {
+        return this.providerRepository.findTaskActiveByIdProvider(id);
     }
 
     @Transactional
