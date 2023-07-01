@@ -42,10 +42,14 @@ public class AdminService {
         User user = new User();
         user.setLogin(admin.getUser().getLogin());
         user.setPassword(passwordEncoder().encode(admin.getUser().getPassword()));
+        user.setApproved(true);
+        user.setPending(false);
+        user.setRejected(false);
         Role adminRole = roleRepository.findByAuthority("ROLE_ADMIN");
         user.getRoles().add(adminRole);
         this.userRepository.save(user);
 
+        admin.setName(admin.getName());
         admin.setUser(user);
         return this.adminRepository.save(admin);
     }
