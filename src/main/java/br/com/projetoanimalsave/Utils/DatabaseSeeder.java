@@ -80,7 +80,6 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             Admin admin = new Admin();
             admin.setName("admin");
-            admin.setName("admin");
             admin.setUser(user);
             this.adminRepository.save(admin);
         }
