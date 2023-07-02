@@ -1,5 +1,6 @@
 package br.com.projetoanimalsave.Repository;
 
+import br.com.projetoanimalsave.Entity.Animal;
 import br.com.projetoanimalsave.Entity.Caregiver;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,4 +19,8 @@ public interface CaregiverRepository extends JpaRepository<Caregiver, Long> {
     @Modifying
     @Query("update Caregiver caregiver set caregiver.active = false where caregiver.id = :idCaregiver")
     public void disable(@Param("idCaregiver")Long id);
+
+    @Query("SELECT animal FROM Animal animal INNER JOIN animal.caregiver caregiver WHERE caregiver.id = :id " +
+            "AND animal.active = true")
+    public List<Animal> findAnimalActiveByIdCaregiver(Long id);
 }
