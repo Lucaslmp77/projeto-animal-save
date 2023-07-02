@@ -61,6 +61,10 @@ public class CaregiverService {
         return this.caregiverRepository.findAll();
     }
 
+    public List<Animal> findAnimalActiveByIdCaregiver(Long id) {
+        return this.caregiverRepository.findAnimalActiveByIdCaregiver(id);
+    }
+
     public List<Caregiver> findByCaregiverActives() {
         return this.caregiverRepository.findByCaregiverActives();
     }

@@ -1,6 +1,5 @@
 package br.com.projetoanimalsave.Repository;
 
-import br.com.projetoanimalsave.Entity.Provider;
 import br.com.projetoanimalsave.Entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
