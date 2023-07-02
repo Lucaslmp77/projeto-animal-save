@@ -45,6 +45,12 @@ public class AnimalService {
     @Transactional
     public void update(Animal animal, Long id) {
         if (id == animal.getId()) {
+            animal.getVaccination().setRabies(animal.getVaccination().getRabies());
+            animal.getVaccination().setCanineParvovirus(animal.getVaccination().getCanineParvovirus());
+            animal.getVaccination().setDistemper(animal.getVaccination().getDistemper());
+            animal.getVaccination().setCanineHepatitis(animal.getVaccination().getCanineHepatitis());
+            this.vaccinationRepository.save(animal.getVaccination());
+            animal.setVaccination(animal.getVaccination());
             this.animalRepository.save(animal);
         } else {
             throw new RuntimeException();
