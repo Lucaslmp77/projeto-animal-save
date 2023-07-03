@@ -129,6 +129,7 @@ public class AnimalServiceTest {
         Long animalId = 1L;
         Animal animal = new Animal();
         animal.setId(animalId);
+        animal.setVaccination(new Vaccination());
 
         when(animalRepository.save(any(Animal.class))).thenReturn(animal);
 
