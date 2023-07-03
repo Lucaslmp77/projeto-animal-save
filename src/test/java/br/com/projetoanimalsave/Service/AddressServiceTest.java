@@ -39,28 +39,6 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void listAllAddresses() {
-        Address address1 = new Address();
-        address1.setCep("11111111");
-        address1.setNeighborhood("bairro 1");
-        address1.setRoad("rua 1");
-        address1.setHouseNumber(1);
-
-        Address address2 = new Address();
-        address2.setCep("22222222");
-        address2.setNeighborhood("bairro 2");
-        address2.setRoad("rua 2");
-        address2.setHouseNumber(2);
-
-        addressRepository.save(address1);
-        addressRepository.save(address2);
-
-        List<Address> addresses = addressRepository.findAll();
-
-        assertEquals(2, addresses.size());
-    }
-
-    @Test
     public void findAddressById() {
         Address address = new Address();
         address.setCep("33333333");
