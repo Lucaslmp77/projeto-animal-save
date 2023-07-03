@@ -75,6 +75,13 @@ public class ProviderService {
     @Transactional
     public void update(Provider provider, Long id) {
         if (id == provider.getId()) {
+            provider.getAddress().setCep(provider.getAddress().getCep());
+            provider.getAddress().setNeighborhood(provider.getAddress().getNeighborhood());
+            provider.getAddress().setRoad(provider.getAddress().getRoad());
+            provider.getAddress().setHouseNumber(provider.getAddress().getHouseNumber());
+            this.addressRepository.save(provider.getAddress());
+            provider.setAddress(provider.getAddress());
+
             this.providerRepository.save(provider);
         } else {
             throw new RuntimeException();
