@@ -71,13 +71,6 @@ public class AssociateService {
     @Transactional
     public void update(Associate associate, Long id) {
         if (id == associate.getId()){
-            associate.getAddress().setCep(associate.getAddress().getCep());
-            associate.getAddress().setNeighborhood(associate.getAddress().getNeighborhood());
-            associate.getAddress().setRoad(associate.getAddress().getRoad());
-            associate.getAddress().setHouseNumber(associate.getAddress().getHouseNumber());
-            this.addressRepository.save(associate.getAddress());
-            associate.setAddress(associate.getAddress());
-            
             this.associateRepository.save(associate);
         } else {
             throw new RuntimeException();
