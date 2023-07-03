@@ -143,6 +143,14 @@ public class ProviderServiceTest {
         Provider provider = new Provider();
         provider.setId(providerId);
 
+        Address address = new Address();
+        address.setCep("00000000");
+        address.setNeighborhood("Bairro do provider");
+        address.setRoad("Rua do provider");
+        address.setHouseNumber(55);
+        this.addressRepository.save(address);
+        provider.setAddress(address);
+
         when(providerRepository.save(provider)).thenReturn(provider);
 
         providerService.update(provider, providerId);

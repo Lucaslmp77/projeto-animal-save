@@ -170,6 +170,14 @@ public class CaregiverServiceTest {
         Caregiver caregiver = new Caregiver();
         caregiver.setId(caregiverId);
 
+        Address address = new Address();
+        address.setCep("00000000");
+        address.setNeighborhood("Bairro da protetora");
+        address.setRoad("Rua da protetora");
+        address.setHouseNumber(99);
+
+        caregiver.setAddress(address);
+
         when(caregiverRepository.save(any(Caregiver.class))).thenReturn(caregiver);
 
         caregiverService.update(caregiverId, caregiver);
