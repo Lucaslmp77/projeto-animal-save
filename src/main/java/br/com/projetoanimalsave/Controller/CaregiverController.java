@@ -1,6 +1,8 @@
 package br.com.projetoanimalsave.Controller;
 
+import br.com.projetoanimalsave.Entity.Animal;
 import br.com.projetoanimalsave.Entity.Caregiver;
+import br.com.projetoanimalsave.Service.AnimalService;
 import br.com.projetoanimalsave.Service.CaregiverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,13 @@ public class CaregiverController {
 
     ) {
         return ResponseEntity.ok().body(this.caregiverService.listAll());
+    }
+
+    @GetMapping("/findAnimalActiveByIdCaregiver/{idCaregiver}")
+    public ResponseEntity<List<Animal>> findAnimalActiveByIdCaregiver(
+            @PathVariable Long idCaregiver
+    ) {
+        return ResponseEntity.ok().body(this.caregiverService.findAnimalActiveByIdCaregiver(idCaregiver));
     }
 
     @GetMapping("/findbyid/{idCaregiver}")

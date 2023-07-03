@@ -1,6 +1,7 @@
 package br.com.projetoanimalsave.Controller;
 
 import br.com.projetoanimalsave.Entity.Provider;
+import br.com.projetoanimalsave.Entity.Task;
 import br.com.projetoanimalsave.Service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,13 @@ public class ProviderController {
 
     ) {
         return ResponseEntity.ok().body(this.providerService.listAll());
+    }
+
+    @GetMapping("/findTaskActiveByIdProvider/{idProvider}")
+    public ResponseEntity<List<Task>> findTaskActiveByIdProvider(
+            @PathVariable("idProvider") Long idprovider
+    ) {
+        return ResponseEntity.ok().body(this.providerService.findTaskActiveByIdProvider(idprovider));
     }
 
     @GetMapping("/findbyid/{idProvider}")

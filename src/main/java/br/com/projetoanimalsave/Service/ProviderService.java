@@ -1,9 +1,6 @@
 package br.com.projetoanimalsave.Service;
 
-import br.com.projetoanimalsave.Entity.Address;
-import br.com.projetoanimalsave.Entity.Provider;
-import br.com.projetoanimalsave.Entity.Role;
-import br.com.projetoanimalsave.Entity.User;
+import br.com.projetoanimalsave.Entity.*;
 import br.com.projetoanimalsave.Repository.AddressRepository;
 import br.com.projetoanimalsave.Repository.ProviderRepository;
 import br.com.projetoanimalsave.Repository.RoleRepository;
@@ -14,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProviderService {
@@ -70,9 +68,20 @@ public class ProviderService {
         return this.providerRepository.findById(id).orElse(new Provider());
     }
 
+    public List<Task> findTaskActiveByIdProvider(Long id) {
+        return this.providerRepository.findTaskActiveByIdProvider(id);
+    }
+
     @Transactional
     public void update(Provider provider, Long id) {
         if (id == provider.getId()) {
+            provider.getAddress().setCep(provider.getAddress().getCep());
+            provider.getAddress().setNeighborhood(provider.getAddress().getNeighborhood());
+            provider.getAddress().setRoad(provider.getAddress().getRoad());
+            provider.getAddress().setHouseNumber(provider.getAddress().getHouseNumber());
+            this.addressRepository.save(provider.getAddress());
+            provider.setAddress(provider.getAddress());
+
             this.providerRepository.save(provider);
         } else {
             throw new RuntimeException();

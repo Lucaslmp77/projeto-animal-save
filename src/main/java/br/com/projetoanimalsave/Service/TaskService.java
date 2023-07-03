@@ -22,6 +22,10 @@ public class TaskService {
         return this.taskRepository.findAll();
     }
 
+    public List<Task> findTasksActives() {
+        return this.taskRepository.findTasksActives();
+    }
+
     public Task findById(Long id) {
         return this.taskRepository.findById(id).orElse(new Task());
     }

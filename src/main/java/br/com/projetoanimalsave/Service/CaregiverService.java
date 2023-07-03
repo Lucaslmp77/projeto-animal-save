@@ -61,6 +61,10 @@ public class CaregiverService {
         return this.caregiverRepository.findAll();
     }
 
+    public List<Animal> findAnimalActiveByIdCaregiver(Long id) {
+        return this.caregiverRepository.findAnimalActiveByIdCaregiver(id);
+    }
+
     public List<Caregiver> findByCaregiverActives() {
         return this.caregiverRepository.findByCaregiverActives();
     }
@@ -72,6 +76,13 @@ public class CaregiverService {
     @Transactional
     public void update(Long id, Caregiver caregiver) {
         if (id == caregiver.getId()){
+            caregiver.getAddress().setCep(caregiver.getAddress().getCep());
+            caregiver.getAddress().setNeighborhood(caregiver.getAddress().getNeighborhood());
+            caregiver.getAddress().setRoad(caregiver.getAddress().getRoad());
+            caregiver.getAddress().setHouseNumber(caregiver.getAddress().getHouseNumber());
+            this.addressRepository.save(caregiver.getAddress());
+            caregiver.setAddress(caregiver.getAddress());
+
             this.caregiverRepository.save(caregiver);
         } else {
             throw new RuntimeException();
